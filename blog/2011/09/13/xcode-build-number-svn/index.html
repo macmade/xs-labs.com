@@ -1,0 +1,55 @@
+<p>
+    All programs come with a version number, generally composed of a number for the major version, another one for the minor version, and a last one for the maintenance version.
+</p>
+<p>
+    It may be also useful to add another number, called the «build» version, identifying more precisely the software's version.<br />
+    Such a number is often represented in a hexadecimal.
+</p>
+<p>
+    You may have for instance: <code>1.7.5 (12B43)</code>
+</p>
+<p>
+    The build number is especially useful when dealing with betas, where to software's version number doesn't change.
+</p>
+<p>
+    If you use a revision control system, such as Subversion (SVN) or GIT, you want to bind the build number to the revision number.
+</p>
+<p>
+    So here's a quick tutorial for the Xcode users, using Subversion.<br />
+    We are going to automatically update an entry of the «Info.plist» file, with the SVN revision number.
+</p>
+<p>
+    In your application's «Info.plist» file, add an entry called «BuildNumber», and define it as a number.
+</p>
+<p>
+    Then, on your target's build phases, add a new «Run Script» phase, and place the following content:
+</p>
+<pre class="code-block language-sh">
+#!/bin/bash
+plist="MyApp/Info.plist"
+svn update
+rev=$(svn info | grep '^Revision:' | sed -e 's/^Revision: //')
+/usr/libexec/PlistBuddy -c "Set :BuildNumber $rev" "$plist"
+</pre>
+<p>
+    That's all. Simply replace the "MyApp/Info.plist" string with the actual path of your «Info.plist» file.
+</p>
+<p>
+    Each time you build your application, the script will update the entry in the «Info.plist» file with the latest revision number from your SVN repository.
+</p>
+<p>
+    To access the build number in Objective-C, you can use:
+</p>
+<pre class="code-block language-objc">
+[ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"BuildNumber" ];
+</pre>
+<p>
+    You can the build a full version string using:
+</p>
+<pre class="code-block language-objc">
+[ NSString
+    stringWithFormat: @"%@ (%@)",
+    [ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"CFBundleVersion" ],
+    [ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"BuildNumber" ]
+];
+</pre>

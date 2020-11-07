@@ -1,0 +1,3281 @@
+/* <![CDATA[ */
+
+/*
+##################################################
+#                                                #
+#       Blood Sweat & Code (& Rock'N'Roll)       #
+#      Thanx for looking at the source code      #
+#                                                #
+#                 XS-Labs © 2013                 #
+#                                                #
+##################################################
+*/
+
+h3.project-icons {
+    padding-top: 12px;
+}
+
+.project-icons-address-book {
+    background-image:       url( 'image/project-icons/address-book.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-address-book {
+    background-image:       url( 'image/project-icons/address-book.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-aero-window-explorer {
+    background-image:       url( 'image/project-icons/aero-window-explorer.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-aero-window-explorer {
+    background-image:       url( 'image/project-icons/aero-window-explorer.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-aero-window-list {
+    background-image:       url( 'image/project-icons/aero-window-list.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-aero-window-list {
+    background-image:       url( 'image/project-icons/aero-window-list.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-alert {
+    background-image:       url( 'image/project-icons/alert.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-alert {
+    background-image:       url( 'image/project-icons/alert.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-applications {
+    background-image:       url( 'image/project-icons/applications.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-applications {
+    background-image:       url( 'image/project-icons/applications.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-battery-display-charging {
+    background-image:       url( 'image/project-icons/battery-display-charging.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-battery-display-charging {
+    background-image:       url( 'image/project-icons/battery-display-charging.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-battery-display-full {
+    background-image:       url( 'image/project-icons/battery-display-full.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-battery-display-full {
+    background-image:       url( 'image/project-icons/battery-display-full.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-battery-display-low {
+    background-image:       url( 'image/project-icons/battery-display-low.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-battery-display-low {
+    background-image:       url( 'image/project-icons/battery-display-low.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-battery-display {
+    background-image:       url( 'image/project-icons/battery-display.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-battery-display {
+    background-image:       url( 'image/project-icons/battery-display.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-battery {
+    background-image:       url( 'image/project-icons/battery.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-battery {
+    background-image:       url( 'image/project-icons/battery.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-bell {
+    background-image:       url( 'image/project-icons/bell.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-bell {
+    background-image:       url( 'image/project-icons/bell.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-book-bookmark {
+    background-image:       url( 'image/project-icons/book-bookmark.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-book-bookmark {
+    background-image:       url( 'image/project-icons/book-bookmark.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-book {
+    background-image:       url( 'image/project-icons/book.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-book {
+    background-image:       url( 'image/project-icons/book.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-bookshelf-empty {
+    background-image:       url( 'image/project-icons/bookshelf-empty.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-bookshelf-empty {
+    background-image:       url( 'image/project-icons/bookshelf-empty.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-bookshelf {
+    background-image:       url( 'image/project-icons/bookshelf.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-bookshelf {
+    background-image:       url( 'image/project-icons/bookshelf.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-box-this-side-up {
+    background-image:       url( 'image/project-icons/box-this-side-up.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-box-this-side-up {
+    background-image:       url( 'image/project-icons/box-this-side-up.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-box {
+    background-image:       url( 'image/project-icons/box.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-box {
+    background-image:       url( 'image/project-icons/box.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-burn {
+    background-image:       url( 'image/project-icons/burn.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-burn {
+    background-image:       url( 'image/project-icons/burn.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-calendar-blue {
+    background-image:       url( 'image/project-icons/calendar-blue.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-calendar-blue {
+    background-image:       url( 'image/project-icons/calendar-blue.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-calendar-day-view {
+    background-image:       url( 'image/project-icons/calendar-day-view.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-calendar-day-view {
+    background-image:       url( 'image/project-icons/calendar-day-view.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-calendar-month-view {
+    background-image:       url( 'image/project-icons/calendar-month-view.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-calendar-month-view {
+    background-image:       url( 'image/project-icons/calendar-month-view.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-camera {
+    background-image:       url( 'image/project-icons/camera.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-camera {
+    background-image:       url( 'image/project-icons/camera.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-cd-burn {
+    background-image:       url( 'image/project-icons/cd-burn.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-cd-burn {
+    background-image:       url( 'image/project-icons/cd-burn.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-cd {
+    background-image:       url( 'image/project-icons/cd.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-cd {
+    background-image:       url( 'image/project-icons/cd.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-chalkboard-empty {
+    background-image:       url( 'image/project-icons/chalkboard-empty.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-chalkboard-empty {
+    background-image:       url( 'image/project-icons/chalkboard-empty.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-chalkboard {
+    background-image:       url( 'image/project-icons/chalkboard.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-chalkboard {
+    background-image:       url( 'image/project-icons/chalkboard.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-chest-of-drawers-open-files {
+    background-image:       url( 'image/project-icons/chest-of-drawers-open-files.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-chest-of-drawers-open-files {
+    background-image:       url( 'image/project-icons/chest-of-drawers-open-files.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-chest-of-drawers-open {
+    background-image:       url( 'image/project-icons/chest-of-drawers-open.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-chest-of-drawers-open {
+    background-image:       url( 'image/project-icons/chest-of-drawers-open.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-chest-of-drawers {
+    background-image:       url( 'image/project-icons/chest-of-drawers.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-chest-of-drawers {
+    background-image:       url( 'image/project-icons/chest-of-drawers.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-chip {
+    background-image:       url( 'image/project-icons/chip.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-chip {
+    background-image:       url( 'image/project-icons/chip.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-christmas-tree-lit {
+    background-image:       url( 'image/project-icons/christmas-tree-lit.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-christmas-tree-lit {
+    background-image:       url( 'image/project-icons/christmas-tree-lit.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-christmas-tree-undecorated {
+    background-image:       url( 'image/project-icons/christmas-tree-undecorated.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-christmas-tree-undecorated {
+    background-image:       url( 'image/project-icons/christmas-tree-undecorated.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-christmas-tree {
+    background-image:       url( 'image/project-icons/christmas-tree.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-christmas-tree {
+    background-image:       url( 'image/project-icons/christmas-tree.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-clapperboard-blank {
+    background-image:       url( 'image/project-icons/clapperboard-blank.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-clapperboard-blank {
+    background-image:       url( 'image/project-icons/clapperboard-blank.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-clapperboard-closed {
+    background-image:       url( 'image/project-icons/clapperboard-closed.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-clapperboard-closed {
+    background-image:       url( 'image/project-icons/clapperboard-closed.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-clapperboard-picture {
+    background-image:       url( 'image/project-icons/clapperboard-picture.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-clapperboard-picture {
+    background-image:       url( 'image/project-icons/clapperboard-picture.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-clapperboard {
+    background-image:       url( 'image/project-icons/clapperboard.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-clapperboard {
+    background-image:       url( 'image/project-icons/clapperboard.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-clipboard-empty {
+    background-image:       url( 'image/project-icons/clipboard-empty.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-clipboard-empty {
+    background-image:       url( 'image/project-icons/clipboard-empty.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-clipboard-fold {
+    background-image:       url( 'image/project-icons/clipboard-fold.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-clipboard-fold {
+    background-image:       url( 'image/project-icons/clipboard-fold.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-clipboard-text {
+    background-image:       url( 'image/project-icons/clipboard-text.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-clipboard-text {
+    background-image:       url( 'image/project-icons/clipboard-text.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-clipboard-torn {
+    background-image:       url( 'image/project-icons/clipboard-torn.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-clipboard-torn {
+    background-image:       url( 'image/project-icons/clipboard-torn.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-clipboard {
+    background-image:       url( 'image/project-icons/clipboard.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-clipboard {
+    background-image:       url( 'image/project-icons/clipboard.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-color-wheel {
+    background-image:       url( 'image/project-icons/color-wheel.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-color-wheel {
+    background-image:       url( 'image/project-icons/color-wheel.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-contact-card {
+    background-image:       url( 'image/project-icons/contact-card.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-contact-card {
+    background-image:       url( 'image/project-icons/contact-card.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-curtains {
+    background-image:       url( 'image/project-icons/curtains.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-curtains {
+    background-image:       url( 'image/project-icons/curtains.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-dashboard {
+    background-image:       url( 'image/project-icons/dashboard.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-dashboard {
+    background-image:       url( 'image/project-icons/dashboard.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-decoration-branch {
+    background-image:       url( 'image/project-icons/decoration-branch.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-decoration-branch {
+    background-image:       url( 'image/project-icons/decoration-branch.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-decoration {
+    background-image:       url( 'image/project-icons/decoration.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-decoration {
+    background-image:       url( 'image/project-icons/decoration.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-delete {
+    background-image:       url( 'image/project-icons/delete.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-delete {
+    background-image:       url( 'image/project-icons/delete.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-design-blueprint {
+    background-image:       url( 'image/project-icons/design-blueprint.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-design-blueprint {
+    background-image:       url( 'image/project-icons/design-blueprint.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-design {
+    background-image:       url( 'image/project-icons/design.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-design {
+    background-image:       url( 'image/project-icons/design.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-desktop {
+    background-image:       url( 'image/project-icons/desktop.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-desktop {
+    background-image:       url( 'image/project-icons/desktop.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-dictionary {
+    background-image:       url( 'image/project-icons/dictionary.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-dictionary {
+    background-image:       url( 'image/project-icons/dictionary.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-digsby {
+    background-image:       url( 'image/project-icons/digsby.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-digsby {
+    background-image:       url( 'image/project-icons/digsby.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-disk-hard-disk {
+    background-image:       url( 'image/project-icons/disk-hard-disk.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-disk-hard-disk {
+    background-image:       url( 'image/project-icons/disk-hard-disk.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-disk-idisk {
+    background-image:       url( 'image/project-icons/disk-idisk.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-disk-idisk {
+    background-image:       url( 'image/project-icons/disk-idisk.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-disk-removable {
+    background-image:       url( 'image/project-icons/disk-removable.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-disk-removable {
+    background-image:       url( 'image/project-icons/disk-removable.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-disk-time-machine {
+    background-image:       url( 'image/project-icons/disk-time-machine.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-disk-time-machine {
+    background-image:       url( 'image/project-icons/disk-time-machine.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-door-chat-room {
+    background-image:       url( 'image/project-icons/door-chat-room.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-door-chat-room {
+    background-image:       url( 'image/project-icons/door-chat-room.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-door {
+    background-image:       url( 'image/project-icons/door.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-door {
+    background-image:       url( 'image/project-icons/door.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-download-high-speed {
+    background-image:       url( 'image/project-icons/download-high-speed.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-download-high-speed {
+    background-image:       url( 'image/project-icons/download-high-speed.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-download-turbo-speed {
+    background-image:       url( 'image/project-icons/download-turbo-speed.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-download-turbo-speed {
+    background-image:       url( 'image/project-icons/download-turbo-speed.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-download {
+    background-image:       url( 'image/project-icons/download.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-download {
+    background-image:       url( 'image/project-icons/download.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-e-mail {
+    background-image:       url( 'image/project-icons/e-mail.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-e-mail {
+    background-image:       url( 'image/project-icons/e-mail.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-emoticon-sleep {
+    background-image:       url( 'image/project-icons/emoticon-sleep.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-emoticon-sleep {
+    background-image:       url( 'image/project-icons/emoticon-sleep.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-emoticon {
+    background-image:       url( 'image/project-icons/emoticon.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-emoticon {
+    background-image:       url( 'image/project-icons/emoticon.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-envelope-airmail {
+    background-image:       url( 'image/project-icons/envelope-airmail.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-envelope-airmail {
+    background-image:       url( 'image/project-icons/envelope-airmail.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-envelope {
+    background-image:       url( 'image/project-icons/envelope.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-envelope {
+    background-image:       url( 'image/project-icons/envelope.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-error {
+    background-image:       url( 'image/project-icons/error.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-error {
+    background-image:       url( 'image/project-icons/error.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-face-book {
+    background-image:       url( 'image/project-icons/face-book.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-face-book {
+    background-image:       url( 'image/project-icons/face-book.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-file {
+    background-image:       url( 'image/project-icons/file.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-file {
+    background-image:       url( 'image/project-icons/file.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-filetype-blueprint-under-construction {
+    background-image:       url( 'image/project-icons/filetype-blueprint-under-construction.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-filetype-blueprint-under-construction {
+    background-image:       url( 'image/project-icons/filetype-blueprint-under-construction.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-filetype-blueprint {
+    background-image:       url( 'image/project-icons/filetype-blueprint.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-filetype-blueprint {
+    background-image:       url( 'image/project-icons/filetype-blueprint.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-filetype-rss-orange {
+    background-image:       url( 'image/project-icons/filetype-rss-orange.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-filetype-rss-orange {
+    background-image:       url( 'image/project-icons/filetype-rss-orange.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-filetype-rss {
+    background-image:       url( 'image/project-icons/filetype-rss.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-filetype-rss {
+    background-image:       url( 'image/project-icons/filetype-rss.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-filetype-script {
+    background-image:       url( 'image/project-icons/filetype-script.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-filetype-script {
+    background-image:       url( 'image/project-icons/filetype-script.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-filetype-under-construction {
+    background-image:       url( 'image/project-icons/filetype-under-construction.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-filetype-under-construction {
+    background-image:       url( 'image/project-icons/filetype-under-construction.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-filetype-video {
+    background-image:       url( 'image/project-icons/filetype-video.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-filetype-video {
+    background-image:       url( 'image/project-icons/filetype-video.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-filetype {
+    background-image:       url( 'image/project-icons/filetype.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-filetype {
+    background-image:       url( 'image/project-icons/filetype.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-film-roll {
+    background-image:       url( 'image/project-icons/film-roll.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-film-roll {
+    background-image:       url( 'image/project-icons/film-roll.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-filmstrip {
+    background-image:       url( 'image/project-icons/filmstrip.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-filmstrip {
+    background-image:       url( 'image/project-icons/filmstrip.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-folder-blue {
+    background-image:       url( 'image/project-icons/folder-blue.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-folder-blue {
+    background-image:       url( 'image/project-icons/folder-blue.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-folder-classic-blue {
+    background-image:       url( 'image/project-icons/folder-classic-blue.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-folder-classic-blue {
+    background-image:       url( 'image/project-icons/folder-classic-blue.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-folder-classic-recycled {
+    background-image:       url( 'image/project-icons/folder-classic-recycled.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-folder-classic-recycled {
+    background-image:       url( 'image/project-icons/folder-classic-recycled.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-folder-classic-yellow {
+    background-image:       url( 'image/project-icons/folder-classic-yellow.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-folder-classic-yellow {
+    background-image:       url( 'image/project-icons/folder-classic-yellow.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-folder-recycled {
+    background-image:       url( 'image/project-icons/folder-recycled.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-folder-recycled {
+    background-image:       url( 'image/project-icons/folder-recycled.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-folder-yellow {
+    background-image:       url( 'image/project-icons/folder-yellow.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-folder-yellow {
+    background-image:       url( 'image/project-icons/folder-yellow.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-gear {
+    background-image:       url( 'image/project-icons/gear.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-gear {
+    background-image:       url( 'image/project-icons/gear.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-get-info {
+    background-image:       url( 'image/project-icons/get-info.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-get-info {
+    background-image:       url( 'image/project-icons/get-info.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-gift-box-blue {
+    background-image:       url( 'image/project-icons/gift-box-blue.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-gift-box-blue {
+    background-image:       url( 'image/project-icons/gift-box-blue.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-gift-box {
+    background-image:       url( 'image/project-icons/gift-box.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-gift-box {
+    background-image:       url( 'image/project-icons/gift-box.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-glass-cola-ice {
+    background-image:       url( 'image/project-icons/glass-cola-ice.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-glass-cola-ice {
+    background-image:       url( 'image/project-icons/glass-cola-ice.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-glass-cola {
+    background-image:       url( 'image/project-icons/glass-cola.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-glass-cola {
+    background-image:       url( 'image/project-icons/glass-cola.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-glass-empty {
+    background-image:       url( 'image/project-icons/glass-empty.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-glass-empty {
+    background-image:       url( 'image/project-icons/glass-empty.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-glass-water-ice {
+    background-image:       url( 'image/project-icons/glass-water-ice.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-glass-water-ice {
+    background-image:       url( 'image/project-icons/glass-water-ice.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-glass-water {
+    background-image:       url( 'image/project-icons/glass-water.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-glass-water {
+    background-image:       url( 'image/project-icons/glass-water.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-hard-disk-installation {
+    background-image:       url( 'image/project-icons/hard-disk-installation.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-hard-disk-installation {
+    background-image:       url( 'image/project-icons/hard-disk-installation.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-house {
+    background-image:       url( 'image/project-icons/house.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-house {
+    background-image:       url( 'image/project-icons/house.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-ical {
+    background-image:       url( 'image/project-icons/ical.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-ical {
+    background-image:       url( 'image/project-icons/ical.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-inkwell {
+    background-image:       url( 'image/project-icons/inkwell.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-inkwell {
+    background-image:       url( 'image/project-icons/inkwell.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-instant-messaging {
+    background-image:       url( 'image/project-icons/instant-messaging.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-instant-messaging {
+    background-image:       url( 'image/project-icons/instant-messaging.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-iphone-application {
+    background-image:       url( 'image/project-icons/iphone-application.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-iphone-application {
+    background-image:       url( 'image/project-icons/iphone-application.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-iphone-locked {
+    background-image:       url( 'image/project-icons/iphone-locked.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-iphone-locked {
+    background-image:       url( 'image/project-icons/iphone-locked.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-iphone {
+    background-image:       url( 'image/project-icons/iphone.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-iphone {
+    background-image:       url( 'image/project-icons/iphone.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-isight {
+    background-image:       url( 'image/project-icons/isight.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-isight {
+    background-image:       url( 'image/project-icons/isight.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-jewel-case-cd {
+    background-image:       url( 'image/project-icons/jewel-case-cd.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-jewel-case-cd {
+    background-image:       url( 'image/project-icons/jewel-case-cd.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-jewel-case-cover {
+    background-image:       url( 'image/project-icons/jewel-case-cover.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-jewel-case-cover {
+    background-image:       url( 'image/project-icons/jewel-case-cover.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-jewel-case-empty {
+    background-image:       url( 'image/project-icons/jewel-case-empty.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-jewel-case-empty {
+    background-image:       url( 'image/project-icons/jewel-case-empty.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-key-command {
+    background-image:       url( 'image/project-icons/key-command.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-key-command {
+    background-image:       url( 'image/project-icons/key-command.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-key-windows {
+    background-image:       url( 'image/project-icons/key-windows.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-key-windows {
+    background-image:       url( 'image/project-icons/key-windows.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-library {
+    background-image:       url( 'image/project-icons/library.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-library {
+    background-image:       url( 'image/project-icons/library.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-lock-unlocked {
+    background-image:       url( 'image/project-icons/lock-unlocked.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-lock-unlocked {
+    background-image:       url( 'image/project-icons/lock-unlocked.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-lock {
+    background-image:       url( 'image/project-icons/lock.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-lock {
+    background-image:       url( 'image/project-icons/lock.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-magnifying-glass {
+    background-image:       url( 'image/project-icons/magnifying-glass.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-magnifying-glass {
+    background-image:       url( 'image/project-icons/magnifying-glass.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-microphone-classic {
+    background-image:       url( 'image/project-icons/microphone-classic.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-microphone-classic {
+    background-image:       url( 'image/project-icons/microphone-classic.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-microphone {
+    background-image:       url( 'image/project-icons/microphone.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-microphone {
+    background-image:       url( 'image/project-icons/microphone.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-money-glowing {
+    background-image:       url( 'image/project-icons/money-glowing.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-money-glowing {
+    background-image:       url( 'image/project-icons/money-glowing.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-money {
+    background-image:       url( 'image/project-icons/money.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-money {
+    background-image:       url( 'image/project-icons/money.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-monitor-film {
+    background-image:       url( 'image/project-icons/monitor-film.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-monitor-film {
+    background-image:       url( 'image/project-icons/monitor-film.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-monitor-music-video {
+    background-image:       url( 'image/project-icons/monitor-music-video.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-monitor-music-video {
+    background-image:       url( 'image/project-icons/monitor-music-video.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-monitor-wallpaper {
+    background-image:       url( 'image/project-icons/monitor-wallpaper.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-monitor-wallpaper {
+    background-image:       url( 'image/project-icons/monitor-wallpaper.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-monitor {
+    background-image:       url( 'image/project-icons/monitor.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-monitor {
+    background-image:       url( 'image/project-icons/monitor.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-mug-empty {
+    background-image:       url( 'image/project-icons/mug-empty.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-mug-empty {
+    background-image:       url( 'image/project-icons/mug-empty.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-mug {
+    background-image:       url( 'image/project-icons/mug.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-mug {
+    background-image:       url( 'image/project-icons/mug.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-musical-note {
+    background-image:       url( 'image/project-icons/musical-note.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-musical-note {
+    background-image:       url( 'image/project-icons/musical-note.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-newspaper-rss {
+    background-image:       url( 'image/project-icons/newspaper-rss.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-newspaper-rss {
+    background-image:       url( 'image/project-icons/newspaper-rss.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-newspaper {
+    background-image:       url( 'image/project-icons/newspaper.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-newspaper {
+    background-image:       url( 'image/project-icons/newspaper.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-newsreader {
+    background-image:       url( 'image/project-icons/newsreader.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-newsreader {
+    background-image:       url( 'image/project-icons/newsreader.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-note-white {
+    background-image:       url( 'image/project-icons/note-white.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-note-white {
+    background-image:       url( 'image/project-icons/note-white.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-note-yellow {
+    background-image:       url( 'image/project-icons/note-yellow.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-note-yellow {
+    background-image:       url( 'image/project-icons/note-yellow.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-notification {
+    background-image:       url( 'image/project-icons/notification.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-notification {
+    background-image:       url( 'image/project-icons/notification.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-os-mac-os-x {
+    background-image:       url( 'image/project-icons/os-mac-os-x.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-os-mac-os-x {
+    background-image:       url( 'image/project-icons/os-mac-os-x.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-os-windows-7 {
+    background-image:       url( 'image/project-icons/os-windows-7.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-os-windows-7 {
+    background-image:       url( 'image/project-icons/os-windows-7.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-os-windows-vista {
+    background-image:       url( 'image/project-icons/os-windows-vista.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-os-windows-vista {
+    background-image:       url( 'image/project-icons/os-windows-vista.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-panel-colors {
+    background-image:       url( 'image/project-icons/panel-colors.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-panel-colors {
+    background-image:       url( 'image/project-icons/panel-colors.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-panel-find {
+    background-image:       url( 'image/project-icons/panel-find.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-panel-find {
+    background-image:       url( 'image/project-icons/panel-find.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-panel-inspector {
+    background-image:       url( 'image/project-icons/panel-inspector.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-panel-inspector {
+    background-image:       url( 'image/project-icons/panel-inspector.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-panel {
+    background-image:       url( 'image/project-icons/panel.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-panel {
+    background-image:       url( 'image/project-icons/panel.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-pen {
+    background-image:       url( 'image/project-icons/pen.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-pen {
+    background-image:       url( 'image/project-icons/pen.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-pencil-and-ruler {
+    background-image:       url( 'image/project-icons/pencil-and-ruler.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-pencil-and-ruler {
+    background-image:       url( 'image/project-icons/pencil-and-ruler.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-pencil {
+    background-image:       url( 'image/project-icons/pencil.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-pencil {
+    background-image:       url( 'image/project-icons/pencil.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-photo-polaroid {
+    background-image:       url( 'image/project-icons/photo-polaroid.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-photo-polaroid {
+    background-image:       url( 'image/project-icons/photo-polaroid.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-photo {
+    background-image:       url( 'image/project-icons/photo.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-photo {
+    background-image:       url( 'image/project-icons/photo.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-pie-chart {
+    background-image:       url( 'image/project-icons/pie-chart.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-pie-chart {
+    background-image:       url( 'image/project-icons/pie-chart.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-pin {
+    background-image:       url( 'image/project-icons/pin.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-pin {
+    background-image:       url( 'image/project-icons/pin.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-plant {
+    background-image:       url( 'image/project-icons/plant.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-plant {
+    background-image:       url( 'image/project-icons/plant.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-preferences-panel {
+    background-image:       url( 'image/project-icons/preferences-panel.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-preferences-panel {
+    background-image:       url( 'image/project-icons/preferences-panel.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-presentation {
+    background-image:       url( 'image/project-icons/presentation.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-presentation {
+    background-image:       url( 'image/project-icons/presentation.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-project-blueprints {
+    background-image:       url( 'image/project-icons/project-blueprints.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-project-blueprints {
+    background-image:       url( 'image/project-icons/project-blueprints.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-project {
+    background-image:       url( 'image/project-icons/project.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-project {
+    background-image:       url( 'image/project-icons/project.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-ram {
+    background-image:       url( 'image/project-icons/ram.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-ram {
+    background-image:       url( 'image/project-icons/ram.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-reception-bell-gold.ico {
+    background-image:       url( 'image/project-icons/reception-bell-gold.ico.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-reception-bell {
+    background-image:       url( 'image/project-icons/reception-bell.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-reception-bell {
+    background-image:       url( 'image/project-icons/reception-bell.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-rss {
+    background-image:       url( 'image/project-icons/rss.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-rss {
+    background-image:       url( 'image/project-icons/rss.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-ruler {
+    background-image:       url( 'image/project-icons/ruler.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-ruler {
+    background-image:       url( 'image/project-icons/ruler.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-safari {
+    background-image:       url( 'image/project-icons/safari.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-safari {
+    background-image:       url( 'image/project-icons/safari.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-safe-dark {
+    background-image:       url( 'image/project-icons/safe-dark.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-safe-dark {
+    background-image:       url( 'image/project-icons/safe-dark.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-safe-open-money {
+    background-image:       url( 'image/project-icons/safe-open-money.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-safe-open-money {
+    background-image:       url( 'image/project-icons/safe-open-money.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-safe-open {
+    background-image:       url( 'image/project-icons/safe-open.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-safe-open {
+    background-image:       url( 'image/project-icons/safe-open.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-safe {
+    background-image:       url( 'image/project-icons/safe.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-safe {
+    background-image:       url( 'image/project-icons/safe.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-school-bell {
+    background-image:       url( 'image/project-icons/school-bell.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-school-bell {
+    background-image:       url( 'image/project-icons/school-bell.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-shield-swords {
+    background-image:       url( 'image/project-icons/shield-swords.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-shield-swords {
+    background-image:       url( 'image/project-icons/shield-swords.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-shield {
+    background-image:       url( 'image/project-icons/shield.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-shield {
+    background-image:       url( 'image/project-icons/shield.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-shopping-bag-black {
+    background-image:       url( 'image/project-icons/shopping-bag-black.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-shopping-bag-black {
+    background-image:       url( 'image/project-icons/shopping-bag-black.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-shopping-bag-paperboard {
+    background-image:       url( 'image/project-icons/shopping-bag-paperboard.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-shopping-bag-paperboard {
+    background-image:       url( 'image/project-icons/shopping-bag-paperboard.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-shopping-bag-price-tag {
+    background-image:       url( 'image/project-icons/shopping-bag-price-tag.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-shopping-bag-price-tag {
+    background-image:       url( 'image/project-icons/shopping-bag-price-tag.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-shopping-bag {
+    background-image:       url( 'image/project-icons/shopping-bag.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-shopping-bag {
+    background-image:       url( 'image/project-icons/shopping-bag.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-sign-post-alternate {
+    background-image:       url( 'image/project-icons/sign-post-alternate.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-sign-post-alternate {
+    background-image:       url( 'image/project-icons/sign-post-alternate.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-sign-post {
+    background-image:       url( 'image/project-icons/sign-post.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-sign-post {
+    background-image:       url( 'image/project-icons/sign-post.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-slide-show {
+    background-image:       url( 'image/project-icons/slide-show.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-slide-show {
+    background-image:       url( 'image/project-icons/slide-show.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-spinning-beach-ball {
+    background-image:       url( 'image/project-icons/spinning-beach-ball.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-spinning-beach-ball {
+    background-image:       url( 'image/project-icons/spinning-beach-ball.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-status {
+    background-image:       url( 'image/project-icons/status.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-status {
+    background-image:       url( 'image/project-icons/status.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-stoplight {
+    background-image:       url( 'image/project-icons/stoplight.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-stoplight {
+    background-image:       url( 'image/project-icons/stoplight.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-stopwatch-off {
+    background-image:       url( 'image/project-icons/stopwatch-off.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-stopwatch-off {
+    background-image:       url( 'image/project-icons/stopwatch-off.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-stopwatch-on {
+    background-image:       url( 'image/project-icons/stopwatch-on.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-stopwatch-on {
+    background-image:       url( 'image/project-icons/stopwatch-on.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-suit {
+    background-image:       url( 'image/project-icons/suit.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-suit {
+    background-image:       url( 'image/project-icons/suit.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-time-machine {
+    background-image:       url( 'image/project-icons/time-machine.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-time-machine {
+    background-image:       url( 'image/project-icons/time-machine.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-top-hat-magic-wand {
+    background-image:       url( 'image/project-icons/top-hat-magic-wand.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-top-hat-magic-wand {
+    background-image:       url( 'image/project-icons/top-hat-magic-wand.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-top-hat-magic {
+    background-image:       url( 'image/project-icons/top-hat-magic.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-top-hat-magic {
+    background-image:       url( 'image/project-icons/top-hat-magic.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-top-hat-wand {
+    background-image:       url( 'image/project-icons/top-hat-wand.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-top-hat-wand {
+    background-image:       url( 'image/project-icons/top-hat-wand.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-top-hat {
+    background-image:       url( 'image/project-icons/top-hat.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-top-hat {
+    background-image:       url( 'image/project-icons/top-hat.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-traffic-link {
+    background-image:       url( 'image/project-icons/traffic-link.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-traffic-link {
+    background-image:       url( 'image/project-icons/traffic-link.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-traffic-no-entry {
+    background-image:       url( 'image/project-icons/traffic-no-entry.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-traffic-no-entry {
+    background-image:       url( 'image/project-icons/traffic-no-entry.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-traffic-stop {
+    background-image:       url( 'image/project-icons/traffic-stop.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-traffic-stop {
+    background-image:       url( 'image/project-icons/traffic-stop.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-traffic-warning {
+    background-image:       url( 'image/project-icons/traffic-warning.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-traffic-warning {
+    background-image:       url( 'image/project-icons/traffic-warning.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-traffic-yield {
+    background-image:       url( 'image/project-icons/traffic-yield.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-traffic-yield {
+    background-image:       url( 'image/project-icons/traffic-yield.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-trash-empty {
+    background-image:       url( 'image/project-icons/trash-empty.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-trash-empty {
+    background-image:       url( 'image/project-icons/trash-empty.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-trash-full {
+    background-image:       url( 'image/project-icons/trash-full.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-trash-full {
+    background-image:       url( 'image/project-icons/trash-full.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-trash {
+    background-image:       url( 'image/project-icons/trash.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-trash {
+    background-image:       url( 'image/project-icons/trash.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-trees {
+    background-image:       url( 'image/project-icons/trees.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-trees {
+    background-image:       url( 'image/project-icons/trees.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-twitter-mention {
+    background-image:       url( 'image/project-icons/twitter-mention.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-twitter-mention {
+    background-image:       url( 'image/project-icons/twitter-mention.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-twitter-retweet {
+    background-image:       url( 'image/project-icons/twitter-retweet.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-twitter-retweet {
+    background-image:       url( 'image/project-icons/twitter-retweet.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-twitter {
+    background-image:       url( 'image/project-icons/twitter.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-twitter {
+    background-image:       url( 'image/project-icons/twitter.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-ui-appearance {
+    background-image:       url( 'image/project-icons/ui-appearance.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-ui-appearance {
+    background-image:       url( 'image/project-icons/ui-appearance.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-ui-debug {
+    background-image:       url( 'image/project-icons/ui-debug.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-ui-debug {
+    background-image:       url( 'image/project-icons/ui-debug.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-ui-drawer {
+    background-image:       url( 'image/project-icons/ui-drawer.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-ui-drawer {
+    background-image:       url( 'image/project-icons/ui-drawer.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-ui-finder {
+    background-image:       url( 'image/project-icons/ui-finder.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-ui-finder {
+    background-image:       url( 'image/project-icons/ui-finder.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-ui-inspector {
+    background-image:       url( 'image/project-icons/ui-inspector.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-ui-inspector {
+    background-image:       url( 'image/project-icons/ui-inspector.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-ui-list-window {
+    background-image:       url( 'image/project-icons/ui-list-window.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-ui-list-window {
+    background-image:       url( 'image/project-icons/ui-list-window.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-ui-movie-window {
+    background-image:       url( 'image/project-icons/ui-movie-window.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-ui-movie-window {
+    background-image:       url( 'image/project-icons/ui-movie-window.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-ui-movie {
+    background-image:       url( 'image/project-icons/ui-movie.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-ui-movie {
+    background-image:       url( 'image/project-icons/ui-movie.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-ui-rulers {
+    background-image:       url( 'image/project-icons/ui-rulers.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-ui-rulers {
+    background-image:       url( 'image/project-icons/ui-rulers.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-ui-sidebar {
+    background-image:       url( 'image/project-icons/ui-sidebar.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-ui-sidebar {
+    background-image:       url( 'image/project-icons/ui-sidebar.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-ui-text {
+    background-image:       url( 'image/project-icons/ui-text.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-ui-text {
+    background-image:       url( 'image/project-icons/ui-text.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-ui-window {
+    background-image:       url( 'image/project-icons/ui-window.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-ui-window {
+    background-image:       url( 'image/project-icons/ui-window.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-user {
+    background-image:       url( 'image/project-icons/user.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-user {
+    background-image:       url( 'image/project-icons/user.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-users {
+    background-image:       url( 'image/project-icons/users.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-users {
+    background-image:       url( 'image/project-icons/users.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-wall-clock-past {
+    background-image:       url( 'image/project-icons/wall-clock-past.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-wall-clock-past {
+    background-image:       url( 'image/project-icons/wall-clock-past.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-wall-clock-time-machine {
+    background-image:       url( 'image/project-icons/wall-clock-time-machine.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-wall-clock-time-machine {
+    background-image:       url( 'image/project-icons/wall-clock-time-machine.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-wall-clock {
+    background-image:       url( 'image/project-icons/wall-clock.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-wall-clock {
+    background-image:       url( 'image/project-icons/wall-clock.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-wallet-money {
+    background-image:       url( 'image/project-icons/wallet-money.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-wallet-money {
+    background-image:       url( 'image/project-icons/wallet-money.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-wallet {
+    background-image:       url( 'image/project-icons/wallet.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-wallet {
+    background-image:       url( 'image/project-icons/wallet.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-wand-magic {
+    background-image:       url( 'image/project-icons/wand-magic.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-wand-magic {
+    background-image:       url( 'image/project-icons/wand-magic.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-wand {
+    background-image:       url( 'image/project-icons/wand.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-wand {
+    background-image:       url( 'image/project-icons/wand.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-website-alias {
+    background-image:       url( 'image/project-icons/website-alias.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-website-alias {
+    background-image:       url( 'image/project-icons/website-alias.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-website-download {
+    background-image:       url( 'image/project-icons/website-download.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-website-download {
+    background-image:       url( 'image/project-icons/website-download.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-website-link {
+    background-image:       url( 'image/project-icons/website-link.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-website-link {
+    background-image:       url( 'image/project-icons/website-link.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+.project-icons-website {
+    background-image:       url( 'image/project-icons/website.png' );
+    background-position:    5px center;
+    background-repeat:      no-repeat;
+    padding-left:           45px;
+    background-size:        32px;
+}
+
+.project-icons-right-website {
+    background-image:       url( 'image/project-icons/website.png' );
+    background-position:    right center;
+    background-repeat:      no-repeat;
+    background-size:        32px;
+}
+
+/* ]]> */

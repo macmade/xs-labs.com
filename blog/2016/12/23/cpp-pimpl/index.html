@@ -1,0 +1,485 @@
+<a name="toc-1"></a>
+<h3>1 - Forewords</h3>
+<p>
+    The C++ <strong>PIMPL</strong> idiom is a technique used in C++ to provide a <strong>private implementation</strong> in classes.
+</p>
+<p>
+    The basic idea is to <strong>hide all private members</strong> (fields and methods) from the public class definition (and public header).
+</p>
+<p>
+    Such a technique provides several benefits:
+</p>
+<p>
+    <strong>1 - Compilation time</strong><br />
+    Since all the private stuff is not in the public headers, modifying private members (like adding/removing private member fields or methods) won't require a recompilation of the compilation units depending on the header.<br />
+    This can very handy with large C++ projects with a lot of dependancies.<br />
+    Such a technique can also minimise the inclusion of other headers in the public one, thus also requiring less compilation time.
+</p>
+<p>
+    <strong>2 - Cleaner headers</strong>
+    Hiding the private members from the public interface also makes your public code cleaner.<br />
+    A developer using your class will only see the stuff he can actually use. This surely removes some burden.<br />
+    This technique can also be quite useful to protect your implementation details when providing for instance a compiled library to a client.<br />
+    This is obviously not a silver-bullet for protecting your code, but at least it will keep private stuff private.
+</p>
+<p>
+    The PIMPL technique also have a few <a href="#toc-5-1">drawbacks</a>, but we'll cover them later on.
+</p>
+<h3>Table Of Contents</h3>
+<ol>
+    <li>
+        <a href="#toc-1">Forewords</a>
+    </li>
+    <li>
+        <a href="#toc-2">Additional readings</a>
+    </li>
+    <li>
+        <a href="#toc-3">Forward declarations</a>
+    </li>
+    <li>
+        <a href="#toc-4">Implementation</a>
+        <ol>
+            <li>
+                <a href="#toc-4-1">Interface</a>
+            </li>
+            <li>
+                <a href="#toc-4-2">Implementation</a>
+                <ol>
+                    <li>
+                        <a href="#toc-4-2-1">IMPL class</a>
+                    </li>
+                    <li>
+                        <a href="#toc-4-2-2">Constructors</a>
+                    </li>
+                    <li>
+                        <a href="#toc-4-2-3">Copy constructor</a>
+                    </li>
+                    <li>
+                        <a href="#toc-4-2-4">Destructor</a>
+                    </li>
+                    <li>
+                        <a href="#toc-4-2-5">Assignment operator</a>
+                    </li>
+                    <li>
+                        <a href="#toc-4-2-6">Swap function</a>
+                    </li>
+                    <li>
+                        <a href="#toc-4-2-7">Member methods</a>
+                    </li>
+                </ol>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <a href="#toc-5">Conclusion</a>
+        <ol>
+            <li>
+                <a href="#toc-5-1">Drawbacks</a>
+                <ol>
+                    <li>
+                        <a href="#toc-5-1-1">Memory usage</a>
+                    </li>
+                    <li>
+                        <a href="#toc-5-1-2">Performance</a>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <a href="#toc-5-2">Possible enhancements</a>
+            </li>
+            <li>
+                <a href="#toc-5-3">Generic PIMPL</a>
+            </li>
+        </ol>
+    </li>
+</ol>
+<a name="toc-2"></a>
+<h3>2 - Additional readings</h3>
+<p>
+    In this tutorial, we'll be designing a PIMPL class, fully compatible with <strong>C++ automatic allocation</strong>.
+</p>
+<p>
+    I won't cover here the implementation details for automatic allocation, as it has been covered in the previous C++ tutorials:
+</p>
+<ul>
+    <li>
+        <a href="http://www.xs-labs.com/en/blog/2016/11/28/cpp-auto-alloc-part-1/">C++ Automatic Allocation - Part 1</a>
+    </li>
+    <li>
+        <a href="http://www.xs-labs.com/en/blog/2016/12/05/cpp-auto-alloc-part-2/">C++ Automatic Allocation - Part 2</a>
+    </li>
+</ul>
+<p>
+    Be sure to fully understand the concepts presented in the above articles before proceeding with this one.
+</p>
+<a name="toc-3"></a>
+<h3>3 - Forward declarations</h3>
+<p>
+    The PIMPL idiom relies on <strong>forward class declarations</strong>.
+</p>
+<p>
+    Conceptually, a forward declaration is the <strong>declaration of an identifier with no formal definition</strong>.<br />
+    Such an identifier can be a variable, a type, a constant, etc.
+</p>
+<p>
+    Let's see some example.<br />
+    Imagine the following header file, assuming the <code>Foo</code> type represents a C++ class:
+</p>
+<pre class="code-block language-cpp">
+#ifndef HEADER_H
+#define HEADER_H
+
+#include "Foo.hpp"
+
+Foo * GetFooObject( void );
+
+#endif /* HEADER_H */
+</pre>
+<p>    
+    This header includes <code>"Foo.hpp"</code>, and declares a function returning a pointer to a <code>Foo</code> object. Quite usual...
+</p>
+<p>
+    But at this point, the <strong>definition</strong> of the <code>Foo</code> class is not needed, so we could also get rid of the inclusion of <code>"Foo.hpp"</code> using a forward declaration:
+</p>
+<pre class="code-block language-cpp">
+#ifndef HEADER_H
+#define HEADER_H
+
+class Foo;
+
+Foo * GetFooObject( void );
+
+#endif /* HEADER_H */
+</pre>
+<p>
+    Here, we simply tell the compiler that the <code>Foo</code> identifier is a C++ class.<br />
+    The compiler won't know anything about it, except that is is a class.
+</p>
+<p>
+    As we are returning a pointer to such a class, the above code is perfectly valid.<br />
+    The compiler doesn't need to know anything about the class definition to handle a pointer.
+</p>
+<p>
+    Note that obviously, you can only use forward declarations with <strong>pointer</strong> or <strong>reference</strong> types.<br />
+    The following code is <strong>not</strong> valid:
+</p>
+<pre class="code-block language-cpp">
+#ifndef HEADER_H
+#define HEADER_H
+
+class Foo;
+
+Foo GetFooObject( void );
+
+#endif /* HEADER_H */
+</pre>
+<p>
+    Here, the <code>Foo</code> object is returned as a copy, so there's no way for the compiler to know what to do without a complete definition of <code>Foo</code>.
+</p>
+<p>
+    As it is <strong>retuned by value</strong>, the compiler will have to allocate memory for the object.<br />
+    And with a forward declaration, there's no way for the compiler to know the size of the object.<br />
+    Also the class may have special methods, like a copy constructor or an assignment operator.<br />
+    In such a case, the compiler also needs to know about it, so it can emit the correct code to handle the object.
+</p>
+<p>
+    So in the last example, you will have to include the <code>"Foo.hpp"</code> header file.<br />
+    <strong>But with pointer or references, the forward declaration is enough, allowing you to get rid of unnecessary includes</strong>.
+</p>
+<a name="toc-4"></a>
+<h3>4 - Implementation</h3>
+<p>
+    So let's implement a C++ PIMPL class.<br />
+    As in the <a href="http://www.xs-labs.com/en/blog/2016/11/28/cpp-auto-alloc-part-1/">first tutorial about automatic allocation</a>, we'll design a simple <code>Point</code> class, representing a 2D point.
+</p>
+<a name="toc-4-1"></a>
+<h4>4.1 - Interface</h4>
+<p>
+    Here's the public interface, <code>Point.hpp</code>:
+</p>
+<pre class="code-block language-cpp">
+#ifndef POINT_HPP
+#define POINT_HPP
+
+class Point
+{
+    public:
+        
+        Point( void );
+        Point( int x, int y );
+        Point( const Point & o );
+        ~Point( void );
+        
+        Point & operator =( Point o );
+        
+        friend void swap( Point & o1, Point & o2 );
+        
+        int GetX( void ) const;
+        int GetY( void ) const;
+        
+        void SetX( int x );
+        void SetY( int y );
+        
+    private:
+        
+        class IMPL;
+        
+        IMPL * iml;
+};
+
+#endif /* POINT_HPP */
+</pre>
+<p>
+    Assuming you've read the <a href="http://www.xs-labs.com/en/blog/2016/11/28/cpp-auto-alloc-part-1/">previous tutorial</a>, the <strong>public</strong> part should be straightforward.
+</p>
+<p>
+    Parameter-less constructor, copy constructor, assignment operator, swap function, etc.<br />
+    We also added getter and setter methods for the <code>X</code> and <code>Y</code> properties.
+</p>
+<p>
+    Now let's take about the <strong>private</strong> part.<br />
+    Here, we are <strong>forward-declaring</strong> an inner class, whose qualified name is <code>Point::IMPL</code>:
+</p>
+<pre class="code-block language-cpp">
+class IMPL;
+</pre>
+<p>
+    This <strong>inner class</strong> will contains our private fields and methods.<br />
+    We don't provide a definition of it here, as we want to keep everything private.
+</p>
+<p>
+    We also declare a single private member, which is a pointer to a <code>Point::IMPL</code> object:
+</p>
+<pre class="code-block language-cpp">
+IMPL * iml;
+</pre>
+<p>    
+    <strong>And that's all!</strong><br />
+    Unless adding public members, the <code>Point</code> class will never have to change.
+</p>
+<a name="toc-4-2"></a>
+<h4>4.2 - Implementation</h4>
+<p>
+    Now let's take a look at the actual implementation for such a class, <code>Point.cpp</code>.
+</p>
+<a name="toc-4-2-1"></a>
+<h5>4.2.1 - IMPL class</h5>
+<p>
+    First of all, as we are implementing the class, we'll now need a complete definition for the <code>Point::IMPL</code> class:
+</p>
+<pre class="code-block language-cpp">
+#include "Point.hpp"
+
+class Point::IMPL
+{
+    public:
+        
+        IMPL( void ):
+            _x( 0 ),
+            _y( 0 )
+        {}
+        
+        IMPL( const IMPL & o ):
+            _x( o._x ),
+            _y( o._y )
+        {}
+        
+        ~IMPL( void )
+        {}
+        
+        int _x;
+        int _y;
+};
+</pre>
+<p>    
+    Nothing fancy.<br />
+    We have a parameter-less constructor, a copy-constructor and a destructor, as well as two integer members, <code>_x</code> and <code>_y</code>.
+</p>
+<p>
+    Note that <strong>everything is public here</strong>.<br />
+    There's no need to have private members, as we're here in the context of the <code>Point</code> class implementation.
+</p>
+<p>
+    In other words, this is a single compilation unit, and the definition of <code>Point::IMPL</code> only exists in that compilation unit.
+</p>
+<p>
+    Now let's take a look at the implementation of the <code>Point</code> class.
+</p>
+<a name="toc-4-2-2"></a>
+<h5>4.2.2 - Constructors</h5>
+<p>
+    First of all, the parameter-less constructor.<br />
+    Remember that the <code>Point</code> class has a single member, named <code>impl</code>, which is a pointer to a <code>Point::IMPL</code> object.
+</p>
+<p>
+    Here, we need to <strong>ensure that this pointer is valid</strong>, by creating a new <code>Point::IMPL</code> object:
+</p>
+<pre class="code-block language-cpp">
+Point::Point( void ): impl( new IMPL )
+{}
+</pre>
+<p>
+    Using the initializer list, we initialize the <code>impl</code> field with a new instance of the <code>Point:IMPL</code> class (<code>new IMPL</code>).<br />
+    We don't need to initialize its members, as this is done by the <code>Point:IMPL</code> constructor.
+</p>
+<p>
+    Now the second constructor:
+</p>
+<pre class="code-block language-cpp">
+Point::Point( int x, int y ): impl( new IMPL )
+{
+    this->impl->_x = x;
+    this->impl->_y = y;
+}
+</pre>
+<p>
+    We also initialize the <code>impl</code> field, as in the previous example, and then we simply set the <code>_x</code> and <code>_y</code> fields with the values passed as arguments.
+</p>
+<a name="toc-4-2-3"></a>
+<h5>4.2.3 - Copy constructor</h5>
+<p>
+    Now let's see how the <strong>copy constructor</strong> is implemented:
+</p>
+<pre class="code-block language-cpp">
+Point::Point( const Point & o ): impl( new IMPL( *( o.impl ) ) )
+{}
+</pre>
+<p>
+    That's it...<br />
+    We simply rely on the copy constructor of the <code>Point::IMPL</code> class for initialising the <code>impl</code> field.
+</p>
+<p>
+    Note that the copy constructor take a reference type, and the <code>impl</code> field is a pointer.<br />
+    That's why we <strong>dereference</strong> it (<code>*( o.impl )</code>), hence effectively calling the copy constructor.
+</p>
+<a name="toc-4-2-4"></a>
+<h5>4.2.4 - Destructor</h5>
+<p>
+    Noting complicated in the destructor, we simply call the <code>delete</code> operator on the <code>impl</code> field:
+</p>
+<pre class="code-block language-cpp">
+Point::~Point( void )
+{
+    delete this->impl;
+}
+</pre>
+<p>
+    No need to check for <code>nullptr</code> as deleting a null pointer is fine, and because there's actually no way the <code>impl</code> field can point to anything else than a valid object.
+</p>
+<a name="toc-4-2-5"></a>
+<h5>4.2.5 - Assignment operator</h5>
+<p>
+    As explained in the <a href="http://www.xs-labs.com/en/blog/2016/11/28/cpp-auto-alloc-part-1/">first tutorial about automatic allocation</a>, our assignment operator takes its value by copy rather than by reference, so we can simply use our <code>swap</code> function, thus relying on our copy constructor to do the work:
+</p>
+<pre class="code-block language-cpp">
+Point & Point::operator =( Point o )
+{
+    swap( *( this ), o );
+    
+    return ( this );
+}
+</pre>
+<a name="toc-4-2-6"></a>
+<h5>4.2.6 - Swap function</h5>
+<p>
+    With the <strong>PIMPL idiom</strong>, the <code>swap</code> function is actually very straightforward.<br />
+    As the <code>Point</code> class only has a single member, which is a pointer, we only need to swap them:
+</p>
+<pre class="code-block language-cpp">
+void swap( Point & o1, Point & o2 )
+{
+    using std::swap;
+    
+    swap( o1.impl, o2.impl );
+}
+</pre>
+<p>    
+    That's it... Swapping two objects <strong>only means swapping their implementations</strong>.
+</p>
+<a name="toc-4-2-7"></a>
+<h5>4.2.7 - Member methods</h5>
+<p>
+    The only thing left is the member methods.<br />
+    Nothing fancy here as well:
+</p>
+<pre class="code-block language-cpp">
+int Point::GetX( void ) const
+{
+    return this->impl->_x;
+}
+
+int Point::GetY( void ) const
+{
+    return this->impl->_y;
+}
+
+void Point::SetX( int x ) const
+{
+    this->impl->_x = x;
+}
+
+void Point::SetY( int y ) const
+{
+    this->impl->_y = y;
+}
+</pre>
+<p>
+    Again, no need to check for a null pointer, as there's no way the <code>impl</code> field can be invalid.
+</p>
+<a name="toc-5"></a>
+<h3>5 - Conclusion</h3>
+<p>
+    As you can see, implementing the <strong>PIMPL idiom</strong> is quite straightforward.<br />
+    It provides several benefits, and the actual implementation is really simple.
+</p>
+<p>
+    I personally think it also improves the overall readability of the code, as it keeps all member methods simple and generic.<br />
+    All the work is basically done by the copy constructor of the <code>IMPL</code> class, so it even makes automatic allocation patterns easier, in my own opinion.
+</p>
+<a name="toc-5-1"></a>
+<h4>5.1 - Drawbacks</h4>
+<p>
+    As stated in the beginning of this article, the <strong>PIMPL idiom</strong> also has a few drawbacks.
+</p>
+<a name="toc-5-1-1"></a>
+<h5>5.1.1 - Memory usage</h5>
+<p>
+    First of all, the PIMPL idiom <strong>forces us to use dynamic memory allocation</strong> for the <code>impl</code> pointer field.
+</p>
+<p>
+    Each time we create a PIMPL object, there's actually a call to <code>new</code> to allocate memory for the <code>impl</code> field.
+</p>
+<p>
+    In most common scenarios, this is clearly not a problem, but that's definitively something you'll have to keep in mind.
+</p>
+<a name="toc-5-1-2"></a>
+<h5>5.1.2 - Performance</h5>
+<p>
+    As stated in the previous point, we need to allocate dynamic memory for the <code>impl</code> field.
+</p>
+<p>
+    The calls to <code>new</code> and <code>delete</code> obviously have a small performance impact, but this also true for accessing fields of the <code>IMPL</code> object, as it means <strong>reading/dereferencing</strong> memory.
+</p>
+<p>
+    Again, not a very big deal in most common scenarios, but if you're really concerned about runtime performances, PIMPL might be a thing you'll want to avoid.
+</p>
+<a name="toc-5-2"></a>
+<h4>5.2 - Possible enhancements</h4>
+<p>
+    I tried to keep things simple in this tutorial, but the <strong>PIMPL idiom</strong> can actually be extended in a lot of ways.
+</p>
+<p>
+    For instance, you could also decide not to copy the <code>impl</code> field each time an object is copied, but instead use some kind of reference counting mechanism, or stuff like <code>std::shared_ptr</code>.
+</p>
+<p>
+    Then you'll have different instances sharing the same implementation.<br />
+    This way, you can have the benefits of shared objects, while having the benefits of automatic allocation.
+</p>
+<a name="toc-5-3"></a>
+<h4>5.3 - Generic PIMPL</h4>
+<p>
+    If you're interested in using the <strong>PIMPL idiom</strong>, I recommend checking my <strong><a href="https://github.com/macmade/PIMPL">Generic C++11 PIMPL implementation</a></strong>.
+</p>
+<p>
+    It consist of a template class that you can inherit from, and which will handle most of the PIMPL implementation for you.
+</p>

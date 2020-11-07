@@ -1,0 +1,68 @@
+<p>
+    A few things caught my attention while analysing the new iOS 7 beta...
+</p>
+<p>
+    Usually, when an iOS beta comes out, the first thing I do is to analyse the filesystem, to check for new stuff, like applications, frameworks, system services, changes in the filesystem layout, etc.
+</p>
+<p>
+    Back in the days, I developed a <a href="http://www.xs-labs.com/en/projects/filesystem/overview/">tiny iOS app</a> to display the content of the iOS filesystem.<br />
+    It used to be on the AppStore, before Apple decided to remove it, for security reasons. I then made it <a href="https://github.com/macmade/FileSystem">available on GitHub</a>, as an OpenSource project.
+</p>
+<p>
+    The app was running nice, displaying all iOS partitions, and filesystem hierarchy, permissions, file's contents...<br />
+    It was really nice, from a developer's perspective, to see how the iOS filesystem was organised, to see how the sandboxing was made, etc...
+</p>
+<p>
+    So I ran it on the first iOS 7 beta...
+</p>
+<p>
+    The app ran just fine, but I was surprised to see that almost all directories on the root partition were empty.<br />
+    Directories like «/Applications» (system apps), or «/tmp» were still browsable, but directories like «/System», «/Library» or «/var» were reported as empty folders...
+</p>
+<p>
+    The last one surprised me a lot, as «/var» is in fact a mount point were all the user data is stored, including third-party applications.
+</p>
+<p>
+    I first thought of a bug in my own code, but after a few tests, it's definitively not.
+</p>
+<p>
+    So iOS 7 adds some security layer in all filesystem operations, hiding everything related to the system to a third-party app.<br />
+    It's not that those locations aren't accessible, in terms of filesystem permissions. They are simply hidden (I guess by the Foundation framework).
+</p>
+<p>
+    So as an example, let's take a look at the following code:
+</p>
+<pre class="code-block language-objc">
+NSError * e;
+
+NSLog( @"%@", [ [ NSFileManager defaultManager ] contentsOfDirectoryAtPath: @"/Applications/" error: &e ] );
+NSLog( @"%@", e );
+
+e = nil;
+
+NSLog( @"%@", [ [ NSFileManager defaultManager ] contentsOfDirectoryAtPath: @"/System/" error: &e ] );
+NSLog( @"%@", e );
+</pre>
+<p>
+    Simple stuff. It will just log the contents of the «/System» and «/Applications» directories to the console, reporting a potential error, if any.
+</p>
+<p>
+    Previous to iOS 7, it just works. In both cases, it displays the directories content.<br />
+    But on iOS 7, while the first case works as expected, the second one, asking for the contents of the «/System» directory, simply fails, with the following error:
+</p>
+<pre class="code-block nohighlight">
+Error
+    Domain=NSCocoaErrorDomain
+    Code=257
+    "The operation couldn’t be completed. (Cocoa error 257.)"
+    UserInfo=0x146397e0
+    {
+        NSUnderlyingError=0x14639720
+        "The operation couldn’t be completed. Operation not permitted",
+        NSFilePath=/System/,
+        NSUserStringVariant=(Folder)
+    }
+</pre>
+<p>
+    Looks like I missed something from the keynote... : )
+</p>

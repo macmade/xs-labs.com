@@ -1,0 +1,350 @@
+<h3>About</h3>
+<p>
+    This tutorial explains how to design C++ classes for automatic allocation.
+</p>
+<p>
+    It is composed of several parts:
+</p>
+<ol>
+    <li>C++ Automatic Allocation - Part 1 (this tutorial)</li>
+    <li><a href="/en/blog/2016/12/05/cpp-auto-alloc-part-2/">C++ Automatic Allocation - Part 2</a></li>
+    <li><a href="/en/blog/2016/12/23/cpp-pimpl/">C++ PIMPL idiom & Automatic Allocation</a></li>
+</ol>
+<h3>Table Of Contents</h3>
+<ol>
+    <li><a href="#toc-1">C++ allocation types</a></li>
+    <li>
+        <a href="#toc-2">Automatic allocation rules</a>
+        <ol>
+            <li><a href="#toc-2-1">Copy constructor</a></li>
+            <li><a href="#toc-2-2">Assignment operator</a></li>
+            <li><a href="#toc-2-3">Swapping</a></li>
+            <li><a href="#toc-2-4">C++11</a></li>
+        </ol>
+    </li>
+</ol>
+<a name="toc-1"></a>
+<h3>1 - C++ allocation types</h3>
+<p>
+    When using C++ classes, you can basically use <strong>automatic</strong> or <strong>dynamic</strong> allocation.
+</p>
+<p>
+    Let's take a look at the following code:
+</p>
+<pre class="code-block language-cpp">
+#include &lt;string&gt;
+
+int main( void )
+{
+    std::string   s1( "hello, world" );
+    std::string * s2 = new std::string( "hello, universe" );
+    
+    delete s2;
+    
+    return 0;
+}
+</pre>
+<p>
+    Here, <code>s1</code> uses <strong>automatic</strong> allocation, while <code>s2</code> uses <strong>dynamic</strong> allocation.<br />
+    Note the call to the <code>new</code> and <code>delete</code> operators, as well as the pointer type for <code>s2</code>.
+</p>
+<p>
+    With automatic allocation, the compiler will automatically allocates memory for the object (here from the stack), and call the <strong>constructor</strong>. When the object goes out of scope, it will the automatically call the <strong>detstructor</strong>, and reclaim the memory. Quite simple.
+</p>
+<p>
+    Dynamic allocation, using the <code>new</code> operator, will allocate memory from the <strong>heap</strong>. The constructor will be called, obviously, but then the compiler won't manage the lifetime of the object, and you'll have to manually call the <code>delete</code> operator when you're done using the object. <code>delete</code> will call the destructor and free the memory.
+</p>
+<p>
+    Both allocation styles are useful. One is not better than the other. It just depend on the context.<br />
+    I won't extend here on this specific topic, as it's not the purpose of this tutorial.
+</p>
+<a name="toc-2"></a>
+<h3>2 - Automatic allocation rules</h3>
+<p>
+    Now let's concentrate on <strong>automatic allocation</strong>.  
+    In order to make a class fully compatible with automatic allocation, a few rules need to be respected.
+</p>
+<p>
+    Let's take as an example a very basic <code>Point</code> class, representing two coordinates:
+</p>
+<pre class="code-block language-cpp">
+class Point
+{
+    public:
+        
+        int x;
+        int y;
+        
+        Point( void ):
+            x( 0 ),
+            y( 0 )
+        {}
+        
+        Point( int x_, int y_ ):
+            x( x_ ),
+            y( y_ )
+        {}
+};
+</pre>
+<p>
+    We first have a <strong>parameter-less</strong> constructor, allowing to declare an empty/default <code>Point</code> object. Members will be initialised to zero:
+</p>
+<pre class="code-block language-cpp">
+Point p;
+</pre>
+<p>
+    And also another constructor, allowing the initialisation of the object with some useful values:
+</p>
+<pre class="code-block language-cpp">
+Point p( 42, 42 );
+</pre>
+<p>
+    Now with such a basic example, the compiler will generate all the necessary code to make this class compatible with automatic allocation.
+</p>
+<p>
+    But let's pretend it won't, and see what we'll need to do.
+</p>
+<a name="toc-2-1"></a>
+<h4>2.1 - Copy constructor</h4>
+<p>
+    First of all, we need a <strong>copy constructor</strong>. That is, a constructor taking as parameter an object of the same type, and which will initialise the values of the object beeing constructed by copying the values from the other object.
+</p>
+<p>
+    The copy constructor will be called by the compiler in the following situations:
+</p>
+<h5>2.1.1 - Explicit call</h5>
+<pre class="code-block language-cpp">
+Point p1( 42, 42 );
+Point p2( p1 );
+</pre>
+<p>
+    Here, <code>p2</code> is constructed from <code>p1</code>. Both objects will have the same values.
+</p>
+<h5>2.1.2 - Passing parameters by value</h5>
+<p>
+    Imagine the following function:
+</p>
+<pre class="code-block language-cpp">
+void foo( Point p );
+</pre>
+<p>
+    The <code>p</code> parameter is here passed by value.<br />
+    So when calling that function, like:
+</p>
+<pre class="code-block language-cpp">
+Point p( 42, 42 );
+
+foo( p );
+</pre>
+<p>
+    The function will receive a <strong>copy</strong> of the <code>p</code> local variable.  
+    The compiler automatically handles this by allocating the necessary memory and calling the copy constructor.
+</p>
+<p>
+    This obviously won't be the case when using a reference type (note the <code>&</code>):
+</p>
+<pre class="code-block language-cpp">
+void foo( Point & p );
+</pre>
+<h5>2.1.3 - Returning values</h5>
+<p>
+    Now let's imagine the following function:
+</p>
+<pre class="code-block language-cpp">
+Point bar( void )
+{
+    Point p( 42, 42 );
+    
+    return p;
+}
+</pre>
+<p>    
+    Here, <code>p</code> is a local variable, belonging to the <code>bar</code> function. Memory is allocated from its stack frame, and might be reused by the compiler on return.
+</p>
+<p>
+    So when returning <code>p</code>, a copy will be made by the compiler, using the copy constructor, so the object will exist in the caller's stack frame.
+</p>
+<p>
+    Now let's take a look at the implementation of the copy constructor, for the <code>Point</code> class:
+</p>
+<pre class="code-block language-cpp">
+Point( const Point & p ):
+    x( p.x ),
+    y( p.y )
+{}
+</pre>
+<p>    
+    <strong>Note this is the only valid signature for a copy constructor.</strong>
+</p>
+<p>
+    As you can see, it takes as a parameter a <strong>reference</strong> to another <code>Point</code> object. Can't take its parameter by value, as this will end up calling the copy constructor infinitely.
+</p>
+<p>
+    The parameter is also <code>const</code>, meaning you <strong>shall not modify any of its value</strong>.<br />  
+    You goal here is simply to construct yourself by copying the object's properties, and that's precisely what we do.
+</p>
+<a name="toc-2-2"></a>
+<h4>2.2 - Assignment operator</h4>
+<p>
+    In order to make a class compatible with automatic allocation, we also need to declare an <strong>assignment operator</strong>.
+</p>
+<p>
+    The assignment operator will be used, for instance, in the following case:
+</p>
+<pre class="code-block language-cpp">
+Point p1;
+Point p2( 42, 42 );
+
+p1 = p2;
+</pre>
+<p>    
+    Here, <code>p1</code> and <code>p2</code> are valid, fully constructed objects.<br />
+    In the last line, <code>p2</code> is assigned to <code>p1</code>.
+</p>
+<p>
+    The assignment operator is in a way close to the copy constructor, as it also needs to set its members by copying from another object.<br />
+    The main difference is that, when using the assignment operator, <strong>the object is already constructed</strong>, so it <strong>may have to free its previous resources</strong> prior to copying the other object's one.
+</p>
+<p>
+    In our <code>Point</code> class example, nothing to worry about, as our only members are integers.<br />
+    So our assignment operator can simply be:
+</p>
+<pre class="code-block language-cpp">
+Point & operator=( const Point & p )
+{
+    this->x = p.x;
+    this->y = p.y;
+    
+    return *( this );
+}
+</pre>
+<p>    
+    We simply assign our member values by copying the member values from the object's reference passed as argument.
+</p>
+<p>
+    Now as you can see, the assignment operator also needs to return a reference type.  In most situations, we simply return ourself, but keep in mind you could also return another object, if needed.
+</p>
+<p>
+    Unlike the copy constructor, this is not the only possible signature for an assignment operator, but we'll cover this in the <a href="/en/blog/2016/12/05/cpp-auto-alloc-part-2/">next tutorial</a>.
+</p>
+<a name="toc-2-3"></a>
+<h4>2.3 - Swapping</h4>
+<p>
+    While not a requirement for automatic allocation, it's usually a good idea to provide a <code>swap</code> function.<br />
+    As we'll see in the <a href="/en/blog/2016/12/05/cpp-auto-alloc-part-2/">next tutorial</a>, it might also help us get rid of some redundant code.
+</p>
+<p>
+    The idea of the <code>swap</code> function is to <strong>exchange two objects</strong>.<br />
+    Here's an example implementation for our <code>Point</code> class:
+</p>
+<pre class="code-block language-cpp">
+friend void swap( Point & p1, Point & p2 )
+{
+    using std::swap;
+    
+    swap( p1.x, p2.x );
+    swap( p1.y, p2.y );
+}
+</pre>
+<p>
+    Quite straightforward, we simply exchange all of the members of the objects passed by reference.
+</p>
+<p>
+    Note the function is declared as <code>friend</code>, so it can also access private members.<br />
+    The <code>using std::swap</code> line tells the compiler to use <code>std::swap</code> as fallback, if there's no overload matching the given arguments.<br />
+    This allows specialized swap functions to be used seamlessly, based on the type of the members.
+</p>
+<a name="toc-2-4"></a>
+<h4>2.4 - C++11</h4>
+<p>
+    C++11 introduced <strong><code>rvalue</code> references</strong>, denoted by <code>&&</code>.<br />
+    I won't cover here what they are, but if targeting C++11, you can also declare a <strong>move constructor</strong>, and a <strong>move assignment</strong> operator.
+</p>
+<p>
+    The basic idea behind this is that sometimes, copy construction or assignment can be avoided.
+</p>
+<p>
+    While the use of <code>rvalue</code> references overloads can be manually triggered by using <code>std::move</code>, the compiler can also decide to avoid copy construction or assignment in some situations.
+</p>
+<p>
+    Such situations include the generation of <strong>temporary</strong> objects. In such a case, using only copy construction or assignment may have performance impacts.
+</p>
+<p>
+    Let's take a look at the following example:
+</p>
+<pre class="code-block language-cpp">
+Point foo( void )
+{
+    Point p( 42, 42 );
+    
+    return p;
+}
+
+int main( void )
+{
+    Point p;
+    
+    p = foo();
+    
+    return 0;
+}
+</pre>
+<p>    
+    Without <code>rvalue</code> references, here's what a compiler might do (I'm not saying it will necessarily be the case, but this will illustrate the need of <code>rvalue</code> references):
+</p>
+<ol>
+    <li>In <code>main</code>, a <code>Point</code> object is allocated. Parameter-less constructor is invoked.</li>
+    <li><code>foo</code> is called.</li>
+    <li>A <code>Point</code> object is allocated in <code>foo</code>, with <code>x = 42</code> and <code>y = 42</code>.</li>
+    <li>The <code>Point</code> object is returned. As we saw before, this will create another <code>Point</code> object, calling the copy constructor.</li>
+    <li>The temporary <code>Point</code> copy returned by <code>foo</code> is finally assigned to the local <code>p</code> object from <code>main</code>, invoking the assignment operator.</li>
+</ol>
+<p>
+    As we can see in points 4 and 5, we have a <strong>temporary copy which is then assigned to an existing object</strong>.<br />
+    With our basic <code>Point</code> class, using only integers, there's nothing to worry about.
+</p>
+<p>
+    But our class might be different and allocate/acquire dynamic resources.<br />
+    In such a case, we'll end up <strong>copying twice</strong> the object. One time when it is returned (copy constructor), and another time when it's assigned (assignment operator).
+</p>
+<p>
+    Depending on the implementation, this can have an impact on performance.
+</p>
+<p>
+    <strong>C++11 <code>rvalue</code> references</strong> solve this problem by avoiding the extra final step.
+</p>
+<p>
+    In the above example, by providing a <strong>move assignment</strong> operator, we'll be able to directly use the resources of the assigned object, as it is a temporary, rather that copy them.
+</p>
+<p>
+    Don't worry if this isn't clear right now, we'll see more of this in the <a href="/en/blog/2016/12/05/cpp-auto-alloc-part-2/">next tutorial</a>.
+</p>
+<p>
+    For reference, here's the signature of a move constructor for our <code>Point</code> class:
+</p>
+<pre class="code-block language-cpp">
+Point( Point && p ):
+    x( p.x ),
+    y( p.y ),
+{}
+</pre>
+<p>    
+    And here's the move assignment operator:
+</p>
+<pre class="code-block language-cpp">
+Point & operator =( Point && p )
+{
+    this->x = p.x;
+    this->y = p.y;
+    
+    return *( this );
+}
+</pre>
+<p>
+    Again, this is clearly not the best example with such a simple class.<br />
+    But the point here is that objects are passed as <code>rvalue</code> references (note the <code>&&</code>), and are not marked <code>const</code>.
+</p>
+<p>
+    This mean we can actually <strong>steal/move</strong> their resources, rather than copying them.<br />
+    Again, not a big deal with our <code>Point</code> class, but more about this in the <a href="/en/blog/2016/12/05/cpp-auto-alloc-part-2/">next tutorial</a>.
+</p>

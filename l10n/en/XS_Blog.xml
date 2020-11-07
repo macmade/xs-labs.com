@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<labels>
+	<readArticle>Read the full story »</readArticle>
+	<author>Author</author>
+	<date>Date</date>
+	<category>Category</category>
+	<comments>Comments</comments>
+	<copyright>Copyright © %s</copyright>
+	<copyrightNote>This article is published under the terms of the %s.</copyrightNote>
+	<copyrightLicense>FreeBSD Documentation License</copyrightLicense>
+	<copyrightLicenseLink>/licenses/freebsd-documentation/</copyrightLicenseLink>
+	<missingPostTitle>Warning - Missing post title:</missingPostTitle>
+	<missingPostName>Warning - Missing post name:</missingPostName>
+	<missingPostDate>Warning - Missing post date:</missingPostDate>
+	<missingPostFile>Warning - Missing post file:</missingPostFile>
+	<addComment>Add a comment</addComment>
+	<comment>Comment</comment>
+	<email>Email</email>
+	<authorRequired>Author (required)</authorRequired>
+	<emailRequired>Email (required)</emailRequired>
+	<commentRequired>Comment (required)</commentRequired>
+	<commentError>Cannot post your comment: some fields have errors.</commentError>
+	<mailSubject>XS-Labs Blog - New comment</mailSubject>
+	<mailMessage>
+A new comment has been posted in "{POST_TITLE}":
+{POST_URL}
+
+Kind regards,
+
+--
+XS-Labs
+	</mailMessage>
+	<mailAdminMessage>
+A new comment has been posted in "{POST_TITLE}":
+{POST_URL}
+
+Author: {COMMENT_AUTHOR}
+Email:  {COMMENT_EMAIL}
+
+{COMMENT}
+
+--
+XS-Labs
+	</mailAdminMessage>
+	<relatedPosts>Similar posts</relatedPosts>
+</labels>

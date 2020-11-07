@@ -1,0 +1,229 @@
+/* <![CDATA[ */
+
+/*
+##################################################
+#                                                #
+#       Blood Sweat & Code (& Rock'N'Roll)       #
+#      Thanx for looking at the source code      #
+#                                                #
+#                XS-Labs (c) 2013                #
+#                                                #
+##################################################
+*/
+
+.navbar {
+    opacity:                    0.95;
+    -moz-opacity:               0.95;
+    -webkit-opacity:            0.95;
+    white-space:                nowrap;
+    min-width:                  200px;
+}
+
+.navbar .navbar-brand {
+    padding:                    0px;
+    margin-left:                0px;
+    margin-top:                 0px;
+    margin-right:               20px;
+    margin-bottom:              0px;
+    position:                   relative;
+    top:                        5px;
+    left:                       10px;
+}
+
+.navbar-nav > li > a {
+    padding-left:               10px;
+    padding-right:              10px;
+}
+
+.navbar-right {
+    padding-right:              20px;
+}
+
+.navbar-right li {
+    float:                      left;
+}
+
+.navbar-right li a {
+    padding-left:               10px;
+    padding-top:                10px;
+    padding-right:              0px;
+    padding-bottom:             0px;
+}
+
+.navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
+    max-height:                 400px;
+}
+
+.footer {
+    background-color:           #F8F8F8;
+    border-top:                 solid 1px #E7E7E7;
+    padding-top:                10px;
+}
+
+.footer * {
+    font-size:                  12px;
+}
+
+.footer .panel-body {
+    background-color:           #FAFAFA;
+}
+
+img.pull-left {
+    margin-left:                0px;
+    margin-top:                 0px;
+    margin-right:               10px;
+    margin-bottom:              10px;
+}
+
+img.pull-right {
+    margin-left:                10px;
+    margin-top:                 0px;
+    margin-right:               0px;
+    margin-bottom:              10px;
+}
+
+.panel-heading {
+    padding:                    2px;
+    padding-left:               10px;
+}
+
+.panel-heading h1, .panel-heading h2, .panel-heading h3, .panel-heading h4, .panel-heading h5, .panel-heading h6 {
+    font-size:                  15px;
+    margin:                     0px;
+    border:                     none;
+    padding-top:                10px;
+    padding-bottom:             8px;
+}
+
+.panel-heading h1 a, .panel-heading h2 a, .panel-heading h3 a, .panel-heading h4 a, .panel-heading h5 a, .panel-heading h6 a {
+    color:                      #5E5E5E;
+}
+
+.xs-page-header .carousel-inner {
+    margin-bottom:              20px;
+}
+
+.xs-page-header .carousel-inner .item {
+    height:                     250px;
+    max-height:                 250px;
+    background-color:           #F8F8F8;
+    border-bottom:              solid 1px #E7E7E7;
+}
+
+.xs-page-header .carousel-inner img {
+    top:                        -150px;
+    min-width:                  610px;
+    position:                   relative;
+}
+
+.xs-page-header .carousel-caption {
+    top:                        50px;
+    left:                       0px;
+    width:                      100%;
+}
+
+.xs-page-header .carousel-caption .hidden-xs h1 {
+    text-align:                 center;
+    font-size:                  80px;
+    font-weight:                500;
+    white-space:                nowrap;
+    width:                      100%;
+    padding-left:               20px;
+    padding-right:              20px;
+}
+
+.xs-page-header .carousel-caption .visible-xs-block h1 {
+    text-align:                 center;
+    font-size:                  30px;
+    font-weight:                500;
+    width:                      100%;
+    padding-left:               20px;
+    padding-right:              20px;
+}
+
+.xs-page-header .carousel-caption h1 a {
+    text-decoration:            none;
+    color:                      #FFFFFF;
+}
+
+.xs-page-sub-header {
+    margin-bottom:              20px;
+}
+
+.xs-page-sub-header h2 {
+    padding:                    0px;
+    margin:                     0px;
+}
+
+.xs-page-sub-header div {
+    overflow:                   hidden;
+    height:                     100%;
+}
+
+.xs-page-sub-header ul {
+    overflow:                   hidden;
+    height:                     100%;
+    list-style:                 none;
+    margin-left:                10px;
+    margin-top:                 0px;
+    margin-right:               0px;
+    margin-bottom:              0px;
+    padding:                    0px;
+    border-left:                solid 5px #E7E7E7;
+}
+
+.xs-page-sub-header li {
+    float:                      left;
+    margin-left:                10px;
+    margin-top:                 5px;
+    margin-right:               0px;
+    margin-bottom:              5px;
+    padding:                    0px;
+}
+
+.xs-page-sub-header li a {
+    color:                      #999999;
+    font-size:                  15px;
+}
+
+.xs-page-sub-header .active a {
+    color:                      #666666;
+    font-weight:                500;
+}
+
+.xs-content {
+    clear:                      both;
+    margin-bottom:              20px;
+}
+
+.breadcrumb .active a {
+    color:                      #999999;
+}
+
+.marketing {
+    text-align:                 center;
+}
+
+.marketing .row {
+    margin-bottom:              20px;
+}
+
+.marketing h3 {
+    border:                     none;
+    padding:                    0px;
+    font-weight:                400;
+}
+
+.marketing a {
+    color:                      #333333;
+}
+
+.marketing h3 a {
+    font-weight:                400;
+}
+
+.marketing p {
+    color:                      #999999;
+}
+
+/* ]]> */

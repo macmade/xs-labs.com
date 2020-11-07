@@ -1,0 +1,263 @@
+<p>
+    In my free time, I'm writing an operating system called <a href="http://www.xs-labs.com/en/projects/xeos/">XEOS</a>.<br />
+    As the system is written mainly in C, I'm also writing a C99 standard library.
+</p>
+<p>
+    The last days, I wrote optimised versions of some C99 string functions, like <code>strlen()</code>, <code>strchr()</code> or <code>memset()</code>.
+</p>
+<p>
+    This set of functions is usually used intensively in any C program or library.<br />
+    So obviously, the more optimised they are, the better the program will perform.
+</p>
+<p>
+    Let's take a look a the <code>memset()</code> function, which is used to fill a memory buffer with a single character.<br />
+    Its prototype is:
+</p>
+<pre class="code-block language-c">
+void * memset( void * p, int c, size_t n );
+</pre>
+<p>
+    A straightforward and naive C implementation would typically be:
+</p>
+<pre class="code-block language-c">
+void * memset( void * p, int c, size_t n )
+{
+    unsigned char * s = p;
+    
+    while( n-- )
+    {
+        *( s++ ) = ( unsigned char )c;
+    }
+    
+    return p;
+}
+</pre>
+<p>
+    Easy, simple, straightforward.<br />
+    But how does this perform?
+</p>
+<p>
+    Actually, it does perform very bad.<br />
+    In fact, it would be difficult to perform worse unintentionally. 
+</p>
+<p>
+    On my computer (Intel Core i7), calling this function <strong>one million times</strong> with a 4096 bytes buffer takes about <strong>9 seconds</strong>.<br />
+    This is huge.
+</p>
+<p>
+    Some programmers think the more simple is the code, the better it will perform, and that optimisation can be performed by reducing the amount of code.
+</p>
+<p>
+    <strong>Well, that's completely wrong</strong>.<br />
+    If you're such a programmer, I deeply encourage you to revise your thinking.
+</p>
+<p>
+    So let's take a closer look.
+</p>
+<p>
+    The main issue in the previous code is that it writes <strong>one byte at a time</strong> into the destination buffer.<br />
+    High-level programmers (including C programmers, as C is a high-level language) might think that memory operations are cheap, in terms of performance.
+</p>
+<p>
+    That's also wrong.<br />
+    <strong>Memory operations aren't cheap</strong>.
+</p>
+<p>
+    In other words, the less times you read/write from/to memory, the better your program will perform.<br />
+    So how can we achieve this here?
+</p>
+<p>
+    Well, actual CPUs are 64 bits wide, so we could simply write 8 bytes (64 bits) at a time, rather than a single byte (8 bits).
+</p>
+<p>
+    But what if the length of the buffer is not a multiple of 8? If the program doesn't crash (segmentation fault), we would write outside the buffer, which is worse, and might be harder to debug.
+</p>
+<p>
+    A simple solution is to write 8 bytes while it's possible, then writes the remaining bytes one by one.<br />
+    Something like:
+</p>
+<pre class="code-block language-c">
+void * memset( void * p, int c, size_t n )
+{
+    uint8_t  * sp;
+    uint64_t * lp;
+    uint64_t   u64;
+    uint8_t    u8;
+    
+    u8  = ( uint8_t )c;
+    u64 = ( uint64_t )c;
+    u64 = ( u64 << 32 ) | u64;
+    lp  = ( uint64_t * )p;
+    
+    while( ( n / 8 ) > 0 )
+    {
+        *( lp++ ) = u64;
+        n        -= 8;
+    }
+    
+    sp = ( uint8_t * )lp;
+    
+    while( n-- )
+    {
+        *( sp++ ) = u8;
+    }
+    
+    return p;
+}
+</pre>
+<p>
+    Let's run the same test as previously.<br />
+    Calling this function <strong>one million times</strong> with a 4096 bytes buffer takes about <strong>1.1 seconds</strong>.
+</p>
+<p>
+    <strong>9 times faster than the previous one.</strong>
+</p>
+<p>
+    We can see here that simplicity does not equal performance.
+</p>
+<p>
+    But in terms of performance, we may still have an issue with this code.<br />
+    If the pointer to the memory buffer is not <a href="https://en.wikipedia.org/wiki/Data_structure_alignment">aligned</a>, the overall performances would decrease. We might even experience crashes, as some CPU architectures do not allow unaligned access to memory.
+</p>
+<p>
+    The test I ran wasn't affected, as the pointer was aligned, and as the Core i7 allows unaligned access to memory without performance loss anyway.
+</p>
+<p>
+    But to be sure the code will run fast and fine, we should first align the pointer.<br />
+    We may write bytes one by one util it is aligned, then write 8 bytes at a time:
+</p>
+<pre class="code-block language-c">
+void * memset( void * p, int c, size_t n )
+{
+    uint8_t  * sp;
+    uint64_t * lp;
+    uint64_t   u64;
+    uint8_t    u8;
+    
+    u8  = ( uint8_t )c;
+    u64 = ( uint64_t )c;
+    u64 = ( u64 << 32 ) | u64;
+    sp  = ( uint8_t * )p;
+    
+    while( n-- && ( ( ( uint64_t )sp & ( uint64_t )-8 ) < ( uint64_t )sp ) )
+    {
+        *( sp++ ) = u8;
+    }
+    
+    lp  = ( uint64_t * )( ( void * )sp );
+    
+    while( ( n / 8 ) > 0 )
+    {
+        *( lp++ ) = u64;
+        n        -= 8;
+    }
+    
+    sp = ( uint8_t * )( ( void * )lp );
+    
+    while( n-- )
+    {
+        *( sp++ ) = u8;
+    }
+    
+    return p;
+}
+</pre>
+<p>
+    This is actually a decent implementation.<br />
+    The big advantage is that it's written in C, so it's pretty easy to read and it's completely portable.
+</p>
+<p>
+    Now can we optimise this more?
+</p>
+<p>
+    The answer is of course, yes.<br />
+    But we might need to stop using C, and write our function using <strong>assembly code</strong>.
+</p>
+<p>
+    First of all, let's take a minute to talk about coding in assembly, for performance considerations.<br />
+    Most of the time, it's usually a bad idea.
+</p>
+<p>
+    Writing assembly code first means you'll loss the portability.<br />
+    You'll have to write a specific function for each processor architecture, which can be a huge and long work.<br />
+    You'll also loss the readability and maintainability of C.
+</p>
+<p>
+    Also remember that writing the same algorithm using assembly will not give you more performances.<br />
+    While it's true that you would be able to get rid of some unnecessary instructions generated by the compiler, this is not the bottleneck.<br />
+    So it's usually better to stay away from assembly if you do not have very specific reasons to do it.<br />
+    That being said, a well written assembly code can be pure magic.
+</p>
+<p>
+    In our case, it's completely worth the effort, as a function like <code>memset()</code> has to be very performant.<br />
+    And also because, using assembly, we have some nice way to optimise it more.
+</p>
+<p>
+    Using assembly will allow us to use <strong>SSE-2 instructions</strong>. Of course, not all CPUs support this, so we'll have to check it first.<br />
+    If SSE-2 are not available, we might still use the optimised C version as fallback.
+</p>
+<p>
+    For x86 platforms, we can check if the CPU supports SSE-2 instructions using the CPUID instruction:
+</p>
+<pre class="code-block nohighlight">
+mov     eax,    1
+cpuid
+test    edx,    0x4000000    
+jz      .fail
+
+; SSE-2 code
+
+.fail:
+
+; Non SSE-2 code
+</pre>
+<p>
+    Note that this code will trash the content of <code>EAX</code>, <code>ECX</code> and <code>EDX</code>.
+</p>
+<p>
+    Now how can SSE-2 help us in the <code>memset()</code> case?<br />
+    Well SSE-2 registers are <strong>128 bits wide</strong>, so using them would allow us to write <strong>16 bytes at a time</strong> into memory.<br />
+    This would result in a huge performance boost.
+</p>
+<p>
+    Note that in order to use SSE-2 instructions, the pointer to the buffer will have to be aligned on a 16-byte boundary.<br />
+    Otherwise, it will just crash.
+</p>
+<p>
+    I've placed such an optimised <code>memset()</code> function on GitHub, as it's really too long for here.<br />
+    You can see the whole code here:<br />
+    <a href="https://github.com/macmade/LibC-String-Optimisations/blob/master/source/memset.64.s">https://github.com/macmade/LibC-String-Optimisations/blob/master/source/memset.64.s</a>
+</p>
+<p>
+    Note the following lines:
+</p>
+<pre class="code-block nohighlight">
+movdqa  [ rdi       ],  xmm0
+movdqa  [ rdi +  16 ],  xmm0
+movdqa  [ rdi +  32 ],  xmm0
+movdqa  [ rdi +  48 ],  xmm0
+movdqa  [ rdi +  64 ],  xmm0
+movdqa  [ rdi +  80 ],  xmm0
+movdqa  [ rdi +  96 ],  xmm0
+movdqa  [ rdi + 112 ],  xmm0
+</pre>
+<p>
+    This actually writes chunks of <strong>128 bytes</strong> into the memory buffer.
+</p>
+<p>
+    Running such a function <strong>one million times</strong> with a 4096 bytes buffer, as before, takes about <strong>0.07 seconds</strong>.
+</p>
+<p>
+    <strong>15 times</strong> faster than our optimised C version, and <strong>150 times</strong> faster that the naive implementation.<br />
+    This is huge.
+</p>
+<p>
+    This implementation is even slightly faster than the Mac OS X implementation, which runs the same test in 0.09 seconds.
+</p>
+<p>
+    <strong>In other words, and as a conclusion, remember than simplicity does not always equals performance.<br />
+    Also remember that optimisation can represent a huge amount of time, especially when dealing with assembly optimisations.</strong>
+</p>
+<p>
+    But as you can see, for some specific cases, it's worth the effort.
+</p>

@@ -1,0 +1,18 @@
+<p>
+    Today I've written the first lines of code for the XEOS memory allocator.
+</p>
+<p>
+    For now, I won't implement the <code>malloc()</code> set of functions in the C library, because I haven't implemented the <code>brk</code> and <code>mmap</code> system calls.<br />
+    Doing this would surely be fun, but right now I need to code some other kernel stuff.
+</p>
+<p>
+    So I decided to write a specific allocator for the Xeos kernel. This way, it will have it's own allocator, managing it's own memory region.<br />
+    I guess it's the best solution for now, to get things correctly done.
+</p>
+<p>
+    No surprise, this will be <code>kmalloc()</code>.<br />
+    This will save me a lot of time, and make the code more maintainable for later.
+</p>
+<p>
+    I'm also going to see if I can build LLVM for Xeos... I'm a bit tired of GCC, since Apple's XCode 4... ; )
+</p>

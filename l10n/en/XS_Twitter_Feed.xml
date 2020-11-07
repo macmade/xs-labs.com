@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<labels>
+	<sorry>We apologize for the inconvience.</sorry>
+	<twitter>Twitter</twitter>
+	<notAvailable>The Twitter feed for %s is not reachable at the moment.</notAvailable>
+	<tryLater>Please try again later, or check %s directly on Twitter:</tryLater>
+</labels>

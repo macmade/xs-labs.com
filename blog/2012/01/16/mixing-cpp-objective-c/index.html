@@ -1,0 +1,353 @@
+<p>
+    When working on a software project, you may sometimes have to mix programming languages.<br />
+    It may be because you need to use some specific libraries, because of code portability needs, whatever.
+</p>
+<p>
+    When coding a Mac OS X (or iOS) application, you are usually going to use Objective-C as main language.<br />
+    It's not mandatory, as you can use the old Carbon API, or stuff like QT (C++), but it will usually be easier, at least for all the UI related stuff.
+</p>
+<p>
+    Mixing C with Objective-C is not a problem, as Objective-C is a strict superset of C.<br />
+    Whether you have pure C code, or if you are linking with a C library, there's no issue.
+</p>
+<p>
+    Mixing C or Objective-C with C++ is not as easy.<br />
+    Although C++ was originally based on the C language, it's not strictly a superset, so trying to use C++ code from C or Objective-C may not be always easy.
+</p>
+<p>
+    Of course, with Objective-C, you have the possibility to use Objective-C++ (.mm files).<br />
+    This way, you can use all the C++ features within Objective-C code.
+</p>
+<p>
+    But sometimes, this is not wanted. Moreover, it's of course impossible with pure C.
+</p>
+<p>
+    Before going on, let's take a little example in pure C.<br />
+    We are going to code a typical «hello world» application.
+</p>
+<p>
+    For this, we decide to have a file for our program's main function, and another file for utility functions.
+</p>
+<p>
+    Let's start by the utility functions file.<br />
+    First of all, we need to create a header file, named «lib.h»:
+</p>
+<pre class="code-block language-c">
+#ifndef __LIB_H__
+#define __LIB_H__
+
+void say_hello( void );
+
+#endif
+</pre>
+<p>
+    We declare here the prototype of a function named «say_hello».<br />
+    We are now going to provide an implementation, in a new file named «lib.c»:
+</p>
+<pre class="code-block language-c">
+#include &lt;stdio.h&gt;
+#include "lib.h"
+
+void say_hello( void )
+{
+    printf( "hello, world\n" );
+}
+</pre>
+<p>
+    Nothing special here.
+    Now let's create our program's main function, in a file named «main.c»:
+</p>
+<pre class="code-block language-c">
+#include "lib.h"
+
+int main( void )
+{
+    say_hello();
+    
+    return 0;
+}
+</pre>
+<p>
+    Here, we just use our «say_hello» function, before exiting the program.
+</p>
+<p>
+    Let's take a look at the compilation.
+    We are going to generate an object file (.o) for each C file, and then link them together.
+</p>
+<p>
+    Let's start with «lib.c»:
+</p>
+<pre class="code-block nohighlight">
+gcc -Wall -o lib.o -c lib.c
+</pre>
+<p>
+    From the «lib.c» source file, we generate an object file (machine code) named «lib.o».
+    We can use the «nm» command to list the symbols available in that object file:
+</p>
+<pre class="code-block nohighlight">
+nm lib.o
+</pre>
+<p>
+    It will output:
+</p>
+<pre class="code-block nohighlight">
+0000000000000028 s EH_frame0
+0000000000000015 s L_.str
+                 U _puts
+0000000000000000 T _say_hello
+0000000000000040 S _say_hello.eh
+</pre>
+<p>
+    We can see here our «say_hello» function.<br />
+    As you can see, it has a leading underscore. This is totally normal.
+</p>
+<p>
+    Now let's create an object file from «main.c»:
+</p>
+<pre class="code-block nohighlight">
+gcc -Wall -o main.o -c main.c
+</pre>
+<p>
+    Now, we have two distinct object files.<br />
+    In order to create an executable, we need to link them. This can be done with:
+</p>
+<pre class="code-block nohighlight">
+gcc -Wall -o test lib.o main.o
+</pre>
+<p>
+    This will create an executable named «test», which will just print «hello, world» when run.
+</p>
+<p>
+    Piece of cake.<br />
+    But now imagine we want to use C++ for the library part, and C for the other parts.
+</p>
+<p>
+    First of all, we are going to rename «lib.c» to «lib.cpp».<br />
+    The «lib.h» header doesn't need to be changed.
+</p>
+<p>
+    We are also going to replace the implementation of the «say_hello» function, so it uses «IOStream» instead of «printf()».<br />
+    Our «lib.cpp» file will now look like that:
+</p>
+<pre class="code-block language-cpp">
+#include &lt;iostream&gt;
+#include "lib.h"
+
+void say_hello( void )
+{
+    std::cout &lt;&lt; "hello, world" &lt;&lt; std::endl;
+}
+</pre>
+<p>
+    No problem here, just a standard C++ hello world.<br />
+    Let's recompile everything (note that we are now going to use g++ instead of gcc for the C++ file):
+</p>
+<pre class="code-block nohighlight">
+g++ -Wall -o lib.o -c lib.cpp
+gcc -Wall -o main.o -c main.c
+</pre>
+<p>
+    No problem here. Let's link the two files in order to create an executable, as previously:
+</p>
+<pre class="code-block nohighlight">
+gcc -Wall -o test lib.o main.o
+</pre>
+<p>
+    Unfortunately, you'll have linker errors here, such as:
+</p>
+<pre class="code-block nohighlight">
+Undefined symbols for architecture x86_64:
+  "std::cout", referenced from:
+      say_hello()    in lib.o
+  "std::basic_ostream&lt;char, std::char_traits&lt;char&gt; &gt;& std::operator&lt;&lt; &lt;std::char_traits&lt;char&gt; &gt;(std::basic_ostream&lt;char, std::char_traits&lt;char&gt; &gt;&, char const*)", referenced from:
+      say_hello()    in lib.o
+  "std::basic_ostream&lt;char, std::char_traits&lt;char&gt; &gt;& std::endl&lt;char, std::char_traits&lt;char&gt; &gt;(std::basic_ostream&lt;char, std::char_traits&lt;char&gt; &gt;&)", referenced from:
+      say_hello()    in lib.o
+  "std::basic_ostream&lt;char, std::char_traits&lt;char&gt; &gt;::operator&lt;&lt;(std::basic_ostream&lt;char, std::char_traits&lt;char&gt; &gt;& (*)(std::basic_ostream&lt;char, std::char_traits&lt;char&gt; &gt;&))", referenced from:
+      say_hello()    in lib.o
+  "std::ios_base::Init::Init()", referenced from:
+      __static_initialization_and_destruction_0(int, int)in lib.o
+  "std::ios_base::Init::~Init()", referenced from:
+      ___tcf_0 in lib.o
+  "_say_hello", referenced from:
+      _main in main.o
+ld: symbol(s) not found for architecture x86_64
+collect2: ld returned 1 exit status
+</pre>
+<p>
+    Ok, obviously we are not linked with the C++ standard library.<br />
+    This is because we used gcc to create our final executable.
+</p>
+<p>
+    So let's use g++ for the final stage.<br />
+    Note that we will still use gcc for the «main.c» file, as it's still pure C code.<br />
+    No need for a C++ compiler here:
+</p>
+<pre class="code-block nohighlight">
+g++ -Wall -o lib.o -c lib.cpp
+gcc -Wall -o main.o -c main.c
+g++ -Wall -o test lib.o main.o
+</pre>
+<p>
+    We still got a linker error:
+</p>
+<pre class="code-block nohighlight">
+Undefined symbols for architecture x86_64:
+  "_say_hello", referenced from:
+      _main in main.o
+ld: symbol(s) not found for architecture x86_64
+collect2: ld returned 1 exit status
+</pre>
+<p>
+    Here, we can see we are effectively linked with the C++ standard library, as the errors for the «std::» members, like «std::cout» are gone.
+</p>
+<p>
+    But it seems that the C++ version of our «say_hello» function is not found.
+    Let's take a look at the «lib.o» file, to find out what's wrong.
+    We are going to use the «nm» command again, to list the symbols available in that file:
+</p>
+<pre class="code-block nohighlight">
+nm lib.o
+</pre>
+<p>
+    The result is:
+</p>
+<pre class="code-block nohighlight">
+0000000000000100 s EH_frame0
+00000000000000eb s L_.str
+0000000000000070 s __GLOBAL__I__Z9say_hellov
+0000000000000148 s __GLOBAL__I__Z9say_hellov.eh
+0000000000000090 s __Z41__static_initialization_and_destruction_0ii
+0000000000000178 s __Z41__static_initialization_and_destruction_0ii.eh
+0000000000000000 T __Z9say_hellov
+0000000000000118 S __Z9say_hellov.eh
+                 U __ZNSolsEPFRSoS_E
+                 U __ZNSt8ios_base4InitC1Ev
+                 U __ZNSt8ios_base4InitD1Ev
+                 U __ZSt4cout
+                 U __ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_
+00000000000001d8 b __ZStL8__ioinit
+                 U __ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc
+                 U ___cxa_atexit
+                 U ___dso_handle
+0000000000000040 t ___tcf_0
+00000000000001a8 s ___tcf_0.eh
+</pre>
+<p>
+    There's no symbol for our «say_hello» function.<br />
+    Instead, we have:
+</p>
+<pre class="code-block nohighlight">
+__Z9say_hellov
+</pre>
+<p>
+    What's this «_Z9» prefix?<br />
+    Ever heard of «name mangling»?
+</p>
+<p>
+    First of all, remember that C++ has built-in support for function overloading.<br />
+    It means that the following example is perfectly valid:
+</p>
+<pre class="code-block language-c">
+void foo( int x );
+void foo( double x );
+int  foo( int x );
+</pre>
+<p>
+    Here, we've got three functions named «foo».<br />
+    In C or Objective-C, this is not possible, as a symbol can only be defined once.
+</p>
+<p>
+    In C++, this is called «function overloading». A function (or method) can have multiple implementations, as long as there is a difference in the return type and/or the arguments.
+</p>
+<p>
+    The compiler will then generate three different functions, and automatically choose which one to use when you issue a call, depending on the return type and the argument types.
+</p>
+<p>
+    In order to do this, as the compiler will create different functions, it will have to use different symbol names.<br />
+    That's why C++ functions (or methods) have a modified symbol name, in the resulting object code.
+</p>
+<p>
+    So how can we deal with this, from our «main.c» file?<br />
+    With Objective-C++, it would have worked, of course. But not with pure C, or pure Objective-C.
+</p>
+<p>
+    Fortunately, there is a way to tell the C++ compiler to comply with C-like declarations, so it won't use its calling conventions (with mangled names) when producing object code.
+</p>
+<p>
+    This way, our C++ function will be callable from pure-C (even if it's implementation uses C++ features).
+</p>
+<p>
+    In order to do this, we just need to change the «lib.h» header file:
+</p>
+<pre class="code-block language-c">
+#ifndef __LIB_H__
+#define __LIB_H__
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void say_hello( void );
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+</pre>
+<p>
+    When the C++ compiler is used, the «__cplusplus» macro is defined.<br />
+    Now, in such a case, our function's prototype will be wrapped with:
+</p>
+<pre class="code-block language-cpp">
+extern "C" {
+}
+</pre>
+<p>
+    This will tell the C++ compiler that we intend to use everything inside the braces from C code, meaning it will generate symbol names according to C.
+</p>
+<p>
+    So let's recompile our «lib.cpp» file into object code:
+</p>
+<pre class="code-block nohighlight">
+g++ -Wall -o lib.o -c lib.cpp
+</pre>
+<p>
+    Now, if we run «nm», we can see:
+</p>
+<pre class="code-block nohighlight">
+0000000000000100 s EH_frame0
+00000000000000eb s L_.str
+0000000000000070 s __GLOBAL__I_say_hello
+0000000000000148 s __GLOBAL__I_say_hello.eh
+0000000000000090 s __Z41__static_initialization_and_destruction_0ii
+0000000000000178 s __Z41__static_initialization_and_destruction_0ii.eh
+                 U __ZNSolsEPFRSoS_E
+                 U __ZNSt8ios_base4InitC1Ev
+                 U __ZNSt8ios_base4InitD1Ev
+                 U __ZSt4cout
+                 U __ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_
+00000000000001d8 b __ZStL8__ioinit
+                 U __ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc
+                 U ___cxa_atexit
+                 U ___dso_handle
+0000000000000040 t ___tcf_0
+00000000000001a8 s ___tcf_0.eh
+0000000000000000 T _say_hello
+0000000000000118 S _say_hello.eh
+</pre>
+<p>
+    Hurray! The symbol name for our «say_hello» function is now «_say_hello» as with pure C.<br />
+    It means we are now able to link our object files, in order to produce the executable:
+</p>
+<pre class="code-block nohighlight">
+g++ -Wall -o test lib.o main.o
+</pre>
+<p>
+    No error here. Our executable was successfully produced, and is working fine!
+</p>
+<p>
+    Of course, when using «extern "C" {}», you can no more use C++ stuff like function's overloading, or namespaces (and of course classes).<br />
+    But this way, when providing functions implemented in C++, you can make them available to C code, and so to Objective-C as well.
+</p>

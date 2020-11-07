@@ -1,0 +1,478 @@
+<p>
+    Obfuscation is quite a debated topic, when it comes to software development.<br />
+    There's obviously a tons of reason why you should not try to obfuscate your code.
+</p>
+<p>
+    But sometimes, for some very specific part of your software, you may consider trying it.<br />
+    Now there's a lot of different ways to achieve this, and in my humble opinion there's no silver bullet when it come to obfuscation.
+<p>
+    At the end, what you are trying to do is to prevent someone else to reverse-engineer your code, to prevent someone making sense of your logic and algorithms.
+</p>
+<p>
+    In such a situation, making your code <em>«hard to read»</em> may not be the best solution.<br />
+    No matter how complex your code is, an experienced reverse-engineer will most of the time figure out what you are doing.
+</p>
+<p>
+    In such a context, psychological warfare is often more effective than pure obfuscation.<br />
+    The goal here is to break down the attacker, and make it quit.
+</p>
+<p>
+    That being said, you'll often want to combine the psychological effect with some kind of obfuscation.
+</p>
+<p>
+    Again, lots of different ways to achieve this, depending on the language you're using, and your target platform.<br />
+    But today I want to look at some techniques you can try from a machine code perspective, on x86-64 platforms.
+</p>
+<h3>Disassembly</h3>
+</p>
+    When reverse-engineering some binary, you'll usually use a <strong>disassembler</strong>.<br />
+    A disassembler is basically a software that will read a binary executable and display the machine code as «human-readable» assembly code.<br />
+    State of the art is of course <a href="https://www.hex-rays.com/products/ida/">IDA</a>, but there's also <a href="https://www.hopperapp.com">Hopper</a> on macOS which is awesome.<br />
+    Debuggers such as <code>LLDB</code> or <code>GDB</code> also provide disassembly.
+</p>
+<p>
+    Now what can you expect from such a tool?<br />
+    Well, let's take a look at the following C program:
+</p>
+
+<pre class="code-block language-c">
+#include <stdio.h>
+
+void foo( void );
+void foo( void )
+{
+    printf( "hello, world\n" );
+}
+
+int main( void )
+{
+    foo();
+    
+    return 0;
+}
+</pre>
+<p>
+    A disassembler might give the following output:
+</p>
+<pre class="code-block nohighlight">
+_foo:
+    push rbp
+    mov  rbp, rsp
+    sub  rsp, 0x10
+    lea  rdi, qword [ aHelloWorldn ]
+    mov  al, 0x0
+    call imp___stubs__printf
+    mov  dword [ rbp + var_4 ], eax
+    add  rsp, 0x10
+    pop  rbp
+    ret
+
+_main:
+    push rbp
+    mov  rbp, rsp
+    sub  rsp, 0x10
+    mov  dword [ rbp + var_4 ], 0x0
+    call _foo
+    xor  eax, eax
+    add  rsp, 0x10
+    pop  rbp
+    ret
+</pre>
+<p>
+    Now even if you're not used to x86-64 assembly code, you might figure out what the program is doing pretty quickly.<br />
+    <code>main</code> calls <code>foo</code>, which calls <code>printf</code>, with some argument.
+</p>
+<p>
+    Among the different obfuscation techniques, hiding code or trying to fool the disassembler is quite common.<br />
+    The goal here is to make the disassembler program go crazy, and make it output garbage instead of the actual instructions.
+</p>
+<p>
+    You should of course not rely solely on this.<br />
+    An experienced reverse-engineer will obviously run your software in a debugger, so machine-code obfuscation won't resist this.<br />
+    But still, it's great if you can prevent some kind of static analysis.
+</p>
+<p>
+    Now how can we achieve this on x86-64 platforms?
+</p>
+<h3>Incomplete instructions</h3>
+<p>
+    Well, the x86 instruction set is quite a complex beast.<br />
+    Unlike most of the <code>RISC</code> architectures, x86 instructions can have an arbitrary length.
+</p>
+<p>
+    The CPU will (very) basically read the first byte(s) of an instruction, and depending on its value will read additional bytes for the instruction operands.<br />
+    As an example, in x86-64 assembly:
+</p>
+<pre class="code-block nohighlight">
+xor eax, eax
+mov eax, [ edi ]
+</pre>
+<p>
+    These two instructions will have a different lengths.<br />
+    First one will be 2 bytes:
+</p>
+<pre class="code-block nohighlight">
+31 C0
+</pre>
+<p>
+    While the second one will be 3 bytes:
+</p>
+<pre class="code-block nohighlight">
+67 8B 07
+</pre>
+<p>
+    This means that, depending of the instruction, the CPU will expect trailing bytes for the operands.<br />
+    <strong>And so will the disassembler</strong>.
+</p>
+<p>
+    This is a neat opportunity for us, as it implies we can in theory output raw bytes that correspond to valid x86 instructions and omit the operand bytes.<br />
+    This way, the disassembler will expect the operands and will try to read them. It will then just miss the next instructions, and go crazy because it will then read at a wrong offset.<br />
+</p>
+<p>
+    The hard part here is that we obviously want our code to be executable.<br />
+    Trying to execute incomplete instructions will most certainly result in a crash.<br />
+    So we want these incomplete instructions in a dead branch of our code; that is a branch that will never be executed, but that will still be read by the disassembler.<br />
+    Something like:
+</p>
+<pre class="code-block language-c">
+if( false )
+{
+    /* Incomplete instructions here... */
+}
+</pre>
+<p>
+    Of course, we don't want this to be so obvious, so we'll need to use some other technique here.
+</p>
+<h3>Faking a return</h3>
+<p>
+    When calling a function, using the <code>call</code> instruction, a few things happen before the target code is reached.<br />
+    Mainly, the <strong>return</strong> address is pushed onto the stack. Later, from the called function, when the <code>ret</code> instruction is executed, the CPU will pop that return address, and jump back to the caller.<br />
+    This pattern is recognised by all disassemblers. That's how they are able to generate complete call graphs.
+</p>
+<p>
+    Again, this is a nice opportunity for us.<br />
+    First of all we might be able to break some disassemblers, as many will expect a function to have a single <code>ret</code> statement.<br />
+    Their ability to generate a call graph will then be greatly compromised.
+</p>
+<p>
+    Then it will help us insert dead code in our program, that will still be seen by the disassembler as actual and valid code.<br />
+    In order to do this, we can basically place another return address on the stack, corresponding to a valid portion of our code.<br />
+    When <code>ret</code> is executed, the CPU will jump to that portion instead of the original caller, giving us control again.
+</p>
+<p>
+    Just like a local <code>jmp</code>, but hidden for the disassembler.<br />
+    Let's see how we can implement this in assembly.
+</p>
+<p>
+    But first of all, let's take a look at <strong>stack frames</strong>.<br />
+    The stack is a memory region that is basically used as scratch memory for functions.<br />
+    This is where local and temporary variables are stored.
+</p>
+<p>
+    Now to avoid overriding values from other functions, each called function will create its own stack frame.<br />
+    The CPU has two registers for the stack: <code>rbp</code> and <code>rsp</code>.<br />
+    The first one is the <strong>base pointer</strong>, and contains the start address of the local stack frame.<br />
+    The second is a pointer to the top of the stack. When using <code>push</code> or <code>pop</code> instructions, this one will change accordingly.
+</p>
+<p>
+    This is why functions usually start with the following prologue:
+</p>
+<pre class="code-block nohighlight">
+push rbp
+mov  rbp, rsp
+</pre>
+<p>
+    The first instruction saves the original base pointer, and the second one sets it to the top of the stack.<br />
+    This way, we can have our own stack space, for the current function.
+</p>
+<p>
+    So let's start by saving the registers we are going to use, so we can restore them later and hopefully don't break anything:
+</p>
+<pre class="code-block nohighlight">
+push rax
+push rcx
+push rdx
+</pre>
+<p>
+    Then we'll save the current stack pointer (<code>rsp</code>) into the <code>rcx</code> register. Again so we'll be able to restore it later.
+</p>
+<pre class="code-block nohighlight">
+mov rcx, rsp
+</pre>
+<p>
+    Now we'll reset the stack pointer (<code>rsp</code>) to the base pointer (<code>rbp</code>).<br />
+    Doing this effectively resets the current stack frame to where it was just before the call.
+</p>
+<pre class="code-block nohighlight">
+mov rsp, rbp
+</pre>
+<p>
+    This is where it gets interesting, because as we moved the stack pointer, the next two values stored in the stack that we can pop are the original base pointer and the return address.<br />
+    We'll pop the base pointer in <code>rbp</code>, and the return address in <code>rax</code>. We'll restore them later:
+</p>
+<pre class="code-block nohighlight">
+pop rbp
+pop rax
+</pre>
+<p>
+    Now we can push another return address, of a location we know:
+</p>
+<pre class="code-block nohighlight">
+lea  rdx, [ rip + 97 ]
+push rdx
+push rdx
+</pre>
+<p>
+    Here, the first line loads a specific address into the <code>rdx</code> register.<br />
+    <code>rip</code> is the current instruction pointer; that is where we are right now. <code>+97</code> is simply an offset from here, and is the target code we'll want to execute.<br />
+    We'll then have some room for garbage code, and some other neat tricks.
+</p>
+<p>
+    We'll obviously push this new return address, as we popped the old one earlier.<br />
+    Note that we do it twice, so the stack keeps its original alignment (it used to have the base pointer as well).
+</p>
+<p>
+    And finally:
+</p>
+<pre class="code-block nohighlight">
+ret
+</pre>
+<p>
+    This is where the magic occurs. For most disassemblers, our function is over here, as we've hit a <code>ret</code> instruction.<br />
+    Control flow should return to the caller, but instead, it will simply jump a few bytes further, as we've overridden the return address.
+</p>
+<p>
+    What can we do from here?
+</p>
+<h3>Fake functions</h3>
+<p>
+    Well, we have some room until we reach to code portion that will be executed.<br />
+    Let's try to fool the disassembler a little more.
+</p>
+<p>
+    Now what logically comes after the <code>ret</code> instruction of a function?<br />
+    <strong>The start of another function</strong>.
+</p>
+<p>
+    Let's do one.<br />
+    Remember this is completely dead code, that will never be executed.<br />
+    We are just doing some stuff that will seem logical for a disassembler.
+</p>
+<p>
+    Let's start by a standard stack frame:
+</p>
+<pre class="code-block nohighlight">
+push rbp
+mov  rbp, rsp
+</pre>
+<h3>Jump all over the place</h3>
+<p>
+    What can we do next?
+</p>
+<p>
+    Well, disassemblers are smart.<br />
+    You can try to fool them in many ways, but sometimes they'll eventually recover.
+</p>
+<p>
+    They do this by analysing your program's flow. That is, your <code>jmp</code> and <code>call</code> instructions.<br />
+    Even if the code seems completely garbage (like if you used the incomplete instruction trick), they might be able to recover if they see a jump to a valid code location.<br />
+    Instead of reading garbage, they'll just start disassembling again from that location.
+</p>
+<p>
+    So I found it can actually be useful to write bogus jump instructions, jumping anywhere in your code.<br />
+    This will usually mess a bit more with the control graph, and the disassembler's ability to recover.
+</p>
+<p>
+    As we have room for some garbage code, let's do this:
+</p>
+<pre class="code-block nohighlight">
+xor  rax, rax
+cmp  rax, rax
+</pre>
+<p>
+    This just zeroes the <code>rax</code> register, and compares it with itself.<br />
+    Useless, but remember this is dead code.
+</p>
+<p>
+    Now following a <code>cmp</code> instruction, we expect some kind of branching:
+</p>
+<pre class="code-block nohighlight">
+je j0
+</pre>
+<p>
+    Meaning if the comparison was true (it surely is), jumps to the local <code>j0</code> label, that we'll define later.<br />
+    And let's continue a bit more, with other random comparisons, and other jumps:
+</p>
+<pre class="code-block nohighlight">
+cmp rax, rdi
+je j1
+add rax, 0xCAFE
+cmp rax, rsi
+je j2
+cmp rax, rdx
+je j3
+cmp rax, rcx
+je j4 
+jmp 24[ rip ]
+</pre>
+<p>
+    We are here just comparing useless stuff with useless stuff, and jumping to some local labels.<br />
+    Again, just to mess with the control graph.<br />
+    The last instruction jumps to a random location, based on the current instruction pointer.
+</p>
+<p>
+    So this is just:
+</p>
+<pre class="code-block language-c">
+if( ... )
+{
+    goto ...;
+}
+else if( ... )
+{
+    goto ...;
+}
+else
+{
+    goto ...;
+}
+</pre>
+<p>
+    Now we'll simply define these local labels, and in each one jump to another random location:
+</p>
+<pre class="code-block nohighlight">
+j0:
+    jmp 16[ rip ]
+j1:
+    jmp 48[ rip ]
+j2:
+    jmp 64[ rip ]
+j3:
+    jmp 128[ rip ]
+j4:
+    jmp 256[ rip ]
+</pre>
+<h3>Restoring everything</h3>
+<p>
+    Now, at this point, the disassembler should be pretty confused.<br />
+    This is time for us to go back to real code.
+</p>
+<p>
+    Remember our return address override?<br />
+    It was <code>[ rip + 97 ]</code>.
+</p>
+<p>
+    That <code>+97</code> offset brings us just <strong>here</strong>, accounting for all the previous instructions we wrote.<br />
+    So let's undo all the mess we've done:
+</p>
+<pre class="code-block nohighlight">
+pop  rdx
+push rax
+</pre>
+<p>
+    We saved the original return address in <code>rax</code>. So we'll restore it in the stack, and just before, as we pushed it twice to keep the stack alignment, we'll just pop it into <code>rdx</code>, which is a safe register for us to use at this point.
+</p>
+<p>
+    The original base pointer was saved in <code>rbp</code> previously, let's push it again:
+</p>
+<pre class="code-block nohighlight">
+push rbp
+</pre>
+<p>
+    And now we can simply restore our previous stack frame (<code>rsp</code> was saved to <code>rcx</code>):
+</p>
+<pre class="code-block nohighlight">
+mov rbp, rsp
+mov rsp, rcx
+</pre>
+<p>
+    And that gives us the opportunity to restore the three registers we earlier pushed on the stack, because we were going to use them:
+</p>
+<pre class="code-block nohighlight">
+pop rdx
+pop rcx
+pop rax
+</pre>
+<p>
+    At this very specific point, <strong>it's just as if nothing happened</strong>.<br />
+    The stack frame and the registers are in the exact same conditions.
+</p>
+<p>
+    This is great, because it means our software will run unaffected.<br />
+    But it's also great because we produced a lot of garbage for the disassembler.
+</p>
+<h3>One more thing</h3>
+<p>
+    Now there's one more thing we can do, before continuing normal code execution.<br />
+    We spoke about incomplete instructions, but we never actually used them.
+</p>
+<p>
+    Now is the right moment.
+</p>
+<p>
+    The idea of offsetting a disassembler is great, but I found in practice that many disassemblers are quite robust to incomplete instructions.<br />
+    But now that we messed so much with its ability to generate a control graph, and detect that we're actually inside a single function, it might be quite efficient.
+</p>
+<p>
+    Now we're still in a valid code section, although it might not be recognised as such by the disassembler.<br />
+    Let's do some shit, and jump to another valid code section:
+</p>
+<pre class="code-block nohighlight">
+push rax
+xor  rax, rax
+jz   done
+</pre>
+<p>
+    Pushing the <code>rax</code> register on the stack, zeroing it, and jumping to a <code>done</code> label.<br />
+    Nothing scary here, I don't expect the disassembler to see the <code>done</code> label because of the mess we just did.
+</p>
+<p>
+    Now let's output an actual incomplete instruction:
+</p>
+<pre class="code-block nohighlight">
+.byte 0x89
+.byte 0x84
+.byte 0xD9
+</pre>
+<p>
+    For an x86-64 processor, that is:
+</p>
+<p>
+    <code>0x89</code> is the opcode for the <code>mov (r/m16/32/64 r16/32/64)</code> instruction.<br />
+    <code>0x84</code> (<code>1000 0100</code>) is <code>MOD-REG-R/M</code> for a four byte displacement following <code>SIB</code> with <code>RAX</code> (<code>000</code>) as destination register.<br />
+    <code>0xD9</code> (<code>1101 1001</code>) is <code>SIB</code> for <code>8</code> as scale, <code>RBX</code> as index (<code>011</code>) and <code>RCX</code> as base (<code>001</code>).
+</p>
+<p>
+    As you can see, the four displacement bytes are omitted, so the instruction is incomplete.<br />
+    Assuming the disassembler is able to reach this location, this will fool it as it will try to interpret the next instructions as the displacement bytes.
+</p>
+<p>
+    Note that the complete instruction, if complete, would translate to:
+</p>
+<pre class="code-block nohighlight">
+mov rax, [ rcx + rbx * 8 + displacement ]
+</pre>
+<p>
+    Now we simply have to declare our <code>done</code> label, pop <code>rax</code>, and we can continue normal execution:
+</p>
+<pre class="code-block nohighlight">
+done:
+    pop rax
+</pre>
+<h3>Wrapping up</h3>
+<p>
+    We're basically done, and I hope you found this article interesting.
+</p>
+<p>
+    Now remember this is a basic approach to some kind of obfuscation, for a specific platform.<br />
+    In practice, I found that mixing different techniques in some specific way usually gives the best results.
+</p>
+<p>
+    That being said, disassemblers are very smart, and getting smarter each day.<br />
+    Each one uses different heuristics, so as I said at the beginning of the article, there's really no silver bullet.
+</p>
+<p>
+    But if you're looking into obfuscation, my only hope is that this article gave you some ideas… : )<br />
+    As alsways, you can find the code for the article on my <a href="https://github.com/macmade/Obfuscate">GitHub</a>.<br />
+    Cheers!
+</p>

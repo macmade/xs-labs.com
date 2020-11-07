@@ -1,0 +1,287 @@
+<p>
+    Now that Apple has revealed iOS 7, there's no doubt that iOS developers around the world have a huge work ahead, to support the new user interface.
+</p>
+<p>
+    Every iOS major version has many changes in the SDK.<br />
+    New concepts, new classes/frameworks to deal with, obsolete features, etc.
+</p>
+<p>
+    So there's usually always some work to do in order to fully support a new iOS major version.
+</p>
+<p>
+    Till now, if the app was made correctly, with compatibility in mind, it was usually not a big deal.<br />
+    But with iOS7, things are completely different.
+<p>
+<h3>The problem</h3>
+<p>
+    The iOS UI haven't changed (or only very slightly) from the first iOS version to iOS6.<br />
+    So the modifications required to support a new iOS versions were mostly in the code logic.
+</p>
+<p>
+    Now we've got a completely different UI, and supporting this in our apps will require much more work.
+</p>
+<p>
+    When thinking about the UI, existing iOS apps can usually be categorized in three main categories.
+</p>
+<ol>
+<li>Applications that use only SDK components, without any modification of UI candy.</li>
+<li>Applications that uses mainly SDK component, with a few custom ones or with a few modifications.</li>
+<li>Applications with completely custom components.</li>
+</ol>
+<p>
+    The first category should be quite OK with iOS7. When you deal only with SDK features, without any kind of modification (custom drawing code, custom layout, etc), you're not really concerned about a change in the UI, as your app will immediately reflect all changes in the SDK.<br />
+    But I think most of the AppStore apps don't fit in this category.
+</p>
+<p>
+    The second category of applications will obviously need modifications.<br />
+    While some parts may adapt well to the new UI, all custom parts will need to be adapted.<br />
+    Depending on the amount of custom parts, this may actually be a huge work.
+</p>
+<p>
+    The third category may be safe, as long as it's really completely custom, and unless the changes in the SDK breaks the custom parts.<br />
+    But then, there's something else.
+</p>
+<p>
+    The problem with most applications with a custom UI is that the UI, even if custom, was somehow related to the original iPhone UI.<br />
+    So even if the custom components will work with iOS7, there's a strong risk that the app will quickly look outdated.
+</p>
+<p>
+    I think users will get used of the new flat UI. So if an application does not use a flat interface, even if it's a killer app, it may finally get less users, only because it will feel less integrated with the system.<br />
+    I guess that's how users will react, and I doubt we can change this mentality.
+</p>
+<p>
+    So to resume, most of the existing applications will need to be modified to support the flat UI of iOS7.
+</p>
+<h3>Solutions</h3>
+<p>
+    Now what's the best way to achieve this, in a developer's perspective?
+</p>
+<p>
+    Of course, we could just drop support to iOS versions lesser than 7. But I don't think this is an option.<br />
+    While some new apps may just do that, and even if the average iPhone user usually updates his device quickly, I think iOS6 (and also iOS5) needs to be supported.
+</p>
+<p>
+    So most of the existing applications will have to deal with two completely different kind of user interfaces. Headache ahead…
+</p>
+<h4>1 - iOS version detection</h4>
+<p>
+    In Objective-C, we can of course query the system for the running iOS version.<br />
+    This is done through the <code>UIDevice</code> class.
+</p>
+<p>
+    I won't fall in the debate of version checking versus feature checking.<br />
+    While the second is obviously better, in such a specific and general case, version checking is perfectly OK.
+</p>
+<p>
+    So the iOS version number can be retrieved with:
+</p>
+<pre class="code-block language-objc">
+NSString * version = [ [ UIDevice currentDevice ] systemVersion ];
+</pre>
+<p>
+    This is not very usefull, as it returns a string with the full version number.<br />
+    In our case, we're only interested by the major version number. And an integer value would be much more practical than a string.
+</p>
+<p>
+    So let's add a method for this in <span class="code-inline">UIDevice</span>, using a category:
+</p>
+<pre class="code-block language-objc">
+/* UIDevice+VersionCheck.h */
+@interface UIDevice( VersionCheck )
+
+- ( NSUInteger )systemMajorVersion;
+
+@end
+
+/* UIDevice+VersionCheck.m */
+@implementation UIDevice( VersionCheck )
+
+- ( NSUInteger )systemMajorVersion
+{
+    NSString * versionString;
+    
+    versionString = [ self systemVersion ];
+    
+    return ( NSUInteger )[ versionString doubleValue ];
+}
+
+@end
+</pre>
+<p>
+    It simply asks for the version string, and converts it to an integer.<br />
+    As we cast a double to an integer, we'll get only the major system version.<br />
+    This way, as we've augmented the <code>UIDevice</code> class, we can use:
+</p>
+<pre class="code-block language-objc">
+NSUInteger version = [ [ UIDevice currentDevice ] systemMajorVersion ];
+</pre>
+<p>
+    And of course, as we now got an integer, we can use it quite simply in conditional statements:
+</p>
+<pre class="code-block language-objc">
+if( [ [ UIDevice currentDevice ] systemMajorVersion ] < 7 )
+{
+    /* iOS 6 and previous versions */
+}
+else
+{
+    /* iOS 7 and above */
+}
+</pre>
+<p>
+But obviously, this will lead to very crappy code, because you'll have to put this kind of statement at many places.<br />
+Your code will then become hardly maintanable.
+</p>
+<p>
+    So how can we improve this?
+</p>
+<h4>2 - Class clusters to the rescue!</h4>
+<p>
+    We can solve this using the class cluster approach.<br />
+    First of all, what's a class cluster?
+</p>
+<p>
+    You may have noticed when using instances of <code>NSArray</code>, for instance, that the resulting object is not really a <code>NSArray</code>.
+</p>
+<p>
+    For instance, you may expect the following code to print <code>NSArray</code> to the console:
+</p>
+<pre class="code-block language-objc">
+NSLog( @"%@", NSStringFromClass( [ [ [ NSArray alloc ] init ] class ] ) );
+</pre>
+<p>
+    But in fact, it will print a different class name.<br />
+    This is because <code>NSArray</code> is a class cluster.
+</p>
+<p>
+    Unlike other object-oriented languages, Objective-C does not have constructors.<br />
+    So creating an instance of a particular class is usually done by sending the <code>alloc</code> message to a class.
+</p>
+<p>
+    The difference is that <code>alloc</code> is a standard static method. So unlike classic constructors, it has the ability to return a value.<br />
+    In that case, a new instance of the requested class.
+</p>
+<p>
+    But as it's a standard method, it can actually return something else, like an instance of another class.
+</p>
+<p>
+    This is, for short, the main concept behind a class cluster.<br />
+    The basic idea is to have a public base class, which exposes all the required and common methods.
+</p>
+<p>
+    Then, depending on the software's needs, we can have many other private classes, extending that base class and overriding behaviours.<br />
+    This way, we can achieve separate specialization, while keeping a standard and unique interface.
+</p>
+<p>
+    For instance, think again about the <code>NSArray</code> class.<br />
+    It obvisouly has to deal with many specializations, like mutable or immutable instances, toll-free bridging (for communicating with the CoreFoundation API), etc.
+</p>
+<p>
+    Dealing with all these cases in one unique class would mean lots of code inside a class, leading to maintanability issues.
+</p>
+<p>
+    So this problem is solved by having many specialized classes extending <code>NSArray</code>.<br />
+    All of those classes aren't exposed in the public API.<br />
+    The only public one is still <code>NSArray</code>, but it will just act as a frontend to the other ones.
+</p>
+<p>
+    This can be done by overriding the <code>alloc</code> method, and returning an instance of another class, depending on the context.
+</p>
+<p>
+    To give a practical example, let's imagine the following scenario: in your app, you have a subclass of UIView in which, amongs other things, you override the <code>drawRect:</code> method.
+</p>
+<p>
+    This is usually the case for custom UI components.
+</p>
+<p>
+    If you want to support both iOS6 and iOS7, you may need to code different drawing code, to adapt to the general system UI.<br />
+    We dont want if/else statements in the <code>drawRect:</code> method. This is crappy.
+</p>
+<p>
+    So we'll simply make a base class, containing all the common code, and we'll override the <code>alloc</code> method in order to have a class cluster:
+</p>
+<pre class="code-block language-objc">
+/* TestView.h */
+@interface TestView: UIView
+
+/* Common method */
+- ( void )test;
+
+@end
+
+/* TestView.m */
+@implementation TestView
+
++ ( id )alloc
+{
+    if( [ self class ] == [ TestView class ] )
+    {
+        if( [ [ UIDevice currentDevice ] systemMajorVersion ] < 7 )
+        {
+            return [ TestViewIOS6 alloc ];
+        }
+        else
+        {
+            return [ TestViewIOS7 alloc ];
+        }
+    }
+    else
+    {
+        return [ super alloc ];
+    }
+}
+
+- ( void )test
+{}
+
+@end
+</pre>
+<p>
+    Look at the <code>alloc</code> method implementation.<br />
+    When called, it detects the iOS version and actually instanciates a specialized subclass, depending on the iOS version.
+</p>
+<p>
+    So when calling:
+</p>
+<pre class="code-block language-objc">
+[ TestView alloc ]
+</pre>
+<p>
+    You'll actually get an instance of the <code>TestViewIOS6</code> prior to iOS 7, and an instance of <code>TestViewIOS7</code> on iOS7 and later.
+</p>
+<p>
+    This way, you can have your common and version independant code in the base class, and specialized code in the the different subclasses, while keeping a unique interface when using your custom view.<br />
+    For instance:
+</p>
+<pre class="code-block language-objc">
+/* TestViewIOS6.m */
+@implementation TestViewIOS6: TestView
+
+- ( void )drawRect: ( CGRect )rect
+{
+    /* Custom iOS6 drawing code */
+}
+
+@end
+
+/* TestViewIOS7.m */
+@implementation TestViewIOS7
+
+- ( void )drawRect: ( CGRect )rect
+{
+    /* Custom iOS7 drawing code */
+}
+
+@end
+</pre>
+<p>
+    This way, all of your specific code will be in specialized subclasses.<br />
+    It means your code will be cleaner and more maintanable.
+</p>
+<p>
+    Also, when you'll decide to drop support for iOS6, the only thing you'll have to do is to remove the specialized iOS6 subclass.<br />
+    Much simpler than removing if/else statements…
+</p>
+<p>
+    Enjoy, and have fun with iOS7 : )
+</p>

@@ -1,0 +1,44 @@
+<p>
+    I just noticed that there is no <code>strrstr()</code> function in the standard C library.
+</p>
+<p>
+    I needed that for a project, using ANSI-C. So I wrote it.
+</p>
+<p>
+    Here's the code, maybe it can be helpfull for someone else... : 
+</p>
+<pre class="code-block language-c">
+char * strrstr( char * s1, char * s2 );
+char * strrstr( char * s1, char * s2 )
+{
+    char * ss1;
+    char * sss1;
+    char * sss2;
+    
+    if( *( s2 ) == '\0' )
+    {
+        return s1;
+    }
+    
+    ss1 = s1 + strlen( s1 );
+    
+    while( ss1 != s1 )
+    {
+        --ss1;
+        
+        for( sss1 = ss1, sss2 = s2; ; )
+        {
+            if( *( sss1++ ) != *( sss2++ ) )
+            {
+                break;
+            }
+            else if ( * sss2 == '\0' )
+            {
+                return ss1;
+            }
+        }
+    }
+    
+    return NULL;
+}
+</pre>

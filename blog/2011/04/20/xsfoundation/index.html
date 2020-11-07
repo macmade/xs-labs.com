@@ -1,0 +1,41 @@
+<p>
+    Long time since I haven't posted here.
+</p>
+<p>
+    I'm currently coding eosgarden's next big thing. A project called XSFoundation.<br />
+    It consist of a portable C library. By portable, I mean it can run on POSIX compliant systems, such as Mac OS X, Linux, Unix, as well as Windows.
+</p>
+<p>
+    A few time ago, I started an insane project: coding an operating system.<br />
+    The base for this OS, named XEOS (x86 Experimental Operating System) is now working, and it's even published on <a href="https://github.com/macmade/XEOS">GitHub</a>.
+</p>
+<p>
+    The main boot parts are coded in Assembly, and the 32bits kernel is coded in C. It also include a (not yet complete) C89 library.
+</p>
+<p>
+    I also decided to code another library for this OS, the XEOS library, to simplify C programming for XEOS software.<br />
+    I ended up with the XSFoundation project. It will be integrated in XEOS once the C library will be complete.
+</p>
+<p>
+    For now, it's a standalone project, and I decided to make it portable on every OS.
+</p>
+<p>
+    XSFoundation is a C library providing object-oriented-like coding in C, reference counting memory management, multi-threading, base objects like array, dictionaries, sets, strings, numbers, URLs, timers, etc.<br />
+    The design inspiration comes from Apple's Core Foundation.
+</p>
+<p>
+    Today, I achieved the final portability steps for Windows, which were multi-threading capabilities.<br />
+    Now you can have exactly the same code, compiling on Window, Mac or Linux!
+</p>
+<p>
+    I'm now going to code the socket part, so the library will have network capabilities.
+</p>
+<p>
+    The project is also available on GitHub, and is distributed under the terms of the BOOST license:
+</p>
+<p>
+    <a href="https://github.com/macmade/XSFoundation/wiki">https://github.com/macmade/XSFoundation/wiki</a>
+</p>
+<p>
+    Feel free to fork me on GitHub, and enjoy!
+</p>

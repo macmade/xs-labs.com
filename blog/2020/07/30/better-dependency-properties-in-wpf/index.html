@@ -1,0 +1,114 @@
+<p>
+    <a href="https://docs.microsoft.com/en-us/dotnet/desktop-wpf/data/data-binding-overview">Bindings</a> are an essential part of the WPF Model-View-ViewModel design pattern.<br />
+    They allow to react to changes in the view or model without any glue code.
+</p>
+<p>
+    Also as a Mac developer using <a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CocoaBindings/CocoaBindings.html">Cocoa Bindings</a>, I usually feel right at home with WPF bindings.<br />
+    It allows very similar patterns when porting an app to Windows.
+</p>
+<p>
+    However, bindings in WPF require a <a href="https://docs.microsoft.com/en-us/dotnet/framework/wpf/advanced/dependency-properties-overview">Dependency Property</a> - that is a special object that will take care of the update and notification mechanisms for your properties.
+</p>
+<p>
+    With Apple technologies, this is handled by <a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/KeyValueObserving/KeyValueObserving.html">KVO</a>, which is basically part of the runtime.<br />
+    As an example, in Swift, the only requirement for a KVO property is dynamic dispatch, meaning the following declaration can be used with bindings:
+</p>
+<pre class="code-block language-swift">
+import Foundation
+
+class Foo: NSObject
+{
+    @objc public dynamic var title: String?
+}
+</pre>
+<p>
+    Compared to a regular property, we only added <code>@objc</code> and <code>dynamic</code>.
+</p>
+<p>
+    In WPF, this is unfortunately not as easy.<br />
+    As mentionned previously, bindings in WPF require a Dependency Property. This object has to be created (or registered) in order for bindings to work.
+</p>
+<p>
+    This leads to the following code:
+</p>
+<pre class="code-block language-csharp">
+using System.Windows;
+
+class Foo
+{
+    public static readonly DependencyProperty TitleProperty = DependencyProperty.Register
+    (
+        "Title",
+        typeof( string ),
+        typeof( MyClass ),
+        new PropertyMetadata( null )
+    );
+
+    public string Title
+    {
+        get => this.GetValue( TitleProperty ) as string;
+        set => this.SetValue( TitleProperty, value );
+    }
+}
+</pre>
+<p>
+    First, as a static member, we register the Dependency Property, specifying its name, type, owner type and other metadata such as default value.<br />
+    Then we need to declare the property accessors, that will redirect to the dependency property itself.
+</p>
+<p>
+    And obviously, the same code has to be repeated for every property we want to use with bindings.<br />
+    It leads to a lot of boilerplate code, and it's very easy to introduce bugs when copy-pasting such code, such as a typo in the property name or a wrong type or owner type.<br />
+    Such bugs will usually result in an exception being thrown.
+</p>
+<p>
+    At <a href="https://imazing.com">DigiDNA</a>, we developped a tiny module allowing a more compact declaration for Dependency Properties:
+</p>
+<pre class="code-block language-csharp">
+using System.Windows;
+using BetterDP;
+
+class Foo
+{
+    static Foo()
+    {
+        DP.InitializeProperties( typeof( Foo ) );
+    }
+
+    [DP]
+    public string Title
+    {
+        get => this.Get< string >();
+        set => this.Set( value );
+    }
+}
+</pre>
+<p>
+    The only requirement is a call to <code>DP.InitializeProperties</code> in the class' static constructor.<br />
+    Then, all properties may be decorated with the <code>DP</code> attribute to turn them into dependency properties, along with calling the generic <code>Get</code> and <code>Set</code> methods in the accessors.
+</p>
+<p>
+    Default values may be set directly from the <code>DP</code> attribute:
+</p>
+<pre class="code-block language-csharp">
+[DP( DefaultValue = 42 )]
+public int Count
+{
+    get => this.Get< int >();
+    set => this.Set( value );
+}
+</pre>
+<p>
+    You may also be notified about a property change by declaring a <code>DependencyPropertyDidChange</code> method in your class, such as:
+</p>
+<pre class="code-block language-csharp">
+protected void DependencyPropertyDidChange( string name, object value )
+{}
+</pre>
+<p>
+    This library is freely available on <a href="https://github.com/DigiDNA/BetterDP">GitHub</a>.  
+    It is also available as a <a href="https://www.nuget.org/packages/BetterDP/">NuGet package</a>.
+</p>
+<p>
+    Enjoy : )
+</p>
+

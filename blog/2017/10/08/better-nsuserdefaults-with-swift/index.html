@@ -1,0 +1,169 @@
+<p>
+    After reading the excellent <a href="https://mikeash.com/pyblog/friday-qa-2017-10-06-type-safe-user-defaults.html">"Type-Safe User Default"</a> article from <a href="https://mikeash.com/pyblog/">Mike Ash</a>, I thought it would be interesting to describe the solution I use in my projects, as the approach is quite different.
+</p>
+<p>
+    I came up with this solution a long time ago, and the first implementation was originally written in Objective-C.<br />
+    The goal remains the same: add safety to Cocoa's <code>NSUserDefaults</code>.
+</p>
+<p>
+    As a reminder, <code>NSUserDefaults</code> is used to persist user settings in an app.<br />
+    While it does the job, it has some drawbacks when it come to type safety, because values are not associated with a type. Moreover, values are retrieved and written using a string key, meaning it's very easy to shoot yourself in the foot with typos.
+</p>
+<p>
+    An easy way to add safety, for both the values and the keys, is to create a wrapper class on top of <code>NSUserDefaults</code>.<br />
+    Something like:
+</p>
+<pre class="code-block language-swift">
+public class Preferences
+{
+    public var someValue: Int
+    {
+        get
+        {
+            return UserDefaults.standard.integer( forKey: "someValue" )
+        }
+        set( value )
+        {
+            UserDefaults.standard.set( value, forKey: "someValue" )
+        }
+    }
+}
+</pre>
+<p>
+    Unfortunately, such an approach leads to a lot of boilerplate code, as you'll need to wrap similarly each of your user default value.
+</p>
+<p>
+    The solution I propose is to automate the wrapping code on runtime, using reflection.<br />
+    This used to be done with the Objective-C runtime.<br />
+    With Swift, it's even easier through the use of the <code>Mirror</code> class.
+</p>
+<p>
+    In Swift, you can use a <code>Mirror</code> to reflect the properties of a custom class, like:
+</p>
+<pre class="code-block language-swift">
+import Cocoa
+
+public class Preferences
+{
+    public var someValue:      Int = 0
+    public var someOtherValue: Int = 42
+}
+
+let p = Preferences()
+let m = Mirror( reflecting: p )
+
+for c in m.children
+{
+    print( ( c.label ?? "" ) + " => " + String( describing: c.value ) )
+}
+</pre>
+<p>
+    Here, the <code>for</code> loop will enumerate each property of the <code>Preferences</code> class, printing its name and actual value.
+</p>
+<p>
+    Now in order to avoid wrapping our properties, we'll use <a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/KeyValueObserving/KeyValueObserving.html">Key Value Observing (KVO)</a>.<br />
+    This will allow us to be notified of any change of a property.
+</p>
+<p>
+    We'll start by reading the actual property value from <code>NSUserDefaults</code>.<br />
+    Then we'll add an observer for each property, using a <code>Mirror</code>.<br />
+    We'll do this in the class' initialiser:
+</p>
+<pre class="code-block language-swift">
+override init()
+{
+    super.init()
+
+    for c in Mirror( reflecting: self ).children
+    {
+        guard let key = c.label else
+        {
+            continue
+        }
+        
+        self.setValue( UserDefaults.standard.object( forKey: key ), forKey: key )
+        self.addObserver( self, forKeyPath: key, options: .new, context: nil )
+    }
+}
+</pre>
+<p>
+    We'll also need to remove the observers in <code>deinit</code>:
+</p>
+<pre class="code-block language-swift">
+deinit
+{
+    for c in Mirror( reflecting: self ).children
+    {
+        guard let key = c.label else
+        {
+            continue
+        }
+    
+        self.removeObserver( self, forKeyPath: key )
+    }
+}
+</pre>
+<p>
+    That's it. From now on, we'll receive KVO notifications when the value of a property is changed.<br />
+    We simply need to handle these notifications, and write the values to <code>NSUserDefaults</code>:
+</p>
+<pre class="code-block language-swift">
+public override func observeValue( forKeyPath keyPath: String?, of object: Any?, change: [ NSKeyValueChangeKey : Any ]?, context: UnsafeMutableRawPointer? )
+{
+    var found = false 
+
+    for c in Mirror( reflecting: self ).children
+    {
+        guard let key = c.label else
+        {
+            continue
+        }
+    
+        if( key == keyPath )
+        {
+            UserDefaults.standard.set( change?[ NSKeyValueChangeKey.newKey ], forKey: key )
+        
+            found = true
+        
+            break
+        }
+    }
+
+    if( found == false )
+    {
+        super.observeValue( forKeyPath: keyPath, of: object, change: change, context: context )
+    }
+}
+</pre>
+<p>
+    With this code in place, what is left to do is to declare the properties you want:
+</p>
+<pre class="code-block language-swift">
+@objc public class Preferences: NSObject
+{
+    @objc public dynamic var someIntegerValue:        Int       = 0
+    @objc public dynamic var someStringValue:         NSString  = ""
+    @objc public dynamic var someOptionalArrayValue:  NSArray?
+
+    // Previous methods here…
+}
+</pre>
+<p>
+    That's it. You don't have to write anything more.<br />
+    Note the <code>@objc</code> and <code>dynamic</code> keywords, that are required for KVO.
+</p>
+<p>
+    I like this approach, because it adds type-safety to <code>NSUserDefaults</code> while keeping the code very simple.<br />
+    All you have to do is to declare the properties you want.
+</p>
+<p>
+    Here's the complete Swift class, for reference:<br />
+    <a href="https://github.com/macmade/user-defaults/blob/master/swift/Preferences.swift">https://github.com/macmade/user-defaults/blob/master/swift/Preferences.swift</a>
+</p>
+<p>
+    And for Objective-C users, here's a similar implementation, using the Objective-C runtime:<br />
+    <a href="https://github.com/macmade/user-defaults/tree/master/objective-c">https://github.com/macmade/user-defaults/tree/master/objective-c</a>
+</p>
+<p>
+    Enjoy : )
+</p>

@@ -1,0 +1,65 @@
+<p>
+    Today, I officially released version 1.2.0 of <a href="http://www.eosgarden.com/en/products/webstart/overview/" title="WebStart">WebStart</a>.
+</p>
+<p>
+    This release fixes an annoying bug, introduced since Mac OS X 10.7.2.<br />
+    The virtual hosts were not accessible anymore from a web browser.
+</p>
+<p>
+    It also adds support for PHP 5.4.0 (release candidate). Now, four version of PHP are available.
+</p>
+<p>
+    Next releases will include custom locations for virtual hosts, as well as a 14 days trial.
+</p>
+<p>
+    This is a Mac OS X Lion only update. Users still on Mac OS X 10.6.x will have to stick with version 1.1.<br />
+    Sorry guys, but it's time to move on.
+</p>
+<p>
+    As I'm compiling the bundled software (Apache, PHP, MySQL, etc.) on Lion, some of them may not be compatible with older Mac OS releases.<br />
+    So I decided not to support Snow Leopard anymore, to concentrate on the actual OS version.
+</p>
+<p>
+    I'd also like to speak about the virtual hosts bug, on Mac OS X Lion.
+</p>
+<p>
+    Previous versions of WebStart used the OpenDirectory database in order to manage hosts, instead of using the /etc/hosts file.<br />
+    This is a much cleaner solution, as it uses a real database, with an official API, instead of parsing and modifying a system configuration file.
+</p>
+<p>
+    Unfortunately, since Mac OS X 10.7.2, there is a kind of bug in OpenDirectory.<br />
+    The DNS resolver, apparently for performance reasons, no longer asks the OpenDirectory database for hosts.
+</p>
+<p>
+    I tried to find a workaround, with guys from Apple, but no luck.<br />
+    Apple recognizes that it's a bug in the DNS resolver, but won't fix it.<br />
+    Here's an answer from Apple about this:
+</p>
+<blockquote>
+    <p>
+        I can replicate the problem as you described it.  I spent a bunch of time investigating it yesterday.<br />
+        At this point I'm somewhat confused.
+    </p>
+    <p>
+        I spent a bunch of time yesterday working my way through the OD daemon's code to try and figure out what's going on.<br />
+        However, I think I might get a result more quickly by asking the experts, so I've sent a request to the OD daemon engineer to see if he has any insight into this problem.
+    </p>
+    <p>
+        Please stand by.
+    </p>
+</blockquote>
+<p>
+    And finally:
+</p>
+    <blockquote>
+        <p>
+            After talking this over with OD engineering, I have an answer for you, but probably not the one you were hoping for: this is a known issue that's unlikely to be fixed in the near future.
+        </p>
+        <p>
+            The change was made as part of the effort to push all DNS resolution down into the mDNSResponder daemon.<br />
+            Doing this has a number of advantages (there's now just one resolver, which allows for coherent caching and so on), but it prevents the OD daemon from providing host information (because the OD daemon exists 'above' the mDNSResponder daemon, and you can't call 'up' in the stack with causing other problems, typically deadlocks).
+        </p>
+</blockquote>
+<p>
+    So version 1.2.0 of WebStart uses the /etc/hosts file, as there is no other solution for this.
+</p>

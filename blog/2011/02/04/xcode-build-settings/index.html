@@ -1,0 +1,520 @@
+<p>
+    For the curious, here are the build settings I use and recommend, when using XCode for Mac and iOS applications.<br />
+    Most of them activates the highest possible error reporting level.
+</p>
+<p>
+    At first sight, it may seem it's hard to code with those settings, but it really saves you a lot of time debugging your app.<br />
+    Most of the problems usually encountered in application development, using Objective-C, comes from the Objective-C runtime. And sometimes, those problems are hard to debug, because of the dynamic nature of the Objective-C language.
+</p>
+<p>
+    Activating most of the compiler error flags will save you time, as the compilation will fail, with an error message, instead of leaving you with a app that crashed for apparently no reason.
+</p>
+<p>
+    About the "Unused Parameters" setting, if you really don't use a parameter, you can cast it to <code>void</code>, so the compiler won't complain:
+</p>
+<pre class="code-block language-c">
+void some_func( int some_param )
+{
+    ( void )some_param;
+    /* ... */
+}
+</pre>
+<p>
+    When dealing with methods returning an <code>id</code> type, you may sometimes have to cast the object, to let the compiler knows about the type:
+</p>
+<pre class="code-block language-objc">
+[ ( ClassName * )[ someObject getIdObject ] someMethod ];
+</pre>
+<p>
+    So here are the settings, grouped as in the XCode build settings panel.
+</p>
+<h3>Linking</h3>
+<h4>Dead Code Stripping</h4>
+<pre>DEAD_CODE_STRIPPING = YES</pre>
+<p>
+    Activating this setting causes the <code>-dead_stri</code>p flag to be passed to <code>ld(1)</code> via <code>cc(1)</code> to turn on dead code stripping.<br />
+    If this option is selected, <code>-gfull</code> (not <code>-gused</code>) must be used to generate debugging symbols in order to have them correctly stripped.
+</p>
+<pre>[DEAD_CODE_STRIPPING, -dead_strip]</pre>
+<h4>Link With Standard Libraries</h4>
+<pre>LINK_WITH_STANDARD_LIBRARIES = YES</pre>
+<p>
+    If this setting activated, then the compiler driver will automatically pass its standard libraries to the linker to use during linking.<br />
+    If desired, this flag can be used to disable linking with the standard libraries, and then individual libraries can be passed as Other Linker Flags.
+</p>
+<pre>[LINK_WITH_STANDARD_LIBRARIES, -nostdlib]</pre>
+<h3>Packaging</h3>
+<h4>Info.plist Output Encoding</h4>
+<pre>INFOPLIST_OUTPUT_FORMAT = binary</pre>
+<p>
+    Specifies the output encoding for the output Info.plist (by default, the output encoding will be unchanged from the input). The output endcodings can be 'binary' or 'XML'.
+</p>
+<pre>[INFOPLIST_OUTPUT_FORMAT]</pre>
+<h3>GCC 4.2 - Code Generation</h3>
+<h4>Generate Debug Symbols</h4>
+<pre>GCC_GENERATE_DEBUGGING_SYMBOLS = NO</pre>
+<p>
+    (Permitted for «Debug» configuration)<br />
+    Enables or disables generation of debug symbols.<br />
+    When debug symbols are enabled, the level of detail can be controlled by the build 'Level of Debug Symbols' setting.<br />
+</p>
+<pre>[GCC_GENERATE_DEBUGGING_SYMBOLS]</pre>
+<h4>Generate Position-Dependant Code</h4>
+<pre>GCC_DYNAMIC_NO_PIC = YES</pre>
+<p>
+    (No permitted for «Debug» configuration, or for shared libraries)<br />
+    Faster function calls for applications. Not appropriate for shared libraries (which need to be position-independent).
+</p>
+<pre>[GCC_DYNAMIC_NO_PIC, -mdynamic-no-pic]</pre>
+<h4>Inline Methods Hidden</h4>
+<pre>GCC_INLINES_ARE_PRIVATE_EXTERN = YES</pre>
+<p>
+    When enabled, out-of-line copies of inline methods are declared <code>private extern</code>.
+</p>
+<pre>[GCC_INLINES_ARE_PRIVATE_EXTERN, -fvisibility-inlines-hidden]</pre>
+<h4>Make Strings Read-Only</h4>
+<pre>GCC_REUSE_STRINGS = YES</pre>
+<p>
+    Reuse string literals.
+</p>
+<pre>[GCC_REUSE_STRINGS, -fwritable-strings]</pre>
+<h4>Objective-C Garbage Collection</h4>
+<pre>GCC_ENABLE_OBJC_GC = Unsupported</pre>
+<p>
+Compiles code to use Garbage Collector write-barrier assignment primitives within the Objective-C runtime.<br />
+Code is marked as being GC capable.<br />
+An application marked GC capable will be started by the runtime with Garbage Collection enabled.<br />
+All Objective-C code linked or loaded by this application must also be GC capable.<br />
+Code compiled as GC Required is presumed to not use traditional Cocoa retain/release methods and may not be loaded into an application that is not running with Garbage Collection enabled.<br />
+Code compiled as GC Supported is presumed to also contain traditional retain/release method logic and can be loaded into any application.<br />
+Garbage Collection is only supported on Mac OS X 10.5 and later.
+</p>
+<pre>[GCC_ENABLE_OBJC_GC, -fobjc-gc | -fobjc-gc-only]</pre>
+<h4>Optimization Level</h4>
+<pre>GCC_OPTIMIZATION_LEVEL = Fastest, Smallest [-Os]</pre>
+<ul>
+<li>
+    <strong>None</strong>: Do not optimize. [-O0] <br />
+    With this setting, the compiler's goal is to reduce the cost of compilation and to make debugging produce the expected results.<br />
+    Statements are independent: if you stop the program with a breakpoint between statements, you can then assign a new value to any variable or change the program counter to any other statement in the function and get exactly the results you would expect from the source code.
+</li>
+<li>
+    <strong>Fast</strong>: Optimizing compilation takes somewhat more time, and a lot more memory for a large function. <code>[-O, -O1]</code><br />
+     With this setting, the compiler tries to reduce code size and execution time, without performing any optimizations that take a great deal of compilation time. In Apple's compiler, strict aliasing, block reordering, and inter-block scheduling are disabled by default when optimizing.
+</li>
+<li>
+    <strong>Faster</strong>: The compiler performs nearly all supported optimizations that do not involve a space-speed tradeoff. <code>[-O2]</code><br />
+     With this setting, the compiler does not perform loop unrolling or function inlining, or register renaming.<br />
+    As compared to the 'Fast' setting, this setting increases both compilation time and the performance of the generated code.
+</li>
+<li>
+    <strong>Fastest</strong>: Turns on all optimizations specified by the 'Faster' setting and also turns on function inlining and register renaming options.<br />
+    This setting may result in a larger binary. <code>[-O3]</code>
+</li>
+<li>
+    <strong>Fastest, smallest</strong>: Optimize for size.<br />
+    This setting enables all 'Faster' optimizations that do not typically increase code size.<br />
+    It also performs further optimizations designed to reduce code size. <code>[-Os]</code>
+</li>
+</ul>
+<pre>[GCC_OPTIMIZATION_LEVEL]</pre>
+<h3>GCC 4.2 - Language</h3>
+<h4>C Language Dialect</h4>
+<pre>GCC_C_LANGUAGE_STANDARD = C89</pre>
+<p>
+    (C99 permitted if absolutely necessary, especially on iOS)<br />
+    Choose a standard or non-standard C language dialect.
+</p>
+<ul>
+<li>
+    <strong>ANSI C:</strong>
+    Accept ISO C90 and ISO C++, turning off GNU extensions that are incompatible. <code>[-ansi]</code><br />
+    Incompatible GNU extensions include the <code>asm</code>, <code>inline</code>, and <code>typeof</code> keywords  (but not the equivalent <code>__asm__</code>, <code>__inline__</code>, and <code>__typeof__</code> forms), and the '//' syntax for comments. <br />
+    This setting also enables trigraphs.
+</li>
+<li>
+    <strong>C89:</strong><br />
+    Accept ISO C90, but not GNU extensions. <code>[-std=c89]</code>
+</li>
+<li>
+    <strong>GNU89:</strong><br />
+    Accept ISO C90 and GNU extensions. <code>[-std=gnu89]</code>
+</li>
+<li>
+    <strong>C99:</strong><br />
+    Accept ISO C99, but not GNU extensions. <code>[-std=c99]</code>
+</li>
+<li>
+    <strong>GNU99:</strong><br />
+    Accept ISO C99 and GNU extensions. <code>[-std=gnu99]</code>
+</li>
+<li>
+    <strong>Compiler Default:</strong><br />
+    Tells the compiler to use its default C language dialect. This is normally the best choice unless you have specific needs. (Currently equivalent to GNU89.)
+</li>
+</ul>
+<p>
+    Please see the full GCC manual for the full definition of all these settings on the C dialect: <br />
+    <a href="http://developer.apple.com/documentation/DeveloperTools/gcc-4.2.1/gcc/C-Dialect-Options.html">http://developer.apple.com/documentation/DeveloperTools/gcc-4.2.1/gcc/C-Dialect-Options.html</a>
+</p>
+<pre>[GCC_C_LANGUAGE_STANDARD]</pre>
+<h3>GCC 4.2 - Warnings</h3>
+<h4>Check Switch Statements</h4>
+<pre>GCC_WARN_CHECK_SWITCH_STATEMENTS = YES</pre>
+<p>
+    Warn whenever a switch statement has an index of enumeral type and lacks a case for one or more of the named codes of that enumeration.<br />
+    The presence of a default label prevents this warning.<br />
+    Case labels outside the enumeration range also provoke warnings when this option is used.
+</p>
+<pre>[GCC_WARN_CHECK_SWITCH_STATEMENTS, -Wswitch]</pre>
+<h4>Effective C++ Violations</h4>
+<pre>GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = YES</pre>
+<p>
+    Warn about violations of the following style guidelines from Scott Meyers' Effective C++ book:
+</p>
+<ul>
+<li>
+    Item 11:<br />
+    Define a copy constructor and an assignment operator for classes with dynamically allocated memory. 
+</li>
+<li>
+    Item 12:<br />
+    Prefer initialization to assignment in constructors. 
+</li>
+<li>
+    Item 14:<br />
+    Make destructors virtual in base classes. 
+</li>
+<li>
+    Item 15:<br />
+    Have <code>operator=</code> return a reference to <code>*this</code>. 
+</li>
+<li>
+    Item 23:<br />
+    Don't try to return a reference when you must return an object.
+</li>
+</ul>
+and about violations of the following style guidelines from Scott Meyers' More Effective C++ book:
+<ul>
+<li>
+    Item 6:<br />
+    Distinguish between prefix and postfix forms of increment and decrement operators. 
+</li>
+<li>
+    Item 7:<br />
+    Never overload <code>&amp;&amp;</code>, <code>||</code>, or, <code>.</code>
+</li>
+</ul>
+<p>
+    If you use this option, you should be aware that the standard library headers do not obey all of these guidelines; you can use <code>grep -v</code> to filter out those warnings. 
+</p>
+<pre>[GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS, -Weffc++]</pre>
+<h4>Four Character Literals</h4>
+<pre>GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES</pre>
+<p>
+    Warn about four-char literals (e.g., MacOS-style OSTypes: <code>'APPL'</code>). 
+</p>
+<pre>[GCC_WARN_FOUR_CHARACTER_CONSTANTS, -Wfour-char-constants]</pre>
+<h4>Global Construction or Destruction Required</h4>
+<pre>GCC_WARN_ABOUT_GLOBAL_CONSTRUCTORS = YES</pre>
+<p>
+    Warn about namespace scope data that requires construction or destruction, or functions that use the constructor attribute or the destructor attribute.<br />
+    Additionally warn if the Objective-C GNU runtime is used to initialize various metadata. 
+</p>
+<pre>[GCC_WARN_ABOUT_GLOBAL_CONSTRUCTORS, -Wglobal-constructors]</pre>
+<h4>Hidden Local Variables</h4>
+<pre>GCC_WARN_SHADOW = YES</pre>
+<p>
+    Warn whenever a local variable shadows another local variable, parameter or global variable or whenever a built-in function is shadowed. 
+</p>
+<pre>[GCC_WARN_SHADOW, -Wshadow]</pre>
+<h4>Implicit Conversion to 32 Bit Type</h4>
+<pre>GCC_WARN_64_TO_32_BIT_CONVERSION = YES</pre>
+<p>
+    Warn if a value is implicitly converted from a 64 bit type to a 32 bit type. 
+</p>
+<pre>[GCC_WARN_64_TO_32_BIT_CONVERSION, -Wshorten-64-to-32]</pre>
+<h4>Incomplete Objective-C Protocols</h4>
+<pre>GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES</pre>
+<p>
+    Warn if methods required by a protocol are not implemented in the class adopting it.<br />
+    Only applies to Objective-C and Objective-C++. 
+</p>
+<pre>[GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL, -Wno-protocol]</pre>
+<h4>Inhibit All Warnings</h4>
+<pre>GCC_WARN_INHIBIT_ALL_WARNINGS = NO</pre>
+<p>
+    Inhibit all warning messages. 
+</p>
+<pre>[GCC_WARN_INHIBIT_ALL_WARNINGS, -w]</pre>
+<h4>Initializer Not Fully Bracketed</h4>
+<pre>GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES</pre>
+<p>
+    Warn if an aggregate or union initializer is not fully bracketed.<br />
+    Example, Here initializer for a is not fully bracketed, but that for b is fully bracketed.
+</p>
+<pre class="code-block language-c">
+int a[ 2 ][ 2 ] = { 0, 1, 2, 3 }; 
+int b[ 2 ][ 2 ] = { { 0, 1 }, { 2, 3 } };
+</pre>
+<pre>[GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED, -Wmissing-braces]</pre>
+<h4>Mismatched Return Type</h4>
+<pre>GCC_WARN_ABOUT_RETURN_TYPE = YES</pre>
+<p>
+    Causes warnings to be emitted when a function with a defined return type (not void) contains a return statement without a return-value.<br />
+    Also emits a warning when a function is defined without specifying a return type. 
+</p>
+<pre>[GCC_WARN_ABOUT_RETURN_TYPE, -Wreturn-type]</pre>
+<h4>Missing Braces and Parentheses</h4>
+<pre>GCC_WARN_MISSING_PARENTHESES = YES</pre>
+<p>
+    Warn if parentheses are omitted in certain contexts, such as when there is an assignment in a context where a truth value is expected, or when operators are nested whose precedence people often get confused about.<br />
+    Also warn about constructions where there may be confusion to which if statement an else branch belongs.<br />
+    Here is an example of such a case:
+</p>
+<pre class="code-block language-c">
+{
+    if( a )
+        if( b )
+            foo();
+        else
+            bar();
+}
+</pre>
+<p>
+    In C, every else branch belongs to the innermost possible if statement, which in this example is if (b).<br />
+    This is often not what the programmer expected, as illustrated in the above example by indentation the programmer chose.<br />
+    When there is the potential for this confusion, GCC will issue a warning when this flag is specified.<br />
+    To eliminate the warning, add explicit braces around the innermost if statement so there is no way the else could belong to the enclosing if.<br />
+    The resulting code would look like this:
+</p>
+<pre class="code-block language-c">
+{
+    if( a )
+    {
+        if( b )
+            foo();
+        else
+            bar();
+    }
+}
+</pre>
+<pre>[GCC_WARN_MISSING_PARENTHESES, -Wparentheses]</pre>
+<h4>Missing Fields in Structure Initializers</h4>
+<pre>GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES</pre>
+<p>
+    Warn if a structure's initializer has some fields missing.<br />
+    For example, the following code would cause such a warning, because <code>"x.h"</code> is implicitly zero:
+</p>
+<pre class="code-block language-c">
+struct s { int f, g, h; };
+struct s x = { 3, 4 };
+</pre>
+<p>
+    This option does not warn about designated initializers, so the following modification would not trigger a warning:
+</p>
+<pre class="code-block language-c">
+struct s { int f, g, h; };
+struct s x = { .f = 3, .g = 4 };
+</pre>
+<pre>[GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS, -Wmissing-field-initializers]</pre>
+<h4>Missing Function Prototypes</h4>
+<pre>GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES</pre>
+<p>
+    Causes warnings to be emitted about missing prototypes. 
+</p>
+<pre>[GCC_WARN_ABOUT_MISSING_PROTOTYPES, -Wmissing-prototypes]</pre>
+<h4>Missing Newline At End Of File</h4>
+<pre>GCC_WARN_ABOUT_MISSING_NEWLINE = YES</pre>
+<p>
+    Warn when a source file does not end with a newline. 
+</p>
+<pre>[GCC_WARN_ABOUT_MISSING_NEWLINE, -Wnewline-eof]</pre>
+<h4>Multiple Definition Types for Selector</h4>
+<pre>GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO</pre>
+<p>
+    Warn if multiple methods of different types for the same selector are found during compilation.<br />
+    The check is performed on the list of methods in the final stage of compilation.<br />
+    Additionally, a check is performed for each selector appearing in a <code>"@selector(...)"</code> expression, and a corresponding method for that selector has been found during compilation.<br />
+    Because these checks scan the method table only at the end of compilation, these warnings are not produced if the final stage of compilation is not reached, for example because an error is found during compilation, or because the -fsyntax-only option is being used.
+</p>
+<pre>[GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR, -Wselector]</pre>
+<h4>Nonvirtual Destructor</h4>
+<pre>GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES</pre>
+<p>
+    Warn when a class declares an nonvirtual destructor that should probably be virtual, because it looks like the class will be used polymorphically. 
+</p>
+<pre>[GCC_WARN_NON_VIRTUAL_DESTRUCTOR, -Wnon-virtual-dtor]</pre>
+<p>
+    This is only active for C++ or Objective-C++ sources.
+</p>
+<h4>Other Warning Flags</h4>
+<pre>WARNING_CFLAGS = -Wall -Wextra -Werror -Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wdeclaration-after-statement</pre>
+<p>
+    Space-separated list of additional warning flags to pass to the compiler. Use this setting if Xcode does not already provide UI for a particular compiler warning flag.
+</p>
+<pre>[WARNING_CFLAGS]</pre>
+<h4>Overloaded Virtual Functions</h4>
+<pre>GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES</pre>
+<p>
+    Warn when a function declaration hides virtual functions from a base class.
+</p>
+<pre>[GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS, -Woverloaded-virtual]</pre>
+<p>
+    For example, in:
+</p>
+<pre class="code-block language-cpp">
+struct A
+{
+    virtual void f();
+};
+struct B: public A
+{
+    void f( int );
+};
+</pre>
+<p>
+    the <code>A</code> class version of <code>f()</code> is hidden in <code>B</code>, and code like this:
+</p>
+<pre class="code-block language-cpp">
+B * b;
+b->f();
+</pre>
+<p>
+    will fail to compile. This setting only applies to C++ and Objective-C++ sources.
+</p>
+<h4>Pedantic Warnings</h4>
+<pre>GCC_WARN_PEDANTIC = YES</pre>
+<p>
+    Issue all the warnings demanded by strict ISO C and ISO C++; reject all programs that use forbidden extensions, and some other programs that do not follow ISO C and ISO C++.<br />
+    For ISO C, follows the version of the ISO C standard specified by any <code>-std</code> option used. 
+</p>
+<pre>[GCC_WARN_PEDANTIC, -pedantic]</pre>
+<h4>Pointer Sign Comparison</h4>
+<pre>GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES</pre>
+<p>
+    Warn when pointers passed via arguments or assigned to a variable differ in sign. 
+</p>
+<pre>[GCC_WARN_ABOUT_POINTER_SIGNEDNESS, -Wno-pointer-sign]</pre>
+<h4>Prototype Conversion</h4>
+<pre>GCC_WARN_PROTOTYPE_CONVERSION = NO</pre>
+<p>
+    Warn if a prototype causes a type conversion that is different from what would happen to the same argument in the absence of a prototype.<br />
+    This includes conversions of fixed point to floating and vice versa, and conversions changing the width or signedness of a fixed point argument except when the same as the default promotion.<br />
+    Also, warn if a negative integer constant expression is implicitly converted to an unsigned type.<br />
+    For example, warn about the assignment <code>"x = -1"</code> if "x" is unsigned.<br />
+    But do not warn about explicit casts like <code>(unsigned) -1</code>.
+</p>
+<pre>[GCC_WARN_PROTOTYPE_CONVERSION, -Wconversion]</pre>
+<h4>Sign Comparison</h4>
+<pre>GCC_WARN_SIGN_COMPARE = YES</pre>
+<p>
+    Warn when a comparison between signed and unsigned values could produce an incorrect result when the signed value is converted to unsigned.<br />
+    This warning is enabled by <code>-W</code>, and by <code>-Wall</code> in C++ only. 
+</p>
+<pre>[GCC_WARN_SIGN_COMPARE, -Wsign-compare]</pre>
+<h4>Strict Selector Matching</h4>
+<pre>GCC_WARN_STRICT_SELECTOR_MATCH = YES</pre>
+<p>
+    Warn if multiple methods with differing argument and/or return types are found for a given selector when attempting to send a message using this selector to a receiver of type "id" or "Class".<br />
+    When this setting is disabled, the compiler will omit such warnings if any differences found are confined to types which share the same size and alignment.
+</p>
+<pre>[GCC_WARN_STRICT_SELECTOR_MATCH, -Wstrict-selector-match]</pre>
+<h4>Treat Missing Function Prototypes as Errors</h4>
+<pre>GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES</pre>
+<p>
+    Causes warnings about missing function prototypes to be treated as errors.<br />
+    Only applies to C and Objective-C.
+</p>
+<pre>[GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS, -Werror-implicit-function-declaration]</pre>
+<h4>Treat Nonconformant Code Errors as Warnings</h4>
+<pre>GCC_TREAT_NONCONFORMANT_CODE_ERRORS_AS_WARNINGS = NO</pre>
+<p>
+    Enabling this option will downgrade messages about nonconformant code from errors to warnings.<br />
+    By default, G++ effectively sets <code>-pedantic-errors</code> without <code>-pedantic</code>; this option reverses that.<br />
+    This behavior and this option are superseded by <code>-pedantic</code>, which works as it does for GNU C.
+</p>
+<pre>[GCC_TREAT_NONCONFORMANT_CODE_ERRORS_AS_WARNINGS, -fpermissive]</pre>
+<h4>Treat Warnings as Errors</h4>
+<pre>GCC_TREAT_WARNINGS_AS_ERRORS = YES</pre>
+<p>
+    Enabling this option causes all warnings to be treated as errors.
+</p>
+<pre>[GCC_TREAT_WARNINGS_AS_ERRORS, -Werror]</pre>
+
+<h4>Typecheck Calls to printf/scanf</h4>
+<pre>GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES</pre>
+<p>
+    Check calls to printf and scanf, etc., to make sure that the arguments supplied have types appropriate to the format string specified, and that the conversions specified in the format string make sense.
+</p>
+<pre>[GCC_WARN_TYPECHECK_CALLS_TO_PRINTF, -Wno-format]</pre>
+<h4>Undeclared Selector</h4>
+<pre>GCC_WARN_UNDECLARED_SELECTOR = YES</pre>
+<p>
+    Warn if a <code>"@selector(...)"</code> expression referring to an undeclared selector is found.<br />
+    A selector is considered undeclared if no method with that name has been declared before the <code>"@selector(...)"</code> expression, either explicitly in an @interface or @protocol declaration, or implicitly in an @implementation section.<br />
+    This option always performs its checks as soon as a <code>"@selector(...)"</code> expression is found, while <code>-Wselector</code> only performs its checks in the final stage of compilation.<br />
+    This also enforces the coding style convention that methods and selectors must be declared before being used.
+</p>
+<pre>[GCC_WARN_UNDECLARED_SELECTOR, -Wundeclared-selector]</pre>
+<h4>Uninitialized Automatic Variables</h4>
+<pre>GCC_WARN_UNINITIALIZED_AUTOS = YES</pre>
+<p>
+    Warn if a variable might be clobbered by a setjmp call or if an automatic variable is used without prior initialization.<br />
+    Detection of uninitialized automatic variable requires data flow analsys that is only enabled during optimized compilation.<br />
+    Note that GCC cannot detect all cases where an automatic variable is initialized or all usage patterns that may lead to use prior to initialization.
+</p>
+<pre>[GCC_WARN_UNINITIALIZED_AUTOS, -Wuninitialized]</pre>
+<h4>Unknown Pragma</h4>
+<pre>GCC_WARN_UNKNOWN_PRAGMAS = YES</pre>
+<p>
+    Warn when a #pragma directive is encountered which is not understood by GCC.<br />
+    If this command line option is used, warnings will even be issued for unknown pragmas in system header files.<br />
+    This is not the case if the warnings were only enabled by the <code>-Wall</code> command line option. 
+</p>
+<pre>[GCC_WARN_UNKNOWN_PRAGMAS, -Wunknown-pragmas]</pre>
+<h4>Unused Functions</h4>
+<pre>GCC_WARN_UNUSED_FUNCTION = YES</pre>
+<p>
+    Warn whenever a static function is declared but not defined or a non-inline static function is unused.
+</p>
+<pre>[GCC_WARN_UNUSED_FUNCTION, -Wunused-function]</pre>
+<h4>Unused Labels</h4>
+<pre>GCC_WARN_UNUSED_LABEL = YES</pre>
+<p>
+    Warn whenever a label is declared but not used.
+</p>
+<pre>[GCC_WARN_UNUSED_LABEL, -Wunused-label]</pre>
+<h4>Unused Parameters</h4>
+<pre>GCC_WARN_UNUSED_PARAMETER = YES</pre>
+<p>
+    Warn whenever a function parameter is unused aside from its declaration.
+</p>
+<pre>[GCC_WARN_UNUSED_PARAMETER, -Wunused-parameter]</pre>
+<h4>Unused Values</h4>
+<pre>GCC_WARN_UNUSED_VALUE = YES</pre>
+<p>
+    Warn whenever a statement computes a result that is explicitly not used.
+</p>
+<pre>[GCC_WARN_UNUSED_VALUE, -Wunused-value]</pre>
+<h4>Unused Variables</h4>
+<pre>GCC_WARN_UNUSED_VARIABLE = YES</pre>
+<p>
+    Warn whenever a local variable or non-constant static variable is unused aside from its declaration.
+</p>
+<pre>[GCC_WARN_UNUSED_VARIABLE, -Wunused-variable]</pre>
+<h4>Warn About Deprecated Functions</h4>
+<pre>GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES</pre>
+<p>
+    Warn about the use of deprecated functions, variables, and types (as indicated by the 'deprecated' attribute). 
+</p>
+<pre>[GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS, -Wno-deprecated-declarations]</pre>
+<h4>Warn About Undefined Use of offsetof Macro</h4>
+<pre>GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = YES</pre>
+<p>
+    Unchecking this setting will suppress warnings from applying the offsetof macro to a non-POD type.According to the 1998 ISO C++ standard, applying offsetof to a non-POD type is undefined.<br />
+    In existing C++ implementations, however, offsetof typically gives meaningful results even when applied to certain kinds of non-POD types. (Such as a simple struct that fails to be a POD type only by virtue of having a constructor.)<br />
+    This flag is for users who are aware that they are writing non-portable code and who have deliberately chosen to ignore the warning about it.<br />
+    The restrictions on offsetof may be relaxed in a future version of the C++ standard.
+</p>
+<pre>[GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO, -Wno-invalid-offsetof]</pre>

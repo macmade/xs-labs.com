@@ -1,0 +1,239 @@
+<p>
+    Ok, once and for all, I'll try to clarify to meaning of the 'const' and 'static' keywords in C (it applies to Objective-C and C++ too).
+</p>
+<p>
+    I'm just tired of questions about this on StackOverflow.
+</p>
+<p>
+    Objective-C programmers usually don't think about C code while coding. I personally think this is a big mistake (it can sometimes apply to C++ programmers too).
+</p>
+<p>
+    Objective-C is just a layer over C. So in order to be a good Objective-C programmer, you <strong>HAVE</strong> to know at least a few things about the C language.
+</p>
+<p>
+    I don't know why C has such a bad reputation for Objective-C coders, especially on iOS. And it's very surprising to see the lack of knowledge of some Objective-C developers.
+</p>
+<p>
+    So once and for all:
+</p>
+<p>
+    If you want to code in Objective-C, learn at least the following C topics:
+</p>
+<ul>
+	<li>Language keywords and their meanings</li>
+	<li>Pointers and pointer arithmetic</li>
+	<li>C standard library</li>
+</ul>
+<p>
+    Those are the (very) basics.
+</p>
+<p>
+    Objective-C is a very nice object-oriented language, with amazing runtime capabilities. That's true.<br />
+    But it doesn't mean you can bypass completely the C language.<br />
+    A lot of time, you'll save a lot of processor time and memory, just by knowing a few things about the C language, rather than relying on the apparent simplicity of the Objective-C language.
+</p>
+<p>
+    But that's a different story. Now back on our keywords...
+</p>
+<h3>const</h3>
+<p>
+    First of all, the <code>const</code> keyword.
+</p>
+<p>
+    Ok, it means 'constant'... So:
+</p>
+<pre class="code-block language-c">
+const int x = 42;
+</pre>
+<p>
+    declares a constant integer variable. It means its value can't be modified. Its value is initially assigned to 42.<br />
+    If you try to change its value later, the compiler will issue a warning, or an error, depending on your compiler settings.<br />
+    So the following statement is invalid:
+</p>
+<pre class="code-block language-c">
+const int x = 42;
+x           = 43;
+</pre>
+<p>
+    That's pretty easy to understand.<br />
+    The problem comes with pointers.
+</p>
+<p>
+    Let's take a look at the following code:
+</p>
+<pre class="code-block language-c">
+char * str = "hello, world";
+</pre>
+<p>
+    It declares a <code>char</code> pointer. Ok… But then what about this:
+</p>
+<pre class="code-block language-c">
+char * const str = "hello, world";
+</pre>
+<p>
+    or
+</p>
+<pre class="code-block language-c">
+const char * str = "hello, world";
+</pre>
+<p>
+    Now read carefully.<br />
+    The first one declares a constant pointer to a char.
+</p>
+<p>
+    It means the the characters of the string can be modified, but not the pointer value.<br />
+    So the variable <code>str</code> cannot be assigned to another pointer.
+</p>
+<p>
+    For instance, this is invalid:
+</p>
+<pre class="code-block language-c">
+char * hello     = "hello, universe";
+char * const str = "hello, world";
+str              = hello;
+</pre>
+<p>
+    as your a modifying the pointer value (not the string value).
+</p>
+<p>
+    This is valid:
+</p>
+<pre class="code-block language-c">
+char * const str = strdup( "hello, world" );
+str[ 0 ]         = 'a';
+</pre>
+<p>
+    The <code>str</code> variable will then contain <code>aello, world</code>. Remember: the pointer can't be modified, the value that is pointed can be.
+</p>
+<p>
+    It's the exact opposite with the following notation:
+</p>
+<pre class="code-block language-c">
+const char * str = "hello, world";
+</pre>
+<p>
+    Here, you can assign the pointer to another variable, but you can't change the value.
+</p>
+<p>
+    The <code>const</code> keyword is contextual, in a way, when using pointers. It can apply to the pointer itself, or to the value pointed.
+</p>
+<p>
+    So, in order to resume:
+</p>
+<pre class="code-block language-c">
+const int * x;
+</pre>
+<p>
+    A modifiable pointer to a constant integer.
+</p>
+<pre class="code-block language-c">
+int * const x;
+</pre>
+<p>
+    A constant pointer to an modifiable integer.
+</p>
+<pre class="code-block language-c">
+const int * const x;
+</pre>
+<p>
+    A constant pointer to a constant integer.
+</p>
+<h3>static</h3>
+<p>
+    The static keyword can have two meanings.
+</p>
+<p>
+    First of all, it can be declared inside a function.<br />
+    Let's take a look at this example:
+</p>
+<pre class="code-block language-c">
+#include &lt;stdio.h&gt;
+
+void foo( void );
+void bar( void );
+
+void foo( void )
+{
+    int x = 0;
+    
+    printf( "X - foo: %i\n", x );
+    
+    x++;
+}
+
+void bar( void )
+{
+    static int x = 0;
+    
+    printf( "X - bar: %i\n", x );
+    
+    x++;
+}
+
+int main( void )
+{
+    foo();
+    foo();
+    foo();
+    bar();
+    bar();
+    bar();
+    
+    return 0;
+}
+</pre>
+<p>
+    The output will be:
+</p>
+<pre class="code-block nohighlight">
+X - foo: 0
+X - foo: 0
+X - foo: 0
+X - bar: 0
+X - bar: 1
+X - bar: 2
+</pre>
+<p>
+    Because a simple local variable, as in the <code>foo</code> function, only exists when the function is called. It's destroyed (to be simple) when the function exits.
+</p>
+<p>
+    So for the <code>foo</code> function, the variable is created each time the function is called, with a value of <code>0</code>. The value is printed, then incremented.<br />
+    The function then exit, and the variable is destroyed.
+</p>
+<p>
+    But in the <code>bar</code> function, the variable is declared as static. It means the value will persist across function calls.<br />
+    It's initialized the first time the function is called, but only at that time. Once it has been initialized, it just exist, so its value will be taken for the next function calls.
+</p>
+<p>
+    Now the <code>static</code> keyword as a completely different meaning when used in a variable declared outside of a function (in the global scope).
+</p>
+<p>
+    It means that the variable will be «file scoped». In other words, the variable, which is global, will be accessible only from the scope of the file which declared it. It won't be accessible from other files.
+</p>
+<p>
+    It's just a way to create global private variable.
+</p>
+<p>
+    For instance, imagine a file called <code>foo.c</code>:
+</p>
+<pre class="code-block language-c">
+int        x = 42;
+static int y = 42;
+</pre>
+<p>
+    From a <code>bar.c</code> file, you'll be able to access the <code>x</code> symbol, if both files are linked together. But you won't be able to access the <code>y</code> symbol, as it's decaled as <code>static</code>.<br />
+    It means that the symbol for the <code>y</code> variable won't be exported by the linker, when the symbol for the <code>x</code> variable will be.
+</p>
+<p>
+    In other words, you'll be able to access the <code>y</code> global variable only from function declared in the <code>foo.c</code> file. The <code>x</code> variable will be also accessible from other files.
+</p>
+<p>
+    Of course,  the <code>static</code> keyword can be combined with <code>const</code>.<br />
+    For instance:
+</p>
+<pre class="code-block language-c">
+static const int * const y;
+</pre>
+<p>
+    A constant pointer to a constant integer, that will be accessible only from the file which declared it.
+</p>

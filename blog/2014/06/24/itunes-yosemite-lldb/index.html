@@ -1,0 +1,172 @@
+<p>
+    With each version of iTunes, Apple tries to prevent people reverse-engineering it, in order to protect some sensitive stuff, involving DRMs, device management, etc.
+</p>
+<p>
+    Different levels of protection are used in the iTunes binary, as well as in some private frameworks.
+</p>
+<p>
+    Machine code for sensitive procedures is heavily obfuscated, a few tricks are used to fool disassembly softwares and debuggers, and usually, iTunes doesn’t run out of the box in a debugger like LLDB or GDB.
+</p>
+<p>
+    Previous versions of iTunes used a very simple protection mechanism in order to prevent it running in a debugger.
+</p>
+<p>
+    At startup, iTunes called the <code>ptrace</code> function, with the <code>PT_DENY_ATTACH</code> argument.<br />
+    So it would quit almost immediately, when run inside a debugger.
+</p>
+<p>
+    The workaround was also very simple: a breakpoint on <code>ptrace</code> followed by an immediate return when the breakpoint is hit.<br />
+    On LLDB, that means:
+</p>
+<pre class="code-block nohighlight">
+lldb /Applications/iTunes.app/Contents/MacOS/iTunes
+Current executable set to '/Applications/iTunes.app/Contents/MacOS/iTunes' (x86_64).
+(lldb) b ptrace
+Breakpoint 1: where = libsystem_kernel.dylib`__ptrace, address = 0x00000000000163b8
+(lldb) br command add 1
+Enter your debugger command(s).  Type 'DONE' to end.
+> thread return
+> c
+> DONE
+</pre>
+<p>
+    That’s it… iTunes now runs fine in LLDB.
+</p>
+<p>
+    With OS X 10.10 Yosemite, a few things have changed…
+</p>
+<p>
+    iTunes no longer calls <code>ptrace</code> at startup, but still quits when running inside LLDB:
+</p>
+<pre class="code-block nohighlight">
+lldb /Applications/iTunes.app/Contents/MacOS/iTunes
+Current executable set to '/Applications/iTunes.app/Contents/MacOS/iTunes' (x86_64).
+(lldb) r
+Process 48470 launched: '/Applications/iTunes.app/Contents/MacOS/iTunes' (x86_64)
+Process 48470 exited with status = 1 (0x00000001) 
+(lldb) 
+</pre>
+<p>
+    As we can see, the process exits almost immediately with status code 1.<br />
+    Let’s see if we can find a workaround.
+</p>
+<p>
+    As the application exits cleanly, we’ll simply break on the system <code>exit</code> function, in order to see where exactly the application exits:
+</p>
+<pre class="code-block nohighlight">
+(lldb) b _Exit
+Breakpoint 1: where = libsystem_c.dylib`_Exit, address = 0x00007fff8b16b042
+</pre>
+<p>
+    When we run iTunes again, it eventually hit the breakpoint, so we can ask for a backtrace:
+</p>
+<pre class="code-block nohighlight">
+* thread #1: tid = 0x8a841, 0x00007fff8b16b042 libsystem_c.dylib`_Exit, name = 'iTunes main', queue = 'com.apple.main-thread', stop reason = breakpoint 1.1
+    frame #0: 0x00007fff8b16b042 libsystem_c.dylib`_Exit
+libsystem_c.dylib`_Exit:
+-> 0x7fff8b16b042:  pushq  %rbp
+   0x7fff8b16b043:  movq   %rsp, %rbp
+   0x7fff8b16b046:  callq  0x7fff8b1914c0            ; symbol stub for: _exit
+(lldb) bt
+* thread #1: tid = 0x8a841, 0x00007fff8b16b042 libsystem_c.dylib`_Exit, name = 'iTunes main', queue = 'com.apple.main-thread', stop reason = breakpoint 1.1
+  * frame #0: 0x00007fff8b16b042 libsystem_c.dylib`_Exit
+    frame #1: 0x00000001007762b8 iTunes`___lldb_unnamed_function35905$$iTunes + 230
+    frame #2: 0x0000000100006262 iTunes`___lldb_unnamed_function115$$iTunes + 196
+    frame #3: 0x000000010000616a iTunes`___lldb_unnamed_function114$$iTunes + 42
+    frame #4: 0x0000000100005454 iTunes`___lldb_unnamed_function83$$iTunes + 50
+    frame #5: 0x0000000100005320 iTunes`___lldb_unnamed_function79$$iTunes + 56
+    frame #6: 0x0000000100002ac6 iTunes`___lldb_unnamed_function11$$iTunes + 231
+    frame #7: 0x00007fff8c0247f4 CoreFoundation`__CFRUNLOOP_IS_CALLING_OUT_TO_A_TIMER_CALLBACK_FUNCTION__ + 20
+    frame #8: 0x00007fff8c024483 CoreFoundation`__CFRunLoopDoTimer + 1059
+    frame #9: 0x00007fff8c09915d CoreFoundation`__CFRunLoopDoTimers + 301
+    frame #10: 0x00007fff8bfe05c2 CoreFoundation`__CFRunLoopRun + 2018
+    frame #11: 0x00007fff8bfdfb98 CoreFoundation`CFRunLoopRunSpecific + 296
+    frame #12: 0x00007fff8fb868ff HIToolbox`RunCurrentEventLoopInMode + 235
+    frame #13: 0x00007fff8fb86672 HIToolbox`ReceiveNextEventCommon + 431
+    frame #14: 0x00007fff8fb864b3 HIToolbox`_BlockUntilNextEventMatchingListInModeWithFilter + 71
+    frame #15: 0x00007fff852495a5 AppKit`_DPSNextEvent + 1000
+    frame #16: 0x00007fff85248d79 AppKit`-[NSApplication nextEventMatchingMask:untilDate:inMode:dequeue:] + 139
+    frame #17: 0x00007fff8523cd53 AppKit`-[NSApplication run] + 594
+    frame #18: 0x000000010093cad0 iTunes`___lldb_unnamed_function48166$$iTunes + 360
+    frame #19: 0x000000010037c7e0 iTunes`___lldb_unnamed_function14308$$iTunes + 52
+</pre>
+<p>
+    Now we know that the function <code>iTunes`___lldb_unnamed_function35905$$iTunes</code> is the one that calls <code>exit</code>.<br />
+    So we’ll just prevent this, by adding another breakpoint:
+</p>
+<pre class="code-block nohighlight">
+(lldb) b iTunes`___lldb_unnamed_function35905$$iTunes
+Breakpoint 2: where = iTunes`___lldb_unnamed_function35905$$iTunes, address = 0x00000001007761d2
+</pre>
+<p>
+    The breakpoint is hit when iTunes is run again, and we'll simply return immediately, without executing the code that leads to the <span class="code-inline">exit</span> call:
+</p>
+<pre class="code-block nohighlight">
+(lldb) thread return
+(lldb) c
+</pre>
+<p>
+    Unfortunately, the breakpoint is hit again and again.<br />
+    Looking closer at the backtrace, we can see:
+</p>
+<ul>
+    <li><code>__CFRunLoopDoTimer</code></li>
+    <li><code>__CFRUNLOOP_IS_CALLING_OUT_TO_A_TIMER_CALLBACK_FUNCTION__</code></li>
+</ul>
+<p>
+    It means that the function that checks if iTunes is running inside a debugger is repeatedly called at a specific time interval, using a CoreFoundation timer.
+</p>
+<p>
+    Fortunately, we can add a command to our breakpoint, so it will automatically returns when the breakpoint is hit:
+</p>
+<pre class="code-block nohighlight">
+(lldb) br command add 2
+Enter your debugger command(s).  Type 'DONE' to end.
+> thread return
+> c
+> DONE
+</pre>
+<p>
+    Now we can run iTunes again.<br />
+    The breakpoint will be hit quite a few times, but our command will just return and continues the program’s execution normally.
+</p>
+<p>
+    But we’re not done yet…
+</p>
+<p>
+    At some point, iTunes will crash:
+</p>
+<pre class="code-block nohighlight">
+Process 49840 stopped
+* thread #1: tid = 0x8b7a4, 0x00007fff8c024483 CoreFoundation`__CFRunLoopDoTimer + 1059, name = 'iTunes main', queue = 'com.apple.main-thread', stop reason = EXC_BAD_ACCESS (code=1, address=0x0)
+    frame #0: 0x00007fff8c024483 CoreFoundation`__CFRunLoopDoTimer + 1059
+CoreFoundation`__CFRunLoopDoTimer + 1059:
+-> 0x7fff8c024483:  leaq   -0x163c94f7(%rip), %rax   ; __CF120290
+   0x7fff8c02448a:  movb   $0x1, (%rax)
+   0x7fff8c02448d:  leaq   -0x163c94ff(%rip), %rax   ; __CF120293
+   0x7fff8c024494:  cmpb   $0x0, (%rax)
+</pre>
+<p>
+    <code>EXC_BAD_ACCESS</code>, meaning we’ve got a segmentation fault somewhere...
+</p>
+<p>
+    So what can we do now? Looks like there’s now way to have iTunes running from here…
+</p>
+<p>
+    Well, actually there is.<br />
+    A segmentation fault means that the software is trying to access a portion of memory it doesn’t own.<br />
+    Usually, this results in a crash, but it doesn’t mean the software and the system can’t sometimes recover from it.
+</p>
+<p>
+    So let’s try to ignore the segmentation fault, by returning from where we are and continuing the program’s execution as if nothing happened:
+</p>
+<pre class="code-block nohighlight">
+(lldb) thread return
+(lldb) c
+Process 49840 resuming
+</pre>
+<p>
+    That’s it…<br />
+    iTunes resumes its execution normally, and never calls again the function that prevented it to run in LLDB.<br />
+    You are now free to work with iTunes in LLDB as usual... : )
+</p>

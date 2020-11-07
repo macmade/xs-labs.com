@@ -1,0 +1,189 @@
+/* <![CDATA[ */
+
+/*
+##################################################
+#                                                #
+#       Blood Sweat & Code (& Rock'N'Roll)       #
+#      Thanx for looking at the source code      #
+#                                                #
+#                XS-Labs (c) 2013                #
+#                                                #
+##################################################
+*/
+
+body, body .container {
+    font-family:            Helvetica, Arial, sans-serif;
+}
+
+.clearer {
+    clear:                  both;
+}
+
+.power {
+    vertical-align:         super;
+}
+
+#imagelightbox {
+    position:               fixed;
+    z-index:                9999;
+    -ms-touch-action:       none;
+    touch-action:           none;
+}
+
+.xs-github-repository-commits .panel-heading {
+    font-size:              10px;
+    overflow:               hidden;
+    height:                 100%;
+    padding:                10px;
+}
+
+ul.xs-status-items {
+    overflow:               hidden;
+    height:                 100%;
+    margin-left:            10px;
+    margin-top:             10px;
+    margin-right:           0px;
+    margin-bottom:          0px;
+    padding:                0px;
+    list-style:             none;
+}
+
+ul.xs-status-items-description {
+    margin-left:            10px;
+    margin-top:             0px;
+    margin-right:           0px;
+    margin-bottom:          10px;
+    padding:                0px;
+    list-style:             none;
+}
+
+ul.xs-status-items-description li {
+    margin:                 5px;
+    font-size:              12px;
+}
+
+ul.xs-status-items li {
+    float:                  left;
+    width:                  150px;
+    margin:                 5px;
+    font-size:              12px;
+}
+
+ul.xs-status-items-description li.xs-status-item-off,
+ul.xs-status-items li.xs-status-item-off {
+    background-image:       url( "image/xs-status-off.png" );
+    background-size:        22px;
+    background-repeat:      no-repeat;
+    padding-left:           28px;
+    padding-top:            4px;
+    padding-bottom:         2px;
+}
+
+ul.xs-status-items-description li.xs-status-item-dev,
+ul.xs-status-items li.xs-status-item-dev {
+    background-image:       url( "image/xs-status-dev.png" );
+    background-size:        22px;
+    background-repeat:      no-repeat;
+    padding-left:           28px;
+    padding-top:            4px;
+    padding-bottom:         2px;
+}
+
+ul.xs-status-items-description li.xs-status-item-ok,
+ul.xs-status-items li.xs-status-item-ok {
+    background-image:       url( "image/xs-status-ok.png" );
+    background-size:        22px;
+    background-repeat:      no-repeat;
+    padding-left:           28px;
+    padding-top:            4px;
+    padding-bottom:         2px;
+}
+
+.resume-menu {
+    font-size:              12px;
+    white-space:            nowrap;
+}
+
+.resume-menu ul {
+    margin:                 0px;
+    padding:                0px;
+    list-style:             none;
+}
+
+.resume-menu ul ul {
+    margin-left:            20px;
+}
+
+.resume-menu li {
+    margin:                 0px;
+    padding:                0px;
+}
+
+dl.dl-horizontal dd {
+    margin-bottom:          10px;
+}
+
+dl.dl-horizontal dt {
+    margin-bottom:          10px;
+    padding-bottom:         2px;
+    border-bottom:          solid 1px #E7E7E7;
+}
+
+dl.dl-horizontal ul {
+    margin-left:            10px;
+    margin-top:             0px;
+    margin-right:           0px;
+    margin-bottom:          0px;
+    padding:                0px;
+}
+
+.xs-museum .panel-body dl.dl-horizontal dd {
+    margin-top:             0px;
+    margin-bottom:          0px;
+    padding-top:            0px;
+    padding-bottom:         0px;
+}
+
+.xs-museum .panel-body dl.dl-horizontal dt {
+    margin-top:             0px;
+    margin-bottom:          0px;
+    padding-top:            3px;
+    padding-bottom:         0px;
+    font-size:              10px;
+}
+
+.xs-museum-photo {
+    font-size:              10px;
+    text-align:             center;
+    margin-bottom:          20px;
+}
+
+#imagelightbox {
+    border:                 solid 1px #999999;
+    padding:                10px;
+    background-color:       #FFFFFF;
+}
+
+.xs-captcha, .xs-captcha input {
+    font-size:              12px;
+}
+
+.xs-captcha a:link {
+    color:                  #999999;
+}
+
+.xs-captcha .recaptchatable input#recaptcha_response_field {
+    font-size:              12px;
+    padding:                5px;
+    border:                 solid 1px #E7E7E7 !important;
+}
+
+.tweet, .tweet-alt {
+    margin-bottom:          7px;
+}
+
+.tweet-infos, .tweet-infos * {
+    color:                  #999999;
+}
+
+/* ]]> */

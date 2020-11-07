@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+	lang="en"
+	root="XS-Labs"
+	keywords="XS-Labs, XEOS, XSFoundation, Codeine, ClangKit, FileSystem, XEOS Software Licence, OpenSource, Operating System, Development, Cocoa, iOS, Objective-C, Assembly, x86, C++, Code, Software, Mac, IDE, Macmade, Jean-David, Gadina, Switzerland"
+	description="XS-Labs is the home of the XEOS Operating System and related projects."
+	image="/uploads/image/highlights/default.jpg"
+	banner="default"
+>
+	<projects>
+	    <title>Projects</title>
+	    <sub>
+	        <xeos>
+	            <title>XEOS Operating System</title>
+	            <sub>
+	                <overview>
+	                    <title>Overview</title>
+	                    <subtitle>x86/x86-64 Experimental Operating System</subtitle>
+	                </overview>
+	                <documentation>
+	                    <title>Documentation</title>
+	                    <subtitle>XEOS Documentation</subtitle>
+	                </documentation>
+	                <status>
+	                    <title>Status</title>
+	                    <subtitle>Project status</subtitle>
+	                </status>
+	                <roadmap>
+	                    <title>Roadmap</title>
+	                    <subtitle>Active sub-projects</subtitle>
+	                </roadmap>
+	                <download>
+	                    <title>Download</title>
+	                    <subtitle>Downloading XEOS</subtitle>
+	                </download>
+	            </sub>
+	        </xeos>
+	        <xsfoundation>
+	            <title>XSFoundation</title>
+	            <sub>
+	                <overview>
+	                    <title>Overview</title>
+                        <subtitle>XEOS C Foundation Library</subtitle>
+	                </overview>
+	                <documentation>
+	                    <title>Documentation</title>
+	                </documentation>
+	                <download>
+	                    <title>Download</title>
+	                    <subtitle>Downloading XSFoundation</subtitle>
+	                </download>
+	            </sub>
+	        </xsfoundation>
+	        <codeine>
+	            <title>Codeine</title>
+	            <sub>
+	                <overview>
+	                    <title>Overview</title>
+	                    <subtitle>C / C++ / Objective-C code editor</subtitle>
+	                </overview>
+	                <screenshots>
+	                    <title>Screenshots</title>
+	                    <subtitle>Screenshots</subtitle>
+	                </screenshots>
+	                <download>
+	                    <title>Download</title>
+	                    <subtitle>Downloading Codeine</subtitle>
+	                </download>
+	            </sub>
+	        </codeine>
+	        <cfpp>
+	            <title>CoreFoundation++</title>
+	            <sub>
+	                <documentation>
+	                    <title>Documentation</title>
+	                    <subtitle>Documentation</subtitle>
+	                </documentation>
+	                <download>
+	                    <title>Download</title>
+	                    <subtitle>Downloading CoreFoundation++</subtitle>
+	                </download>
+	            </sub>
+	        </cfpp>
+	        <clang-kit>
+	            <title>ClangKit</title>
+	            <sub>
+	                <overview>
+	                    <title>Overview</title>
+	                    <subtitle>Objective-C (Foundation) frontend to LibClang</subtitle>
+	                </overview>
+	                <documentation>
+	                    <title>Documentation</title>
+	                </documentation>
+	                <download>
+	                    <title>Download</title>
+	                    <subtitle>Downloading ClangKit</subtitle>
+	                </download>
+	            </sub>
+	        </clang-kit>
+	        <filesystem>
+	            <title>FileSystem</title>
+	            <sub>
+	                <overview>
+	                    <title>Overview</title>
+	                    <subtitle>About FileSystem</subtitle>
+	                </overview>
+	                <screenshots>
+	                    <title>Screenshots</title>
+	                    <subtitle>Screenshots</subtitle>
+	                </screenshots>
+	                <download>
+	                    <title>Download</title>
+	                    <subtitle>Downloading FileSystem</subtitle>
+	                </download>
+	            </sub>
+	        </filesystem>
+	        <xeos-software-license>
+	            <title>XEOS Software License</title>
+	            <sub>
+	                <overview>
+	                    <title>Overview</title>
+	                    <subtitle>About</subtitle>
+	                </overview>
+	                <terms>
+	                    <title>License Terms</title>
+	                    <subtitle>XEOS Software License - Version 1.0 - December 21, 2012</subtitle>
+	                </terms>
+	                <contribute>
+	                    <title>Contributing</title>
+	                    <subtitle>Contributing to the XEOS Software License</subtitle>
+	                </contribute>
+	            </sub>
+	        </xeos-software-license>
+	        <coding-style-guide>
+	            <title>Coding Style Guide</title>
+	            <sub>
+	                <overview>
+	                    <title>Overview</title>
+	                    <subtitle>About</subtitle>
+	                </overview>
+	            </sub>
+	        </coding-style-guide>
+	    </sub>
+	</projects>
+	<about>
+	    <navTitle>About</navTitle>
+	    <title>About XS-Labs</title>
+	</about>
+	<contact>
+		<title>Contact</title>
+	</contact>
+	<archives>
+		<title>Archives</title>
+		<sub>
+		    <software>
+		        <title>Discontinued software</title>
+		        <subtitle>About</subtitle>
+		    </software>
+		    <articles>
+		        <title>Old articles archives</title>
+		        <subtitle>About</subtitle>
+		        <sub>
+		            <c-reference-counting hidden="yes">
+		                <title>Reference counting in ANSI-C</title>
+		            </c-reference-counting>
+		            <gdb-tutorial hidden="yes">
+		                <title>GDB basic tutorial</title>
+		            </gdb-tutorial>
+		            <iokit-idle-time hidden="yes">
+		                <title>Detecting idle time and activity with I/O Kit</title>
+		            </iokit-idle-time>
+		            <xcode-static-libraries hidden="yes">
+		                <title>Using static libraries with XCode</title>
+		            </xcode-static-libraries>
+		            <c-bool hidden="yes">
+		                <title>Using boolean data-types with ANSI-C</title>
+		            </c-bool>
+		            <objc-blocks hidden="yes">
+		                <title>Closure and lambda in Objective-C</title>
+		            </objc-blocks>
+		            <cocoa-delegate-chain hidden="yes">
+		                <title>Cocoa: Delegate chain system</title>
+		            </cocoa-delegate-chain>
+		            <float hidden="yes">
+		                <title>Understanding floats</title>
+		            </float>
+		        </sub>
+		    </articles>
+		    <museum>
+		        <title>Computer Museum</title>
+		    </museum>
+		</sub>
+	</archives>
+	<blog>
+		<title>Blog</title>
+	</blog>
+	<xs-one>
+		<title>XS Computer One</title>
+	</xs-one>
+	<sitemap hidden="yes" sitemap="no">
+		<title>Sitemap</title>
+	</sitemap>
+	<legal hidden="yes">
+		<title>Legal</title>
+		<sub>
+			<privacy hidden="yes">
+				<title>Privacy Policy</title>
+			</privacy>
+			<credits hidden="yes">
+				<title>Credits &amp; Disclaimer</title>
+			</credits>
+		</sub>
+	</legal>
+    <licenses sitemap="no" hidden="yes">
+        <title>OpenSource Licenses</title>
+        <sub>
+            <bsd hidden="yes">
+                <title>BSD License</title>
+            </bsd>
+            <boost hidden="yes">
+                <title>Boost License</title>
+            </boost>
+            <freebsd-documentation hidden="yes">
+                <title>FreeBSD Documentation License</title>
+            </freebsd-documentation>
+        </sub>
+    </licenses>
+</menu>

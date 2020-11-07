@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="utf-8"?>
+<blog>
+    <post>
+        <date>2020/07/30</date>
+        <time>22:15</time>
+        <author>Jean-David Gadina</author>
+        <name>better-dependency-properties-in-wpf</name>
+        <title>Better Dependency Properties in WPF</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2017/11/26</date>
+        <time>21:40</time>
+        <author>Jean-David Gadina</author>
+        <name>prevent-macos-root-access</name>
+        <title>Preventing macOS root access</title>
+        <category>Security</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2017/11/07</date>
+        <time>22:18</time>
+        <author>Jean-David Gadina</author>
+        <name>x86-64-machine-code-obfuscation</name>
+        <title>x86-64 Machine Code Obfuscation</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2017/11/01</date>
+        <time>21:07</time>
+        <author>Jean-David Gadina</author>
+        <name>investigating-a-dead-touchbar</name>
+        <title>Investigating a dead TouchBar</title>
+        <category>Apple</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2017/10/08</date>
+        <time>14:53</time>
+        <author>Jean-David Gadina</author>
+        <name>better-nsuserdefaults-with-swift</name>
+        <title>Better NSUserDefaults with Swift</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2016/12/23</date>
+        <time>19:05</time>
+        <author>Jean-David Gadina</author>
+        <name>cpp-pimpl</name>
+        <title>C++ PIMPL idiom &amp; C++ automatic allocation</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2016/12/05</date>
+        <time>21:39</time>
+        <author>Jean-David Gadina</author>
+        <name>cpp-auto-alloc-part-2</name>
+        <title>C++ Automatic Allocation - Part 2</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2016/11/28</date>
+        <time>20:00</time>
+        <author>Jean-David Gadina</author>
+        <name>cpp-auto-alloc-part-1</name>
+        <title>C++ Automatic Allocation - Part 1</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2016/11/23</date>
+        <time>20:00</time>
+        <author>Jean-David Gadina</author>
+        <name>hello-again</name>
+        <title>Hello (again)</title>
+        <category>Miscellaneous</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2015/02/04</date>
+        <time>09:00</time>
+        <author>Jean-David Gadina</author>
+        <name>goodbye-imazing</name>
+        <title>Goodbye iMazing</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2014/06/24</date>
+        <time>19:32</time>
+        <author>Jean-David Gadina</author>
+        <name>itunes-yosemite-lldb</name>
+        <title>Running OS X 10.10 Yosemite’s iTunes in LLDB</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2014/03/08</date>
+        <time>16:36</time>
+        <author>Jean-David Gadina</author>
+        <name>apple-1-replica-tumblr</name>
+        <title>Apple 1 Replica on Tumblr</title>
+        <category>Electronics</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2013/10/27</date>
+        <time>01:20</time>
+        <author>Jean-David Gadina</author>
+        <name>apple-1-replica-project-started</name>
+        <title>Apple 1 Replica - Project Started</title>
+        <category>Electronics</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2013/10/20</date>
+        <time>19:39</time>
+        <author>Jean-David Gadina</author>
+        <name>apple-1-replica-project</name>
+        <title>Apple 1 replica project</title>
+        <category>Electronics</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2013/10/20</date>
+        <time>19:01</time>
+        <author>Jean-David Gadina</author>
+        <name>iconic-photographic-tribute</name>
+        <title>Iconic - A Photographic Tribute</title>
+        <category>Miscellaneous</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2013/10/20</date>
+        <time>18:47</time>
+        <author>Jean-David Gadina</author>
+        <name>vintage-computer-collection</name>
+        <title>Vintage Computer Collection / Computer Nostalgia</title>
+        <category>Miscellaneous</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2013/08/16</date>
+        <time>13:04</time>
+        <author>Jean-David Gadina</author>
+        <name>coding-style-guide</name>
+        <title>Coding Style Guide</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2013/08/06</date>
+        <time>06:30</time>
+        <author>Jean-David Gadina</author>
+        <name>optimising-memset</name>
+        <title>Code optimisations - Optimising memset()</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2013/07/15</date>
+        <time>22:36</time>
+        <author>Jean-David Gadina</author>
+        <name>manual-github</name>
+        <title>Manual on GitHub</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2013/06/18</date>
+        <time>19:46</time>
+        <author>Jean-David Gadina</author>
+        <name>ios7-new-ui-strategies</name>
+        <title>Strategies to support the new iOS7 UI</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2013/06/17</date>
+        <time>20:33</time>
+        <author>Jean-David Gadina</author>
+        <name>ios7-new-filesystem-security</name>
+        <title>New filesystem security on iOS 7</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2013/06/10</date>
+        <time>20:56</time>
+        <author>Jean-David Gadina</author>
+        <name>wwdc-2013-whats-new</name>
+        <title>WWDC 2013 - So what's new?</title>
+        <category>Apple</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2013/04/28</date>
+        <time>13:11</time>
+        <author>Jean-David Gadina</author>
+        <name>xs-labs</name>
+        <title>XS-Labs</title>
+        <category>Miscellaneous</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2013/04/26</date>
+        <time>15:26</time>
+        <author>Jean-David Gadina</author>
+        <name>spring-cleaning</name>
+        <title>Spring cleaning</title>
+        <category>Miscellaneous</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2012/08/19</date>
+        <time>20:55</time>
+        <author>Jean-David Gadina</author>
+        <name>codeine-diagnostics-completion</name>
+        <title>Codeine - Diagnostics &amp; Code completion</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2012/08/15</date>
+        <time>22:34</time>
+        <author>Jean-David Gadina</author>
+        <name>announcing-codeine</name>
+        <title>Announcing Codeine</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2012/08/06</date>
+        <time>21:16</time>
+        <author>Jean-David Gadina</author>
+        <name>apple-vs-world</name>
+        <title>Apple vs the World (again)</title>
+        <category>Apple</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2012/05/27</date>
+        <time>16:33</time>
+        <author>Jean-David Gadina</author>
+        <name>apple-kills-filesystem-app</name>
+        <title>Apple kills the FileSystem App</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2012/04/20</date>
+        <time>23:22</time>
+        <author>Jean-David Gadina</author>
+        <name>osx-mountain-lion-screens</name>
+        <title>Mac OS X Mountain Lion - Screens</title>
+        <category>Apple</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2012/01/16</date>
+        <time>22:00</time>
+        <author>Jean-David Gadina</author>
+        <name>mixing-cpp-objective-c</name>
+        <title>Mixing C++ with C/Objective-C</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2012/01/10</date>
+        <time>19:43</time>
+        <author>Jean-David Gadina</author>
+        <name>warning-flags-clang</name>
+        <title>Warning flags for Clang</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2012/01/05</date>
+        <time>06:54</time>
+        <author>Jean-David Gadina</author>
+        <name>webstart-1-3-0</name>
+        <title>WebStart 1.3.0</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2012/01/05</date>
+        <time>00:28</time>
+        <author>Jean-David Gadina</author>
+        <name>little-apps-on-appstore</name>
+        <title>Little apps on the Mac AppStore</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2012/01/03</date>
+        <time>23:08</time>
+        <author>Jean-David Gadina</author>
+        <name>unix-man-pages</name>
+        <title>Unix manual pages</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2012/01/03</date>
+        <time>23:00</time>
+        <author>Jean-David Gadina</author>
+        <name>webstart-1-2-0</name>
+        <title>WebStart 1.2.0 released</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/09/13</date>
+        <time>18:57</time>
+        <author>Jean-David Gadina</author>
+        <name>xcode-build-number-svn</name>
+        <title>Xcode - Build number from SVN</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/08/23</date>
+        <time>19:10</time>
+        <author>Jean-David Gadina</author>
+        <name>icloud-migration</name>
+        <title>iCloud - Migration from MobileMe</title>
+        <category>Apple</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/07/29</date>
+        <time>01:30</time>
+        <author>Jean-David Gadina</author>
+        <name>c-const-static-keywords</name>
+        <title>C - const and static keywords</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/05/31</date>
+        <time>16:01</time>
+        <author>Jean-David Gadina</author>
+        <name>book-selection</name>
+        <title>Book selection</title>
+        <category>Miscellaneous</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/05/31</date>
+        <time>13:21</time>
+        <author>Jean-David Gadina</author>
+        <name>new-job</name>
+        <title>New job</title>
+        <category>Miscellaneous</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/05/31</date>
+        <time>14:03</time>
+        <author>Jean-David Gadina</author>
+        <name>gdb-asm-debug</name>
+        <title>GDB - Assembly debugging</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/04/20</date>
+        <time>13:04</time>
+        <author>Jean-David Gadina</author>
+        <name>c-call-stack-windows</name>
+        <title>C - Function call stack on Windows</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/04/20</date>
+        <time>11:59</time>
+        <author>Jean-David Gadina</author>
+        <name>xsfoundation</name>
+        <title>The next big thing - XSFoundation</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/04/07</date>
+        <time>15:50</time>
+        <author>Jean-David Gadina</author>
+        <name>face-detection-iphone</name>
+        <title>Face detection on iPhone</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/04/04</date>
+        <time>08:31</time>
+        <author>Jean-David Gadina</author>
+        <name>migration-github</name>
+        <title>Migration to GitHub</title>
+        <category>Miscellaneous</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/03/17</date>
+        <time>18:26</time>
+        <author>Jean-David Gadina</author>
+        <name>cpu-64bits-check</name>
+        <title>CPU 64bits check</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/03/14</date>
+        <time>23:29</time>
+        <author>Jean-David Gadina</author>
+        <name>webstart-osx-lion</name>
+        <title>WebStart - OS X Lion</title>
+        <category>Apple</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/03/10</date>
+        <time>09:51</time>
+        <author>Jean-David Gadina</author>
+        <name>webstart-whats-new</name>
+        <title>WebStart - What's new?</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/03/05</date>
+        <time>18:03</time>
+        <author>Jean-David Gadina</author>
+        <name>osx-fat-binaries</name>
+        <title>OSX fat binaries</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/03/01</date>
+        <time>22:41</time>
+        <author>Jean-David Gadina</author>
+        <name>finder-wallpaper</name>
+        <title>Finder wallpaper</title>
+        <category>Miscellaneous</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/02/28</date>
+        <time>22:31</time>
+        <author>Jean-David Gadina</author>
+        <name>selling-software</name>
+        <title>About selling software</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/02/24</date>
+        <time>17:45</time>
+        <author>Jean-David Gadina</author>
+        <name>osx-lion-server</name>
+        <title>Mac OS X Lion - Server side</title>
+        <category>Apple</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/02/24</date>
+        <time>16:30</time>
+        <author>Jean-David Gadina</author>
+        <name>osx-lion-screens</name>
+        <title>Mac OS X Lion - Screens</title>
+        <category>Apple</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/02/18</date>
+        <time>17:24</time>
+        <author>Jean-David Gadina</author>
+        <name>interview-apple</name>
+        <title>Interview with Apple</title>
+        <category>Miscellaneous</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/02/16</date>
+        <time>18:21</time>
+        <author>Jean-David Gadina</author>
+        <name>mwc-barcelona</name>
+        <title>MWC Barcelona</title>
+        <category>Miscellaneous</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/02/14</date>
+        <time>23:08</time>
+        <author>Jean-David Gadina</author>
+        <name>webstart-light</name>
+        <title>WebStart light</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/02/13</date>
+        <time>17:31</time>
+        <author>Jean-David Gadina</author>
+        <name>webstart-installer</name>
+        <title>WebStart installer is ready</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/02/07</date>
+        <time>15:10</time>
+        <author>Jean-David Gadina</author>
+        <name>webstart-announced</name>
+        <title>WebStart announced!</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/02/05</date>
+        <time>12:07</time>
+        <author>Jean-David Gadina</author>
+        <name>arm-architecture</name>
+        <title>A look at the ARM architecture</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/02/05</date>
+        <time>10:29</time>
+        <author>Jean-David Gadina</author>
+        <name>webstart</name>
+        <title>WebStart</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/02/04</date>
+        <time>10:21</time>
+        <author>Jean-David Gadina</author>
+        <name>about-compiler-optimizations</name>
+        <title>About compiler optimizations</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/02/04</date>
+        <time>06:36</time>
+        <author>Jean-David Gadina</author>
+        <name>xcode-build-settings</name>
+        <title>XCode Build Settings</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/02/03</date>
+        <time>20:42</time>
+        <author>Jean-David Gadina</author>
+        <name>filesystem-iphone</name>
+        <title>FileSystem for iPhone</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/02/01</date>
+        <time>17:30</time>
+        <author>Jean-David Gadina</author>
+        <name>next-freeware-siege-gui</name>
+        <title>Next freeware: Siege GUI</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/02/01</date>
+        <time>16:46</time>
+        <author>Jean-David Gadina</author>
+        <name>minor-updates</name>
+        <title>Minor updates</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/02/01</date>
+        <time>14:29</time>
+        <author>Jean-David Gadina</author>
+        <name>process-renicer-release</name>
+        <title>Release: ProcessRenicer</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/01/31</date>
+        <time>07:30</time>
+        <author>Jean-David Gadina</author>
+        <name>laws-simplicity</name>
+        <title>Laws of simplicity</title>
+        <category>Miscellaneous</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/01/31</date>
+        <time>03:34</time>
+        <author>Jean-David Gadina</author>
+        <name>nslog-ansi-c</name>
+        <title>NSLog in ANSI-C</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/01/30</date>
+        <time>20:08</time>
+        <author>Jean-David Gadina</author>
+        <name>xeos-memory-allocator-llvm</name>
+        <title>XEOS: memory allocator &amp; LLVM</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/01/30</date>
+        <time>18:50</time>
+        <author>Jean-David Gadina</author>
+        <name>vps-switch</name>
+        <title>VPS switch</title>
+        <category>Miscellaneous</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/01/30</date>
+        <time>15:43</time>
+        <author>Jean-David Gadina</author>
+        <name>job-opportunity-apple</name>
+        <title>Job opportunity at Apple</title>
+        <category>Miscellaneous</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/01/30</date>
+        <time>10:12</time>
+        <author>Jean-David Gadina</author>
+        <name>looking-for-a-job</name>
+        <title>Looking for a job</title>
+        <category>Miscellaneous</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/01/29</date>
+        <time>21:42</time>
+        <author>Jean-David Gadina</author>
+        <name>process-renicer</name>
+        <title>Process Renicer</title>
+        <category>Software</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/01/29</date>
+        <time>15:42</time>
+        <author>Jean-David Gadina</author>
+        <name>c-reverse-string-search</name>
+        <title>C - Reverse string search</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
+        <date>2011/01/29</date>
+        <time>09:04</time>
+        <author>Jean-David Gadina</author>
+        <name>hello-world</name>
+        <title>Hello world: introducing eosgarden's blog</title>
+        <category>Miscellaneous</category>
+        <comments>disabled</comments>
+    </post>
+</blog>

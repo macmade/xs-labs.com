@@ -1,0 +1,50 @@
+<p>
+    I must say I'm a big fan of the x86 architecture, and Intel processors, especially when writing assembly code.<br />
+    The instruction set on that type of processors is nice, there's not too much registers... In one word: SISC.
+</p>
+<p>
+    At the opposite, I always felt completely stupid with RISC processors. From the PPC architecture, with all that vectorial and floating point registers, to the ARM architecture, know used on the iOS devices.
+</p>
+<p>
+    I took a closer look on the ARM architecture some time ago, because I always felt the need to know more about RISC processors.
+</p>
+<p>
+    Here are a few tips, or things that I've learned about the ARM architecture.
+</p>
+<p>
+    First of all, an ARM processor can be run in several modes, as Intel processors.<br />
+    The  six available modes are:
+<ol>
+    <li><strong>User: </strong>The unprivileged mode under which most tasks run</li>
+    <li><strong>FIQ: </strong>Entered when a high priority interrupt is raised</li>
+    <li><strong>IRQ: </strong>Entered when a low priority nterrupt is raised</li>
+    <li><strong>Supervisor: </strong>Entered on reset and when a interrupt instruction is run</li>
+    <li><strong>Abort: </strong>Memory access violations</li>
+    <li><strong>Undef: </strong>Undefined instructions mode</li>
+</ol>
+<p>
+    I must say I always felt bad with RISC registers. There are just too many of them.<br />
+    The ARM architecture has 37 registers. All registers are 32 bits long.
+</p>
+<p>
+The registers are:
+</p>
+<ol>
+    <li>1 program counter</li>
+    <li>1 current program status register</li>
+    <li>5 saved program status registers</li>
+    <li>30 general purpose registers</li>
+</ol>
+<p>
+    However, access to these registers are defined by the CPU mode.<br />
+    Each mode has access to 13 general purpose registers (<code>r0</code> - <code>r12</code>), a stack pointer (<code>r13</code>), a link regiser (<code>r14</code>), a program counter (<code>r15</code>), and the current program status register (<code>cpsr</code>).
+</p>
+<p>
+    When running supervisor mode, the spsr (saved program status register) register is also available.
+</p>
+<p>
+    The ARM architecture does not support shift operations, but they can be done through multiplication, by a power of 2.
+<p>
+    It's also important to note that the ARM architecture is  a «load & store» architecture, meaning memory to memory data processing is not available.<br />
+    Data need to be copied into registers first, and then processed.
+</p>

@@ -1,0 +1,54 @@
+<p>
+    Just a little reminder (also to myself)...
+</p>
+<p>
+    Mac OS X support a lot of different processor architectures.<br />
+    From PPC to Intel, including ARM (for iOS), all of these with 32 or 64 bits instruction sets.
+</p>
+<p>
+    When compiling a C file with GCC under Mac OS X, only the current CPU architecture will be compiled by default.
+</p>
+<p>
+    For instance:
+</p>
+<pre class="code-block nohighlight">
+gcc -Wall -o test test.c
+</pre>
+<p>
+    Will produce an executable supporting only one architecture (similar to the host machine).
+</p>
+<p>
+    The executable format is called «Mach-O», and is specific to OS X.
+</p>
+<p>
+    The Mach-O format supports more than one architecture.<br />
+    It means you can have a single binary file, which contain code that will run on different CPU architectures.
+</p>
+<p>
+    Apple introduced that format with Mac OS X, while preparing the transition from the PowerPC architecture to Intel.<br />
+    The same thing was done for the M68K to PPC transition.<br />
+    But it's also used to run binaries with 32 or 64 bits instruction sets.
+</p>
+<p>
+    To see what kind of architecture an executable file supports, your can use the «lipo» command.<br />
+    For instance, on my computer (Intel x86_64):
+</p>
+<pre class="code-block nohighlight">
+lipo -info /bin/bash
+</pre>
+<p>
+    will return:
+</p>
+<pre class="code-block nohighlight">
+Architectures in the fat file: /bin/bash are: x86_64 i386
+</pre>
+<p>
+    Meaning the executable can be run on Intel 64bits or 32bits processors.
+</p>
+<p>
+    In order to compile an executable for a specific processor architecture, you can pass the <code>-arch</code> option to GCC.<br />
+    For instance, to compile a FAT binary, that will run on 64 and 64 bits intel processors:
+</p>
+<pre class="code-block nohighlight">
+gcc -Wall -arch x86_64 -arch i386 -o test test.c
+</pre>

@@ -1,0 +1,35 @@
+<p>
+    Since I <a href="/en/blog/2012/08/15/announcing-codeine/">announced</a> Codeine, I mainly worked on live code diagnostics and code completion.
+</p>
+<p>
+    Live diagnostics are now working well.<br />
+    I modified Codeine's console area to provide live diagnostics, as well as the output console.<br />
+    The whole stuff now looks like this:
+</p>
+<p>
+    <img src="{POST_URL}debug.png" alt="" title="debug" width="600" height="95" class="img-thumbnail" />
+</p>
+<p>
+    On the right, you can select the output console, or the code diagnostics (here with a well formed code).
+</p>
+<p>
+    Diagnostics are provided in real-time:
+</p>
+<p>
+    <img src="{POST_URL}errors.png" alt="" title="errors" width="572" height="305" class="img-thumbnail" />
+</p>
+<p>
+    In that example, I didn't include the necessary C library headers, hence the errors.
+</p>
+<p>
+    Code completion is more complex, but it's now beginning to work:
+</p>
+<p>
+    <img src="{POST_URL}complete.png" alt="" title="complete" width="548" height="245" class="img-thumbnail" />
+</p>
+<p>
+    Code-completion results still needs to be filtered, and the final output will of course provide useful infos, just as xCode autocompletion.
+</p>
+<p>
+    So stay tuned. I'll keep posting here updates about Codeine. : )
+</p>

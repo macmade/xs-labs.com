@@ -1,0 +1,129 @@
+<p>
+    <strong>Today my TouchBar finally died...</strong>
+</p>
+<p>
+    I own a second-generation MacBook Pro 15' with the TouchBar (mid-2017 model).<br />
+    As many, I can't say I'm a big fan of this TouchBar gadget.<br />
+    As a developer, spending most of my time coding, or doing stuff in the Terminal and in <code>vim</code>, I miss real function or escape keys.
+</p>
+<p>
+    That being said, having TouchID on a Mac is awesome (T1 ftw), plus I usually use an external keyboard, so that's not really a big issue.<br />
+    And of course, the machine itself is simply splendid.
+</p>
+<p>
+    Unfortunately, the TouchBar never really worked on this machine.<br />
+    Most of the time, it required multiple reboots simply to power-on. TouchID was working fine, so this was more a display issue.<br />
+    Also, I was running the beta versions of macOS High Sierra, so I tought of a software-related issue.
+</p>
+<p>
+    But now it looks like its definitely dead. No matter what I try, the TouchBar does not power-on.<br />
+    It's just a useless black ribbon, at the top of my keyboard. 
+</p>
+<p>
+    Booting in diagnostics mode reports no issue.<br />
+    And no luck resetting the SMC and PRAM either.
+</p>
+<p>
+    So I tried to investigate at the software level.
+</p>
+<p>
+    The TouchBar runs an operating system of its own, apparently a variant of WatchOS, on a dedicated chip.<br />
+    It communicates with macOS through a system service called <code>TouchBarServer</code>, used by the <code>ControlStrip</code> application (in <code>/System/Library/CoreServices</code>).
+</p>
+<p>
+    Now while there's a <code>TouchBarServer</code> process running on my machine, there's no <code>ControlStrip</code> process.<br />
+    This is obviously an issue.
+</p>
+<p>
+    I tried to start the <code>ControlStrip</code> process manually, but that doesn't work.<br />
+    So I thought I could try debugging it with <code>LLDB</code>.
+</p>
+<pre class="code-block">
+lldb /System/Library/CoreServices/ControlStrip.app/Contents/MacOS/ControlStrip
+</pre>
+<p>
+    Running the process gives the following output:
+</p>
+<pre class="code-block">
+Process 688 launched: '/System/Library/CoreServices/ControlStrip.app/Contents/MacOS/ControlStrip' (x86_64)
+Process 688 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = signal SIGABRT
+    frame #0: 0x00007fff7c0dbe4e libsystem_kernel.dylib`__pthread_kill + 10
+libsystem_kernel.dylib`__pthread_kill:
+->  0x7fff7c0dbe4e <+10>: jae    0x7fff7c0dbe58            ; <+20>
+    0x7fff7c0dbe50 <+12>: movq   %rax, %rdi
+    0x7fff7c0dbe53 <+15>: jmp    0x7fff7c0d31e8            ; cerror_nocancel
+    0x7fff7c0dbe58 <+20>: retq   
+Target 0: (ControlStrip) stopped.
+</pre>
+<p>
+    Looks like <code>abort</code> is called somewhere, for some reason.<br />
+    The backtrace gives:
+</p>
+<pre class="code-block">
+* thread #1, queue = 'com.apple.main-thread', stop reason = signal SIGABRT
+  * frame #0: 0x00007fff7c0dbe4e libsystem_kernel.dylib`__pthread_kill + 10
+    frame #1: 0x00007fff7c21a150 libsystem_pthread.dylib`pthread_kill + 333
+    frame #2: 0x00007fff7c038312 libsystem_c.dylib`abort + 127
+    frame #3: 0x000000010004f07d ControlStrip`___lldb_unnamed_symbol1597$$ControlStrip + 61
+    frame #4: 0x0000000100045aca ControlStrip`___lldb_unnamed_symbol1532$$ControlStrip + 490
+    frame #5: 0x0000000100045aff ControlStrip`___lldb_unnamed_symbol1533$$ControlStrip + 15
+    frame #6: 0x00007fff51946d62 AppKit`-[NSClassSwapper initWithCoder:] + 584
+    ...
+</pre>
+<p>
+    Let's try to break on the first function before <code>abort</code>:
+</p>
+<pre class="code-block">
+b ControlStrip`___lldb_unnamed_symbol1597$$ControlStrip
+</pre>
+<p>
+    After the usual prologue, we can see the following stuff, in the disassembly:
+</p>
+<pre class="code-block">
+0x10004f046 <+6>:  callq  0x100079a92               ; symbol stub for: DFRCreateCAContext
+0x10004f04b <+11>: movq   %rax, %rdi
+0x10004f04e <+14>: callq  0x100079fb4               ; symbol stub for: objc_retainAutoreleasedReturnValue
+0x10004f053 <+19>: movq   %rax, %rbx
+0x10004f056 <+22>: movq   %rbx, %rdi
+0x10004f059 <+25>: callq  0x100079f9c               ; symbol stub for: objc_release
+0x10004f05e <+30>: testq  %rbx, %rbx
+0x10004f061 <+33>: je     0x10004f06a               ; <+42>
+0x10004f06a <+42>: leaq   0x31611(%rip), %rax       ; "TouchBarServer not running."
+0x10004f071 <+49>: movq   %rax, 0x57a28(%rip)
+0x10004f078 <+56>: callq  0x100079ed6               ; symbol stub for: abort
+</pre>
+<p>
+    So the <code>ControlStrip</code> calls a <code>DFRCreateCAContext</code> function, which fails, returning <code>0</code>.
+    It then calls <code>abort</code>, with a <code>TouchBarServer not running.</code> message.
+</p>
+<p>
+    I already know the <code>TouchBarServer</code> process is running, so I can try making this test pass py placing the value <code>1</code> in the <code>rbx</code> register:<br />
+    This way, I'll avoid the call to <code>abort</code>:
+</p>
+<pre class="code-block">
+p $rbx=1
+</pre>
+<p>
+    The process indeed continues normal execution, outputting a ton of AutoLayout issues (c'mon Apple...).<br />
+    But obviously, the display stays dark...
+</p>
+<p>
+    Now I'm convinced this is an hardware issue.<br />
+    I also tried to reinstall a fresh copy of macOS High Sierra, and the problem persist.
+</p>
+<p>
+    Looking at the system logs, I can also see:
+</p>
+
+<pre class="code-block">
+[DFR] [DFRDisplayRegisterForNotification_block_invoke] AddTerminatedNotification ret = 0x0
+[DFR] [deviceTerminate] 
+[DFR] ERR [_DFRDisplayHandleVendorPacket] DFR display not ready, possible hardware error
+[DFR] ERR [GetInfoTimeout] get info timeout, retrying
+[DFR] ERR [_DFRDisplayHandleVendorPacket] DFR display not ready, possible hardware error
+</pre>
+<p>
+    <strong>So yeah, I think I'm left with bringing this puppy to the nearest Apple Store for an exchange...<br />
+    Fragile little things...</strong>
+</p>

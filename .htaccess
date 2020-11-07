@@ -1,0 +1,41 @@
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+
+RewriteRule (.*) http://xs-labs.com/$1 [R=301,L]
+
+RewriteCond %{HTTP_USER_AGENT} libwww-perl.* 
+RewriteRule .* ? [F,L]
+
+# Sitemaps
+RewriteRule ^sitemap\.xml.*$ /sitemap/ [R,L]
+RewriteRule ^sitemap_index\.xml.*$ /sitemap/ [R,L]
+
+# Amazon S3
+#RewriteRule ^(downloads/foo.*.pkg)$ /s3.php?download=$1 [R,L]
+
+# Downloads
+RewriteRule ^downloads/([^/]+)/?([^/]*).*$ /downloads/?app=$1&file=$2 [R,L]
+
+# Main
+RewriteRule ^downloads/.*$ - [L]
+RewriteRule ^fever/.*$ - [L]
+RewriteRule ^doc/xs/PHP/.*$ - [L]
+RewriteRule ^stats/.*$ - [L]
+RewriteRule ^([^/]+)/blog/.*$ /blog.php
+RewriteRule .*/index.php /index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond %{REQUEST_FILENAME} !blog.php
+RewriteRule .* /index.php
+
+RewriteRule \.(?:jpe?g|gif|png)$ /retina.php [L]
+
+<ifmodule mod_expires.c>
+    ExpiresActive on
+    ExpiresDefault "access plus 1 week"
+</ifmodule>
+
+Order Allow,Deny
+Allow from all
+
+Satisfy Any

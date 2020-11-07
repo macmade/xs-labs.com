@@ -1,0 +1,39 @@
+<p>
+    A huge security issue in macOS High Sierra has just been revealed on Twitter by <a href="https://twitter.com/lemiorhan/status/935578694541770752">Lemi Orhan Ergin</a>:
+</p>
+<blockquote>
+    Dear @AppleSupport, we noticed a *HUGE* security issue at MacOS High Sierra.<br />
+    Anyone can login as "root" with empty password after clicking on login button several times.<br />
+    Are you aware of it @Apple?
+</blockquote>
+<p>
+    <strong>I've been able to confirm this on my machine.</strong><br />
+    This issue occurs when you try to unlock a secure preferences item from the System Preferences app.
+</p>
+<p>
+    This is really bad, as it allows someone with a physical access to the machine to alter any system setting, like changing user passwords, adding admin users, or even decrypting FileVault volumes.
+</p>
+<p>
+    I hope Apple will react soon, providing an update, but in the meantime, here's a simple way to prevent this issue:
+</p>
+<p>
+    Open a new Finder window, and navigate to the <code>/System/Library/CoreServices/Applications</code> directory.<br />
+    Here you will find an app named <strong>Directory Utility.app</strong>.
+</p>
+<p>
+    Open it, and unlock it by using the lock icon at the bottom-left of the window.
+</p>
+<p>
+    <img src="{POST_URL}app.png" alt="Directory Utility" width="500" height="395" class="img-thumbnail" />
+</p>
+<p>
+    Then, from the application's <strong>Edit</strong> menu, choose <strong>Enable root user</strong>.
+</p>
+</p>
+<p>
+    <img src="{POST_URL}menu.png" alt="Directory Utility Menu" width="134" height="165" class="img-thumbnail" />
+</p>
+<p>
+    This will allow you to set a password for the macOS <strong>root</strong> user.<br />
+    At this point, the security issue will no longer happen.
+</p>
