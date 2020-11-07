@@ -1,0 +1,982 @@
+<p>
+    I often use Makefiles in some of my projects.<br />
+    I really like the flexibility it gives, and I often find myself writing a Makefile instead of a simple shell script to automatize tasks.
+</p>
+<p>
+    So here's a little crash course.<br />
+    I'll obviously only cover the basics, but I hope this will give you a good idea on how you could improve your workflows using Makefiles.
+</p>
+<h3>About Make</h3>
+<p>
+    Make was developed in 1976 mainly as a build automation tool, to produce executable files or libraries from source code.
+</p>
+<p>
+    While it excels as a build system, it can also be used for a lot of different things.<br />
+    If you do write shell scripts to automatize certain tasks, you'll be able to use Makefiles instead.<br />
+    As we're going to see, a Makefile can have several advantages over a regular shell script.
+</p>
+<p>
+    This tutorial will only be focused on the GNU version of Make, as it's the most widely used and the most powerful.
+</p>
+<h3>Basics</h3>
+<p>
+    First of all, when you invoke the <code>make</code> command, it will look for a file named <code>Makefile</code> in the current working directory.<br />
+    This is the default, but note that a specific Makefile can be used with the <code>-f</code> flag, followed by the file name or path.
+</p>
+<p>
+    If such a file is found, it will by default execute the <code>all</code> target.
+</p>
+<p>
+    <strong>Make is target-based system.</strong><br />
+    Your Makefile can specify multiple targets, and targets may be executed individually when invoking <code>make</code>. But more on this later.
+</p>
+<p>
+    <strong>For now, we'll just start by creating a basic <em>hello world</em> example.</strong>
+</p>
+<h4>hello, world</h4>
+<p>
+    In some directory, create a file called <code>Makefile</code> with the following content:
+</p>
+<pre class="code-block language-makefile">
+all:
+    
+    echo "hello, world"
+</pre>
+<p>
+    <code>all</code> is the target name. Target definitions are followed by a colon sign.<br />
+    As mentioned earlier, <code>make</code> will by default look for a target called <code>all</code>. So this is our main entry point.
+</p>
+<p>
+    Inside the target, you'll simply execute shell commands.  
+    Here, we print the <em>hello, world</em> string, using the shell's builtin <code>echo</code> command.
+</p>
+<p>
+    <strong>Note that target commands need to be indented with at least a single tab.</strong><br />
+    <strong>While spaces can be used elsewhere for indentation, tabulation is mandatory inside a target.</strong>
+</p>
+<p>
+    Now from a command prompt, <code>cd</code> to that directory and type <code>make</code>.
+</p>
+<p>
+    <code>make</code> will read the <code>Makefile</code>, and execute the <code>all</code> target, giving the following output:
+</p>
+<pre class="code-block">
+echo "hello, world"
+hello, world
+</pre>
+<p>    
+    As you can see, <code>make</code> will first print the full command, before printing any output.<br />
+    This can be disabled by using an <code>@</code> sign before the command:
+</p>
+<pre class="code-block language-makefile">
+all:
+    
+    @echo "hello, world"
+</pre>
+<p>
+    Now the output is simply:
+</p>
+<pre class="code-block">
+hello, world
+</pre>
+<h4>Additional targets</h4>
+<p>
+    You can define as many targets as you want.<br />
+    For instance:
+</p>
+<pre class="code-block language-makefile">
+all:
+    
+    @echo "hello, world"
+
+foo:
+    
+    @echo "hello, foo"
+
+bar:
+    
+    @echo "hello, bar"
+</pre>
+<p>
+    While invoking <code>make</code> will still only execute the <code>all</code> target, the <code>foo</code> or <code>bar</code> targets can be executed individually by specifying their names:
+</p>
+<pre class="code-block">
+$ make
+hello, world
+
+$ make foo
+hello, foo
+
+$ make bar
+hello, bar
+</pre>
+<h4>Target dependencies</h4>
+<p>
+    A target may depend on another target, or on multiple other targets.<br />
+    This is called a <strong>prerequisite</strong>.
+</p>
+<p>
+    Prerequisites follows the target name:
+</p>
+<pre class="code-block language-makefile">
+foo: bar
+    
+    @echo "hello, foo"
+</pre>
+<p>
+    Here, the <code>foo</code> target depends on <code>bar</code>. This means that when <code>foo</code> is about to be executed, <code>bar</code> will be executed first.
+</p>
+<p>
+    Multiple prerequisites are simply separated by a space:
+</p>
+<pre class="code-block language-makefile">
+foo: bar all
+    
+    @echo "hello, foo"
+</pre>
+<p>
+    Here, upon executing <code>foo</code>, <code>make</code> will start by executing <code>bar</code>, then <code>all</code>, and finally <code>foo</code>.
+</p>
+<p>
+    And obviously, chaining works too:
+</p>
+<pre class="code-block language-makefile">
+all: foo
+    
+    @echo "hello, world"
+
+foo: bar
+    
+    @echo "hello, foo"
+
+bar:
+    
+    @echo "hello, bar"
+</pre>
+<p>
+    <code>all</code> depends on <code>foo</code>, which depends on <code>bar</code>. So when invoking <code>make</code>, you'll get the following output:
+</p>
+<pre class="code-block">
+hello, bar
+hello, foo
+hello, world
+</pre>
+<p>    
+    And you can also manually execute <code>foo</code> by typing <code>make foo</code>, which will give:
+</p>
+<pre class="code-block">
+hello, bar
+hello, foo
+</pre>
+<h4>Error handling</h4>
+<p>
+    <strong>A very nice thing about <code>make</code> is that it does error handling for you.</strong><br />
+    If a command returns a <strong>non-zero</strong> exit status, <code>make</code> will report the error and <strong>abort execution</strong>.
+</p>
+<p>
+    This means that if a command fails inside some target (which may be a prerequisite of another target), the whole execution will stop.<br />
+    So you don't have to do any manual error checking, as you would/should do with a shell script.
+</p>
+<p>
+    For instance:
+</p>
+<pre class="code-block language-makefile">
+all: foo
+    
+    @echo "hello, world"
+
+foo: bar
+    
+    @echo "hello, foo"
+
+bar:
+    
+    @echo "Executing false"
+    @false
+    @echo "hello, bar"
+</pre>
+<p>
+    Note that in the <code>bar</code> target, we execute the shell's <code>false</code> command, which always returns a non-zero exit status.<br />
+    Now if we invoke <code>main</code>, we'll get the following output:
+</p>
+<pre class="code-block">
+Executing false
+make: *** [bar] Error 1
+</pre>
+<p>
+    <code>make</code> will execute <code>all</code>, which needs to execute <code>foo</code>, which needs to execute <code>bar</code>.  
+    <code>bar</code> will print the first message, and then execute the <code>false</code> command.
+</p>
+<p>
+    As it returns a non-zero exit status, this is detected as an error, and execution is stopped.<br />
+    The remaining message in <code>bar</code> will not be printed, and the <code>foo</code> and <code>all</code> targets won't be executed.
+</p>
+<h4>Debugging</h4>
+<p>
+    Also note that you can obtain detailed informations about how <code>make</code> reads your Makefile using the <code>--debug</code> flag.<br />
+    With the previous example:
+</p>
+<pre class="code-block">
+$ make --debug
+Reading makefiles...
+Updating goal targets....
+    File `all' does not exist.
+        File `foo' does not exist.
+            File `bar' does not exist.
+        Must remake target `bar'.
+Executing false
+make: *** [bar] Error 1
+</pre>
+<h4>Variables</h4>
+<p>
+    You can also define variables inside your Makefile.<br />
+    Variables are defined outside targets, and can be referred to with a <code>$</code> sign and parenthesis:
+</p>
+<pre class="code-block language-makefile">
+HELLO := hello, world
+
+all:
+
+    @echo "$(HELLO)"
+</pre>
+<p>
+    Variables may also be overridden when invoking <code>make</code>, giving extra flexibility.<br />
+    For instance, with the example above:
+</p>
+<pre class="code-block">
+$ make HELLO="This is a test"
+This is a test
+</pre>
+<p>
+    We'll cover more about variables later.
+</p>
+<h3>Real life example - Build system</h3>
+<p>
+    <strong>Now that we have covered the basics, let's take a more useful example.</strong>
+</p>
+<p>
+    We'll create a simple build system for the C programming language.<br />
+    The goal is to compile C source files, and to produce an executable.
+</p>
+<p>
+    We'll start by a very simple build system, and work on it step by step to achieve a more generic one.
+</p>
+<h4>Project structure</h4>
+<p>
+    Here's the basic project structure:
+</p>
+<ul>
+    <li><code>build</code> (directory)</li>
+    <li><code>Makefile</code></li>
+    <li>
+        <code>source</code> (directory)
+        <ul>
+            <li><code>main.c</code></li>
+        </ul>
+    </li>
+</ul>
+
+<p>
+    We have a <code>build</code> directory for the final executable and temporary files, the Makefile, and a <code>source</code> directory with a single <code>main.c</code> file.
+</p>
+<p>
+The <code>main.c</code> file is a basic <em>hello world</em> program:
+</p>
+<pre class="code-block language-c">
+#include &lt;stdio.h&gt;
+
+int main( void )
+{
+    printf( "hello, world\n" );
+    
+    return 0;
+}
+</pre>
+<h4>Producing a simple executable</h4>
+<p>
+    We'll start with a very simple <code>Makefile</code> that invokes the <code>clang</code> C compiler.<br />
+    You can obviously replace it with <code>gcc</code> if you want:
+</p>
+<pre class="code-block language-makefile">
+all:
+    
+    @clang -Wall -Werror source/main.c -o build/main
+</pre>
+<p>
+    When invoking <code>make</code>, it will compile the <code>source/main.c</code> and produce an executable in <code>build/main</code>.<br />
+    Dead simple.
+</p>
+<h4>Compiling multiple files</h4>
+<p>
+    Now let's say we want to compile multiple C files to produce the executable.
+</p>
+<p>
+    We'll first create a function named <code>hello</code> in the <code>source/hello.c</code> file:
+</p>
+<pre class="code-block language-c">
+#include &lt;stdio.h&gt;
+#include "hello.h"
+
+void hello( void )
+{
+    printf( "hello, world\n" );
+}
+</pre>
+<p>
+    And we'll also add the corresponding header in <code>source/hello.h</code> with the function prototype:
+</p>
+<pre class="code-block language-c">
+#ifndef HELLO_H
+#define HELLO_H
+
+void hello( void );
+
+#endif
+</pre>
+<p>
+    Our <code>main.c</code> file will then call the <code>hello</code> function:
+</p>
+<pre class="code-block language-c">
+#include "hello.h"
+
+int main( void )
+{
+    hello();
+    
+    return 0;
+}
+</pre>
+<p>
+    Now the <code>Makefile</code> could simply be:
+</p>
+<pre class="code-block language-makefile">
+all:
+
+    @clang -Wall -Werror source/hello.c source/main.c -o build/main
+</pre>
+<p>
+    However, this is not really flexible, and this is usually not how individual files are compiled.<br />
+    Instead, we'll produce an <strong>object file</strong> for each C source file, and <strong>link them together</strong> to produce the final executable:
+</p>
+<pre class="code-block language-makefile">
+all:
+
+    @clang -Wall -Werror -c source/hello.c -o build/hello.o
+    @clang -Wall -Werror -c source/main.c -o build/main.o
+    @clang -Wall -Werror build/hello.o build/main.o -o build/main
+</pre>
+<p>
+    Note the additional <code>-c</code> flag, needed to tell the compiler to produce an unlinked object file, instead of an executable.
+</p>
+<p>
+    But we obviously want the compilation to happen in separate targets, so we'll create a specific target for each C source file.<br />
+    The <code>all</code> target will depend on these, and be responsible for linking the executable:
+</p>
+<pre class="code-block language-makefile">
+all: main hello
+    
+    @clang -Wall -Werror build/hello.o build/main.o -o build/main
+    
+main:
+    
+    @clang -Wall -Werror -c source/main.c -o build/main.o
+    
+hello:
+    
+    @clang -Wall -Werror -c source/hello.c -o build/hello.o
+</pre>
+<p>
+    Also notice that the compiler flags (<code>-Wall -Werror</code>) are now repeated in each target.<br />
+    Time to create a variable:
+</p>
+<pre class="code-block language-makefile">
+CFLAGS := -Wall -Werror
+
+all: main hello
+    
+    @clang $(CFLAGS) build/hello.o build/main.o -o build/main
+    
+main:
+    
+    @clang $(CFLAGS) -c source/main.c -o build/main.o
+    
+hello:
+    
+    @clang $(CFLAGS) -c source/hello.c -o build/hello.o
+</pre>
+<p>
+    This is obviously better, and it also mean we can now override the compiler flags when invoking <code>make</code>:
+</p>
+<pre class="code-block">
+$ make CFLAGS=-Weverything
+</pre>
+<p>
+    It might also be a good idea to create a variable for the compiler itself:
+</p>
+<pre class="code-block language-makefile">
+CC     := clang
+CFLAGS := -Wall -Werror
+
+all: main hello
+    
+    @$(CC) $(CFLAGS) build/hello.o build/main.o -o build/main
+    
+main:
+    
+    @$(CC) $(CFLAGS) -c source/main.c -o build/main.o
+    
+hello:
+    
+    @$(CC) $(CFLAGS) -c source/hello.c -o build/hello.o
+</pre>
+<p>
+    So if you want to use <code>gcc</code> instead of <code>clang</code>, you can simply use:
+</p>
+<pre class="code-block">
+$ make CC=gcc
+</pre>
+<p>
+    And we should also add some output:
+</p>
+<pre class="code-block language-makefile">    
+CC     := clang
+CFLAGS := -Wall -Werror
+
+all: main hello
+    
+    @echo "Linking executable"
+    @$(CC) $(CFLAGS) build/hello.o build/main.o -o build/main
+    
+main:
+    
+    @echo "Compiling main.c"
+    @$(CC) $(CFLAGS) -c source/main.c -o build/main.o
+    
+hello:
+    
+    @echo "Compiling hello.c"
+    @$(CC) $(CFLAGS) -c source/hello.c -o build/hello.o
+</pre>
+<h4>File dependencies</h4>
+<p>
+    When invoking <code>make</code>, we'll now get:
+</p>
+<pre class="code-block">
+Compiling main.c
+Compiling hello.c
+Linking executable
+</pre>
+<p>
+    But there's an issue here. If we run <code>make</code> again, all files will be recompiled.<br />
+    <strong>Ideally, we want to compile the files only if it's necessary.</strong>
+</p>
+<p>
+    Fortunately, <code>make</code> makes this very easy, as it supports targets that are based on real files.<br />
+    <strong>If the name of a target specifies a file name, the target will only be executed if the file does not already exist.</strong>
+</p>
+<p>
+    This is what we need.<br />
+    We only want to compile the C files <strong>if the object files don't already exist in the build directory</strong>.
+</p>
+<p>
+    So we can change our <code>Makefile</code> the following way:
+</p>
+<pre class="code-block language-makefile">
+CC     := clang
+CFLAGS := -Wall -Werror
+
+all: build/main.o build/hello.o
+    
+    @echo "Linking executable"
+    @$(CC) $(CFLAGS) build/hello.o build/main.o -o build/main
+    
+build/main.o:
+    
+    @echo "Compiling main.c"
+    @$(CC) $(CFLAGS) -c source/main.c -o build/main.o
+    
+build/hello.o:
+    
+    @echo "Compiling hello.c"
+    @$(CC) $(CFLAGS) -c source/hello.c -o build/hello.o
+</pre>
+<p>
+    Notice how we replaced the <code>main</code> and <code>foo</code> target names with the <strong>expected produced files</strong>.
+</p>
+<p>
+    Now if we run <code>make</code> again, the <code>build/main.o</code> and <code>build/hello.o</code> targets won't be executed, because these files already exist.<br />
+    For <code>make</code>, it means that the <strong>prerequisites are already satisfied</strong>.
+</p>
+<p>
+    And obviously we can do the same with the executable, to avoid linking it every time:
+</p>
+<pre class="code-block language-makefile">
+CC     := clang
+CFLAGS := -Wall -Werror
+
+all: build/main
+    
+    @echo "Build successful"
+
+build/main: build/main.o build/hello.o
+    
+    @echo "Linking executable"
+    @$(CC) $(CFLAGS) build/hello.o build/main.o -o build/main
+
+build/main.o:
+    
+    @echo "Compiling main.c"
+    @$(CC) $(CFLAGS) -c source/main.c -o build/main.o
+
+build/hello.o:
+    
+    @echo "Compiling hello.c"
+    @$(CC) $(CFLAGS) -c source/hello.c -o build/hello.o
+</pre>
+<p>
+    Here we created an additional <code>build/main</code> target for the executable, on which <code>all</code> now depends.
+</p>
+<p>
+    As always, we can see what's going on with the <code>--debug</code> flag:
+</p>
+<pre class="code-block">
+$ make
+Reading makefiles...
+Updating goal targets....
+    File `all' does not exist.
+        File `build/main' does not exist.
+            File `build/main.o' does not exist.
+        Must remake target `build/main.o'.
+Compiling main.c
+        Successfully remade target file `build/main.o'.
+            File `build/hello.o' does not exist.
+        Must remake target `build/hello.o'.
+Compiling hello.c
+        Successfully remade target file `build/hello.o'.
+    Must remake target `build/main'.
+Linking executable
+    Successfully remade target file `build/main'.
+Must remake target `all'.
+Build successful
+Successfully remade target file `all'.
+</pre>
+<h4>Common useful targets</h4>
+<p>
+    This is fine, but what if we want to force a full compilation again?
+</p>
+<p>
+    It is common practice to define a <code>clean</code> target that will remove temporary build files.<br />
+    Nothing difficult here, we'll just remove the files from the build <code>directory</code>:
+</p>
+<pre class="code-block language-makefile">
+clean:
+    
+    @echo "Removing build files"
+    @rm -rf build/*
+</pre>
+<p>
+    We can also add a <code>test</code> target that will run the executable:
+</p>
+<pre class="code-block language-makefile">
+test: all
+    
+    @./build/main
+</pre>
+<h4>Generic targets</h4>
+<p>
+    Our <code>Makefile</code> is looking good so far.<br />
+    But we can already see an upcoming issue.
+</p>
+<p>
+    If we want to add more C files, we'll have to add additional targets, which is not convenient at all.
+</p>
+<p>
+    Fortunately, <code>make</code> supports targets that <strong>match a specific pattern</strong>. You can think of it as a kind of wildcard.
+</p>
+<p>
+    The generic part is denoted with the <code>%</code> character in the target name.<br />
+    It is called <strong>the stem</strong>.
+</p>
+<p>
+    This means we can create a single target named <code>build/%.o</code>, that will match every <code>.o</code> file in the build directory:
+</p>
+<pre class="code-block language-makefile">
+build/%.o:
+    
+    @echo "Compiling ???"
+    @$(CC) $(CFLAGS) -c ??? -o ???
+</pre>
+<p>
+    But we also need to retrieve the actual file name, so we can replace the <code>???</code> in the example above with the correct values.
+</p>
+<p>
+    For this purpose, <code>make</code> has predefined variables, such as:
+</p>
+<ul>
+    <li><code>$@</code> The full name of the target, with the stem (<code>%</code>) expanded.</li>
+    <li><code>$*</code> The value of the stem (<code>%</code>).</li>
+</ul>
+<p>
+    Using these variables, we can create a generic target that will compile C files from the <code>source</code> directory into the <code>build</code> directory:
+</p>
+<pre class="code-block language-makefile">
+CC     := clang
+CFLAGS := -Wall -Werror
+
+all: build/main
+    
+    @echo "Build successful"
+    
+clean:
+    
+    @echo "Removing build files"
+    @rm -rf build/*
+    
+test: all
+    
+    @./build/main
+
+build/main: build/main.o build/hello.o
+    
+    @echo "Linking executable"
+    @$(CC) $(CFLAGS) build/hello.o build/main.o -o build/main
+
+build/%.o:
+    
+    @echo "Compiling $*.c"
+    @$(CC) $(CFLAGS) -c source/$*.c -o $@
+</pre>
+<p>
+    Now every time we execute a target with a <code>build/</code> prefix and a <code>.o</code> suffix, such as <code>build/main.o</code>, it will compile the corresponding C file (<code>$*</code>) from the <code>source</code> directory into the destination file, which is the target name (<code>$@</code>).
+</p>
+<p>
+    And we can do the same for the executable target:
+</p>
+<pre class="code-block language-makefile">
+CC     := clang
+CFLAGS := -Wall -Werror
+
+all: build/main
+    
+    @echo "Build successful"
+    
+clean:
+    
+    @echo "Removing build files"
+    @rm -rf build/*
+    
+test: all
+    
+    @./build/main
+
+build/%.o:
+    
+    @echo "Compiling $*.c"
+    @$(CC) $(CFLAGS) -c source/$*.c -o $@
+
+build/%: build/main.o build/hello.o
+    
+    @echo "Linking executable"
+    @$(CC) $(CFLAGS) $^ -o $@
+</pre>
+<p>
+    Notice that we also moved the <code>build/%</code> target after <code>build/%.o</code>. The target order is important in the way <code>make</code> consider targets.
+</p>
+<p>
+    As <code>build/%</code> can match any file in the <code>build</code> directory, we want to give a higher priority to the <code>build/%.o</code> target, so its considered first.
+</p>
+<p>
+    We also introduced a new variable: <code>$^</code><br />
+    This contains the full list of the target's prerequisites.
+</p>
+<h4>Precious targets</h4>
+<p>
+    When invoking main with the last example, we can notice a small difference:
+</p>
+<pre class="code-block">
+$ make
+Compiling main.c
+Compiling hello.c
+Linking executable
+Build successful
+rm build/main.o build/hello.o
+</pre>
+<p>
+    Notice the last line. <code>make</code> is now automatically removing the <code>.o</code> files from the <code>build</code> directory after a successful build.  
+</p>
+<p>
+    Why this sudden change?<br />
+    It's because the <code>build/%.o</code> target is now called from a target that also contains a stem (<code>%</code>) - <code>build/%</code>.
+</p>
+<p>
+    <code>make</code> considers that files produced by a target with a stem called from a target with a stem are temporary.<br />
+    And its default behavior is to remove them upon completion.
+</p>
+<p>
+    We can instruct <code>make</code> to keep these files by declaring the target as <strong>precious</strong>:
+</p>
+<pre class="code-block language-makefile">
+CC     := clang
+CFLAGS := -Wall -Werror
+
+.PRECIOUS: build/%.o
+
+all: build/main
+    
+    @echo "Build successful"
+    
+clean:
+    
+    @echo "Removing build files"
+    @rm -rf build/*
+    
+test: all
+    
+    @./build/main
+
+build/%.o:
+    
+    @echo "Compiling $*.c"
+    @$(CC) $(CFLAGS) -c source/$*.c -o $@
+
+build/%: build/main.o build/hello.o
+    
+    @echo "Linking executable"
+    @$(CC) $(CFLAGS) $^ -o $@
+</pre>
+<p>
+    The <code>.o</code> files will no longer be deleted.
+</p>
+<h4>Detecting changes</h4>
+<p>
+    Now what if we make changes to a C file and run <code>make</code> again?
+</p>
+<pre class="code-block">
+$ make clean && make
+Compiling main.c
+Compiling hello.c
+Linking executable
+Build successful
+
+$ touch source/hello.c
+$ make
+Build successful
+</pre>
+<p>
+    This doesn't work.<br />
+    We can obviously manually run <code>make clean</code> before, but this will recompile everything.<br  />
+    Ideally, we want to recompile <strong>only the changed files</strong>.
+</p>
+<p>
+    With <code>make</code>, this is really easy to achieve.<br />
+    As we saw earlier, targets may represent existing files.<br />
+    This also means we can use files as target prerequisites:
+</p>
+<pre class="code-block language-makefile">
+build/%.o: source/%.c
+    
+    @echo "Compiling $*.c"
+    @$(CC) $(CFLAGS) -c $< -o $@
+</pre>
+<p>
+    Here we added <code>source/%.c</code> as a prerequisite, which means that <code>.o</code> files in the <code>build</code> directory now depends on their corresponding C file in the <code>source</code> directory.
+</p>
+<p>
+    And as the C file is now a prerequisite, we no longer need to specify it manually in the <code>clang</code> invocation.<br />
+    Instead, we use the <code>$&lt;</code> variable, which contains the first prerequisite of the target.
+</p>
+<p>
+    Let's try that again:
+</p>
+<pre class="code-block">
+$ make clean && make
+Compiling main.c
+Compiling hello.c
+Linking executable
+Build successful
+
+$ touch source/hello.c
+$ make
+Compiling hello.c
+Linking executable
+Build successful
+</pre>
+<p>    
+    We can see that <code>hello.c</code> was recompiled, and that the executable was also relinked.<br />
+    The <code>build/%</code> target was automatically executed, because one of its prerequisite needed to be executed again.<br />
+    This is exactly what we want!
+</p>
+<h4>Variables manipulation</h4>
+<p>
+    Our build system is quite nice so far, but we still have to manually specify the files we want to build:
+</p>
+<pre class="code-block language-makefile">
+    build/%: build/main.o build/hello.o
+</pre>
+<p>
+    Let's start by making a variable for this; it will already be a little more convenient:
+</p>
+<pre class="code-block language-makefile">
+CC      := clang
+CFLAGS  := -Wall -Werror
+FILES_O := build/main.o build/hello.o
+
+.PRECIOUS: build/%.o
+
+all: build/main
+    
+    @echo "Build successful"
+    
+clean:
+    
+    @echo "Removing build files"
+    @rm -rf build/*
+    
+test: all
+    
+    @./build/main
+
+build/%.o: source/%.c
+    
+    @echo "Compiling $*.c"
+    @$(CC) $(CFLAGS) -c $< -o $@
+
+build/%: $(FILES_O)
+    
+    @echo "Linking executable"
+    @$(CC) $(CFLAGS) $^ -o $@
+</pre>
+<p>
+    We defined <code>FILES_O</code>, and we use it now as a prerequisite.
+</p>
+<p>
+    But we can make it better.<br />
+    <code>make</code> provide several functions that can process text.
+</p>
+<h5>addprefix</h5>
+<p>
+    For instance, we have a function called <code>addprefix</code> that adds a prefix to a variable.<br />
+    As an example:
+</p>
+<pre class="code-block language-makefile">
+TEXT  := world
+HELLO := $(addprefix hello ,$(TEXT))
+</pre>
+<p>
+    Here we add the <code>hello </code> prefix to the <code>TEXT</code> variable.<br />
+    The <code>HELLO</code> variable now contains <code>hello world</code>.
+</p>
+<p>
+    And obviously, there is also a function called <code>addsuffix</code>.
+</p>
+<h5>subst</h5>
+<p>
+    <code>make</code> can also do text replacement with the <code>subst</code> function:
+</p>
+<pre class="code-block language-makefile">
+TEXT  := hello world
+HELLO := $(subst world,universe,$(TEXT))
+</pre>
+<p>
+    Here we replace the <code>world</code> string by <code>universe</code> in the <code>TEXT</code> variable.
+</p>
+<h5>patsubst</h5>
+<p>
+    <code>make</code> also provides a replacement function that works with patterns on whitespace separated strings: <code>patsubst</code>
+</p>
+<pre class="code-block language-makefile">
+FILES_C := hello.c main.c
+FILES_O := $(patsubst %.c,%.o,$(FILES_C))
+</pre>
+<p>
+    Here <code>FILES_O</code> now contains <code>hello.o main.o</code>.  For every string in <code>FILES_C</code>, we replaced the <code>.c</code> extension with <code>.o</code>.
+</p>
+<p>
+    And we can also combine with <code>addprefix</code> to add the <code>build</code> directory on each file, since <code>addprefix</code> also works on string lists:
+</p>
+<pre class="code-block language-makefile">
+FILES_C := hello.c main.c
+FILES_O := $(addprefix build/,$(patsubst %.c,%.o,$(FILES_C)))
+</pre>
+<p>
+    This would be a nice enhancement, be we can do even better.
+</p>
+<h4>Listing files</h4>
+<p>
+    <code>make</code> is also able to get a file list from a directory, with the <code>wildcard</code> function:
+</p>
+<pre class="code-block language-makefile">
+$(wildcard source/*.c)
+</pre>
+<p>
+    This will get every <code>.c</code> file in the <code>source</code> directory.
+</p>
+<p>
+    If we have multiple directories, we can use the <code>wildcard</code> function as above in a <code>foreach</code>:
+</p>
+<pre class="code-block language-makefile">    
+DIR_SRC := source other
+FILES_C := $(foreach dir,$(DIR_SRC),$(wildcard $(dir)/*.c))
+</pre>
+<p>
+    Here, for each string in <code>DIR_SRC</code>, the <code>foreach</code> function will declare a variable called <code>dir</code> and pass it to its last argument, <code>$(wildcard $(dir)/*.c)</code>, which gets all C file in the directory.
+</p>
+<p>
+    This way, we no longer have to specify the files we want to compile.<br />
+    We can just add them to the <code>source</code> directory, and they will be compiled.
+</p>
+<h4>Wrapping up</h4>
+<p>
+    Our final example is:
+</p>
+<pre class="code-block language-makefile">
+CC        := clang
+CFLAGS    := -Wall -Werror
+EXEC      := main
+DIR_SRC   := source
+DIR_BUILD := build
+
+FILES_C   := $(foreach dir,$(DIR_SRC),$(wildcard $(dir)/*.c))
+FILES_O   := $(addprefix $(DIR_BUILD)/,$(patsubst $(DIR_SRC)/%.c,%.o,$(FILES_C)))
+
+.PRECIOUS: $(DIR_BUILD)/%.o
+
+all: $(addprefix $(DIR_BUILD)/,$(EXEC))
+
+    @echo "Build successful"
+
+clean:
+
+    @echo "Removing build files"
+    @rm -rf $(DIR_BUILD)/*
+
+test: all
+
+    @./$(DIR_BUILD)/$(EXEC)
+
+build/%.o: $(DIR_SRC)/%.c
+
+    @echo "Compiling $*.c"
+    @$(CC) $(CFLAGS) -c $< -o $@
+
+build/%: $(FILES_O)
+
+    @echo "Linking executable"
+    @$(CC) $(CFLAGS) $^ -o $@
+</pre>
+<p>
+    We also added a variable for the build directory and for the executable name.<br />
+    We now have a pretty generic build system.
+</p>
+<h4>Conclusion</h4>
+<p>
+    That's all I have for today. I really hope you found this article useful.
+</p>
+<p>
+    As you can see, Makefiles can be quite simple and very powerful.<br />
+    While this article was focused on a build system, you can probably see how it can be applied to other tasks and conveniently replace shell scripts for day to day automation.
+</p>
+<p>
+    Finally, the last example is also <a href="https://github.com/macmade/make-tutorial">available on my GitHub</a>.<br />
+    Feel free to use and adapt it as you want.
+</p>

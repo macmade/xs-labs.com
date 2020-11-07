@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <blog>
     <post>
+        <date>2020/11/07</date>
+        <time>17:20</time>
+        <author>Jean-David Gadina</author>
+        <name>introduction-to-makefiles</name>
+        <title>Introduction to Makefiles</title>
+        <category>Development</category>
+        <comments>disabled</comments>
+    </post>
+    <post>
         <date>2020/07/30</date>
         <time>22:15</time>
         <author>Jean-David Gadina</author>
