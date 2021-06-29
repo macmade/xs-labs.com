@@ -23,6 +23,11 @@ body, body .container {
     vertical-align:         super;
 }
 
+.btn {
+    margin-top:             2px !important;
+    margin-bottom:          2px !important;
+}
+
 #imagelightbox {
     position:               fixed;
     z-index:                9999;
