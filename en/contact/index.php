@@ -6,7 +6,7 @@
     </div>
 </div>
 <div>
-    <img src="/uploads/image/ita2.png" class="pull-left img-circle" width="100" height="100" alt="Jean-David Gadina" />
+    <img src="/uploads/image/macmade.png" class="pull-left img-circle" width="100" height="100" alt="Jean-David Gadina" />
 </div>
 <h2 style="margin-top: 0px; padding-top: 20px;  ">
     Jean-David Gadina<br />
