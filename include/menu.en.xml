@@ -157,7 +157,7 @@
             <coding-style-guide>
                 <title>Coding Style Guide</title>
                 <sub>
-                    <overview>
+                    <overview sitemap="no">
                         <title>Overview</title>
                         <subtitle>About</subtitle>
                     </overview>
