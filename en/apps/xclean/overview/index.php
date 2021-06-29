@@ -15,6 +15,6 @@
 <h3 class="clearer">Screenshots</h3>
 <div class="row">
     <div class="col-xs-4">
-        <a href="/uploads/image/xclean/screenshot-full.png" class="lightbox"><img src="/uploads/image/xclean/screenshot.png" alt="" width="200" height="307" class="img-thumbnail" /></a>
+        <a href="/uploads/image/xclean/screenshot-full.png" class="lightbox"><img src="/uploads/image/xclean/screenshot.png" alt="" width="200" height="161" class="img-thumbnail" /></a>
     </div>
 </div>
