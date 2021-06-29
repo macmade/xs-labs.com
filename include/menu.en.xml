@@ -13,7 +13,7 @@
             <xclean>
                 <title>Xclean</title>
                 <sub>
-                    <overview>
+                    <overview sitemap="no">
                         <title>Overview</title>
                         <subtitle>About Xclean</subtitle>
                     </overview>
@@ -22,7 +22,7 @@
             <hot>
                 <title>Hot</title>
                 <sub>
-                    <overview>
+                    <overview sitemap="no">
                         <title>Overview</title>
                         <subtitle>About Hot</subtitle>
                     </overview>
@@ -31,7 +31,7 @@
             <iobrowser>
                 <title>IOBrowser</title>
                 <sub>
-                    <overview>
+                    <overview sitemap="no">
                         <title>Overview</title>
                         <subtitle>About IOBrowser</subtitle>
                     </overview>
@@ -40,7 +40,7 @@
             <sensors>
                 <title>Sensors</title>
                 <sub>
-                    <overview>
+                    <overview sitemap="no">
                         <title>Overview</title>
                         <subtitle>About Sensors</subtitle>
                     </overview>
@@ -49,7 +49,7 @@
             <silicon>
                 <title>Silicon</title>
                 <sub>
-                    <overview>
+                    <overview sitemap="no">
                         <title>Overview</title>
                         <subtitle>About Silicon</subtitle>
                     </overview>
@@ -58,7 +58,7 @@
             <qemu-manager>
                 <title>QEMU Manager</title>
                 <sub>
-                    <overview>
+                    <overview sitemap="no">
                         <title>Overview</title>
                         <subtitle>About QEMU Manager</subtitle>
                     </overview>
@@ -67,7 +67,7 @@
             <game-of-life>
                 <title>Game Of Life</title>
                 <sub>
-                    <overview>
+                    <overview sitemap="no">
                         <title>Overview</title>
                         <subtitle>About Game Of Life</subtitle>
                     </overview>
@@ -76,7 +76,7 @@
             <notarize>
                 <title>Notarize</title>
                 <sub>
-                    <overview>
+                    <overview sitemap="no">
                         <title>Overview</title>
                         <subtitle>About Notarize</subtitle>
                     </overview>
@@ -85,7 +85,7 @@
             <ccache-gui>
                 <title>CCache GUI</title>
                 <sub>
-                    <overview>
+                    <overview sitemap="no">
                         <title>Overview</title>
                         <subtitle>About CCache GUI</subtitle>
                     </overview>
