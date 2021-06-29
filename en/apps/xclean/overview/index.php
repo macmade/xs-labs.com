@@ -1,5 +1,5 @@
 <div>
-    <img src="/uploads/image/xclean/icon.png" alt="Hot" width="140" height="140" class="pull-right" />
+    <img src="/uploads/image/xclean/icon.png" alt="Xclean" width="140" height="140" class="pull-right" />
 </div>
 <p>
     <strong>Xclean is a macOS menu bar app that provides a convenient way to clear Xcode's derived data or module cache.</strong>

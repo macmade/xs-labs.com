@@ -1,5 +1,5 @@
 <div>
-    <img src="/uploads/image/sensors/icon.png" alt="Hot" width="140" height="140" class="pull-right" />
+    <img src="/uploads/image/sensors/icon.png" alt="Sensors" width="140" height="140" class="pull-right" />
 </div>
 <p>
     <strong>A macOS application displaying the thermal, voltage and current sensor values.</strong>
