@@ -10,7 +10,7 @@ Source: <a href="https://developer.apple.com/library/archive/documentation/Devic
 </blockquote>
 <h3 class="clearer">Download &amp; Source Code</h3>
 <ul>
-    <li>Latest release: <a href="https://github.com/macmade/IOBrowser/releases/latest" title="Source code">github.com/macmade/IOBrowser/releases/latest</a></li>
+    <li>Latest release: <a href="https://github.com/macmade/IOBrowser/releases/latest" title="Latest release">github.com/macmade/IOBrowser/releases/latest</a></li>
     <li>Source code: <a href="https://github.com/macmade/IOBrowser" title="Source code">github.com/macmade/IOBrowser</a></li>
 </ul>
 <h3 class="clearer">Screenshots</h3>
