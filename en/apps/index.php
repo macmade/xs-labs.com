@@ -35,7 +35,7 @@
             </div>
             <h3><?php print \XS\Menu::getInstance()->getPageLink( '/apps/iobrowser' ); ?></h3>
             <p>
-                Coming soon...
+                IOBrowser is a macOS application for browsing the IOKit registry.
             </p>
             <p>
                 <a class="btn btn-default" href="<?php print \XS\Menu::getInstance()->getPageUrl( '/apps/iobrowser' ); ?>">Learn more »</a>

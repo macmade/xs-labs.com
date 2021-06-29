@@ -8,7 +8,7 @@
 <div>
     <img src="/uploads/image/macmade.png" class="pull-left img-circle" width="100" height="100" alt="Jean-David Gadina" />
 </div>
-<h2 style="margin-top: 0px; padding-top: 20px;  ">
+<h2 style="margin-top: 0px; padding-top: 20px;">
     Jean-David Gadina<br />
     <small>Software engineer - Lead Developer at <a href="https://imazing.com" title="iMazing">imazing.com</a></small>
 </h2>
