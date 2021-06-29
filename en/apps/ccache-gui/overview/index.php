@@ -11,11 +11,10 @@
 <p>
     The application run by default in the menu bar, but the window can be detached for convenience.
 </p>
-<h3 class="clearer">Download &amp; Source Code</h3>
-<ul>
-    <li>Latest release: <a href="https://github.com/macmade/ccache-gui/releases/latest" title="Latest release">github.com/macmade/ccache-gui/releases/latest</a></li>
-    <li>Source code: <a href="https://github.com/macmade/ccache-gui" title="Source code">github.com/macmade/ccache-gui</a></li>
-</ul>
+<p>
+    <a href="https://github.com/macmade/ccache-gui/releases/latest" class="btn btn-primary" role="button">Download latest version</a>
+    <a href="https://github.com/macmade/ccache-gui" class="btn btn-default" role="button">View source on GitHub</a>
+</p>
 <h3 class="clearer">Screenshots</h3>
 <div class="row">
     <div class="col-xs-4">

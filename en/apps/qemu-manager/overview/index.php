@@ -4,11 +4,10 @@
 <p>
     <strong>QEMU-Manager is a macOS graphical frontend to QEMU, a generic and open source machine emulator and virtualizer.</strong>
 </p>
-<h3 class="clearer">Download &amp; Source Code</h3>
-<ul>
-    <li>Latest release: <a href="https://github.com/macmade/QEMU-Manager/releases/latest" title="Latest release">github.com/macmade/QEMU-Manager/releases/latest</a></li>
-    <li>Source code: <a href="https://github.com/macmade/QEMU-Manager" title="Source code">github.com/macmade/QEMU-Manager</a></li>
-</ul>
+<p>
+    <a href="https://github.com/macmade/QEMU-Manager/releases/latest" class="btn btn-primary" role="button">Download latest version</a>
+    <a href="https://github.com/macmade/QEMU-Manager" class="btn btn-default" role="button">View source on GitHub</a>
+</p>
 <h3 class="clearer">Screenshots</h3>
 <div class="row">
     <div class="col-xs-3">
