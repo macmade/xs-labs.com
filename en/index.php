@@ -1,7 +1,7 @@
 <h2 class="text-center">Featured projects</h2>
 <div class="marketing">
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div>
                 <a href="<?php print \XS\Menu::getInstance()->getPageUrl( '/projects/xeos' ); ?>"><img src="/uploads/image/xeos/icon-circle.png" alt="XEOS" width="140" height="140" /></a>
             </div>
@@ -16,7 +16,7 @@
                 <a class="btn btn-default" href="<?php print \XS\Menu::getInstance()->getPageUrl( '/projects/xeos' ); ?>">Learn more »</a>
             </p>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div>
                 <a href="<?php print \XS\Menu::getInstance()->getPageUrl( '/projects/xsfoundation' ); ?>"><img src="/uploads/image/xsfoundation/icon-circle.png" alt="XSFoundation" width="140" height="140" /></a>
             </div>
@@ -27,20 +27,6 @@
             </p>
             <p>
                 <a class="btn btn-default" href="<?php print \XS\Menu::getInstance()->getPageUrl( '/projects/xsfoundation' ); ?>">Learn more »</a>
-            </p>
-        </div>
-        <div class="col-sm-4">
-            <div>
-                <a href="<?php print \XS\Menu::getInstance()->getPageUrl( '/projects/codeine' ); ?>"><img src="/uploads/image/codeine/icon-circle.png" alt="Codeine" width="140" height="140" /></a>
-            </div>
-            <h3><?php print \XS\Menu::getInstance()->getPageLink( '/projects/codeine' ); ?></h3>
-            <p>
-                Codeine is a new code editor for Mac, allowing editing, building, running and debugging C, C++ and Objective-C code.
-                While not an IDE (yet), Codeine aims to evolve to support complex application projects.
-                Codeine uses the latest technologies in source code compilation to provide users with the best environment to build and run software on the Mac platform.
-            </p>
-            <p>
-                <a class="btn btn-default" href="<?php print \XS\Menu::getInstance()->getPageUrl( '/projects/codeine' ); ?>">Learn more »</a>
             </p>
         </div>
     </div>

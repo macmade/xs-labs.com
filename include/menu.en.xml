@@ -2,7 +2,7 @@
 <menu
 	lang="en"
 	root="XS-Labs"
-	keywords="XS-Labs, XEOS, XSFoundation, Codeine, FileSystem, XEOS Software Licence, OpenSource, Operating System, Development, Cocoa, iOS, Objective-C, Assembly, x86, C++, Code, Software, Mac, IDE, Macmade, Jean-David, Gadina, Switzerland"
+	keywords="XS-Labs, XEOS, XSFoundation, XEOS Software Licence, OpenSource, Operating System, Development, Cocoa, iOS, Objective-C, Assembly, x86, C++, Code, Software, Mac, IDE, Macmade, Jean-David, Gadina, Switzerland"
 	description="XS-Labs is the home of the XEOS Operating System and related projects."
 	image="/uploads/image/highlights/default.jpg"
 	banner="default"
@@ -51,40 +51,6 @@
 	                </download>
 	            </sub>
 	        </xsfoundation>
-	        <codeine>
-	            <title>Codeine</title>
-	            <sub>
-	                <overview>
-	                    <title>Overview</title>
-	                    <subtitle>C / C++ / Objective-C code editor</subtitle>
-	                </overview>
-	                <screenshots>
-	                    <title>Screenshots</title>
-	                    <subtitle>Screenshots</subtitle>
-	                </screenshots>
-	                <download>
-	                    <title>Download</title>
-	                    <subtitle>Downloading Codeine</subtitle>
-	                </download>
-	            </sub>
-	        </codeine>
-	        <filesystem>
-	            <title>FileSystem</title>
-	            <sub>
-	                <overview>
-	                    <title>Overview</title>
-	                    <subtitle>About FileSystem</subtitle>
-	                </overview>
-	                <screenshots>
-	                    <title>Screenshots</title>
-	                    <subtitle>Screenshots</subtitle>
-	                </screenshots>
-	                <download>
-	                    <title>Download</title>
-	                    <subtitle>Downloading FileSystem</subtitle>
-	                </download>
-	            </sub>
-	        </filesystem>
 	        <xeos-software-license>
 	            <title>XEOS Software License</title>
 	            <sub>
