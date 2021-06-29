@@ -2,7 +2,7 @@
 <menu
 	lang="en"
 	root="XS-Labs"
-	keywords="XS-Labs, XEOS, XSFoundation, Codeine, ClangKit, FileSystem, XEOS Software Licence, OpenSource, Operating System, Development, Cocoa, iOS, Objective-C, Assembly, x86, C++, Code, Software, Mac, IDE, Macmade, Jean-David, Gadina, Switzerland"
+	keywords="XS-Labs, XEOS, XSFoundation, Codeine, FileSystem, XEOS Software Licence, OpenSource, Operating System, Development, Cocoa, iOS, Objective-C, Assembly, x86, C++, Code, Software, Mac, IDE, Macmade, Jean-David, Gadina, Switzerland"
 	description="XS-Labs is the home of the XEOS Operating System and related projects."
 	image="/uploads/image/highlights/default.jpg"
 	banner="default"
@@ -68,35 +68,6 @@
 	                </download>
 	            </sub>
 	        </codeine>
-	        <cfpp>
-	            <title>CoreFoundation++</title>
-	            <sub>
-	                <documentation>
-	                    <title>Documentation</title>
-	                    <subtitle>Documentation</subtitle>
-	                </documentation>
-	                <download>
-	                    <title>Download</title>
-	                    <subtitle>Downloading CoreFoundation++</subtitle>
-	                </download>
-	            </sub>
-	        </cfpp>
-	        <clang-kit>
-	            <title>ClangKit</title>
-	            <sub>
-	                <overview>
-	                    <title>Overview</title>
-	                    <subtitle>Objective-C (Foundation) frontend to LibClang</subtitle>
-	                </overview>
-	                <documentation>
-	                    <title>Documentation</title>
-	                </documentation>
-	                <download>
-	                    <title>Download</title>
-	                    <subtitle>Downloading ClangKit</subtitle>
-	                </download>
-	            </sub>
-	        </clang-kit>
 	        <filesystem>
 	            <title>FileSystem</title>
 	            <sub>

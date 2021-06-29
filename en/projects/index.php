@@ -51,34 +51,6 @@
     <div class="row">
         <div class="col-sm-4">
             <div>
-                <a href="<?php print \XS\Menu::getInstance()->getPageUrl( '/projects/cfpp' ); ?>"><img src="/uploads/image/cfpp/icon-circle.png" alt="CoreFoundation++" width="140" height="140" /></a>
-            </div>
-            <h3><?php print \XS\Menu::getInstance()->getPageLink( '/projects/cfpp' ); ?></h3>
-            <p>
-                CoreFoundation++ (CFPP) is a C++ wrapper for Apple's CoreFoundation API.
-                CoreFoundation++ uses the good parts of the C++ language to wrap the most used CoreFoundation classes, and to makes them easy to use, for instance by using operator overloading.
-            </p>
-            <p>
-                <a class="btn btn-default" href="<?php print \XS\Menu::getInstance()->getPageUrl( '/projects/cfpp' ); ?>">Learn more »</a>
-            </p>
-        </div>
-        <div class="col-sm-4">
-            <div>
-                <a href="<?php print \XS\Menu::getInstance()->getPageUrl( '/projects/clang-kit' ); ?>"><img src="/uploads/image/clang-kit/icon-circle.png" alt="ClangKit" width="140" height="140" /></a>
-            </div>
-            <h3><?php print \XS\Menu::getInstance()->getPageLink( '/projects/clang-kit' ); ?></h3>
-            <p>
-                ClangKit provides an Objective-C frontend to LibClang, providing source code tokenization, diagnostics and fix-its.
-                ClangKit is intended to be used as a private framework, in an application's bundle.
-                Possible applications includes source code syntax highlighting, source code tokenization, source code diagnostics and source code static analysis.
-                ClangKit is currently used by the Codeine project.
-            </p>
-            <p>
-                <a class="btn btn-default" href="<?php print \XS\Menu::getInstance()->getPageUrl( '/projects/clang-kit' ); ?>">Learn more »</a>
-            </p>
-        </div>
-        <div class="col-sm-4">
-            <div>
                 <a href="<?php print \XS\Menu::getInstance()->getPageUrl( '/projects/filesystem' ); ?>"><img src="/uploads/image/filesystem/icon-circle.png" alt="FileSystem" width="140" height="140" /></a>
             </div>
             <h3><?php print \XS\Menu::getInstance()->getPageLink( '/projects/filesystem' ); ?></h3>
@@ -89,8 +61,6 @@
                 <a class="btn btn-default" href="<?php print \XS\Menu::getInstance()->getPageUrl( '/projects/filesystem' ); ?>">Learn more »</a>
             </p>
         </div>
-    </div>
-    <div class="row">
         <div class="col-sm-4">
             <div>
                 <a href="<?php print \XS\Menu::getInstance()->getPageUrl( '/projects/xeos-software-license' ); ?>"><img src="/uploads/image/xeos-software-license/icon-circle.png" alt="XEOS Software License" width="140" height="140" /></a>
