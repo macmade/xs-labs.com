@@ -1,149 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
-	lang="en"
-	root="XS-Labs"
-	keywords="XS-Labs, XEOS, XSFoundation, XEOS Software Licence, OpenSource, Operating System, Development, Cocoa, iOS, Objective-C, Assembly, x86, C++, Code, Software, Mac, IDE, Macmade, Jean-David, Gadina, Switzerland"
-	description="XS-Labs is the home of the XEOS Operating System and related projects."
-	image="/uploads/image/highlights/default.jpg"
-	banner="default"
+    lang="en"
+    root="XS-Labs"
+    keywords="XS-Labs, XEOS, XSFoundation, XEOS Software Licence, OpenSource, Operating System, Development, Cocoa, iOS, Objective-C, Assembly, x86, C++, Code, Software, Mac, IDE, Macmade, Jean-David, Gadina, Switzerland"
+    description="XS-Labs is the home of the XEOS Operating System and related projects."
+    image="/uploads/image/highlights/default.jpg"
+    banner="default"
 >
-	<projects>
-	    <title>Projects</title>
-	    <sub>
-	        <xeos>
-	            <title>XEOS Operating System</title>
-	            <sub>
-	                <overview>
-	                    <title>Overview</title>
-	                    <subtitle>x86/x86-64 Experimental Operating System</subtitle>
-	                </overview>
-	                <documentation>
-	                    <title>Documentation</title>
-	                    <subtitle>XEOS Documentation</subtitle>
-	                </documentation>
-	                <status>
-	                    <title>Status</title>
-	                    <subtitle>Project status</subtitle>
-	                </status>
-	                <roadmap>
-	                    <title>Roadmap</title>
-	                    <subtitle>Active sub-projects</subtitle>
-	                </roadmap>
-	                <download>
-	                    <title>Download</title>
-	                    <subtitle>Downloading XEOS</subtitle>
-	                </download>
-	            </sub>
-	        </xeos>
-	        <xsfoundation>
-	            <title>XSFoundation</title>
-	            <sub>
-	                <overview>
-	                    <title>Overview</title>
+    <apps>
+        <title>Apps</title>
+        <sub>
+            <xclean>
+                <title>Xclean</title>
+                <sub>
+                    <overview>
+                        <title>Overview</title>
+                        <subtitle>About Xclean</subtitle>
+                    </overview>
+                </sub>
+            </xclean>
+            <hot>
+                <title>Hot</title>
+                <sub>
+                    <overview>
+                        <title>Overview</title>
+                        <subtitle>About Hot</subtitle>
+                    </overview>
+                </sub>
+            </hot>
+            <iobrowser>
+                <title>IOBrowser</title>
+                <sub>
+                    <overview>
+                        <title>Overview</title>
+                        <subtitle>About IOBrowser</subtitle>
+                    </overview>
+                </sub>
+            </iobrowser>
+            <sensors>
+                <title>Sensors</title>
+                <sub>
+                    <overview>
+                        <title>Overview</title>
+                        <subtitle>About Sensors</subtitle>
+                    </overview>
+                </sub>
+            </sensors>
+            <silicon>
+                <title>Silicon</title>
+                <sub>
+                    <overview>
+                        <title>Overview</title>
+                        <subtitle>About Silicon</subtitle>
+                    </overview>
+                </sub>
+            </silicon>
+            <qemu-manager>
+                <title>QEMU Manager</title>
+                <sub>
+                    <overview>
+                        <title>Overview</title>
+                        <subtitle>About QEMU Manager</subtitle>
+                    </overview>
+                </sub>
+            </qemu-manager>
+            <game-of-life>
+                <title>Game Of Life</title>
+                <sub>
+                    <overview>
+                        <title>Overview</title>
+                        <subtitle>About Game Of Life</subtitle>
+                    </overview>
+                </sub>
+            </game-of-life>
+            <notarize>
+                <title>Notarize</title>
+                <sub>
+                    <overview>
+                        <title>Overview</title>
+                        <subtitle>About Notarize</subtitle>
+                    </overview>
+                </sub>
+            </notarize>
+            <ccache-gui>
+                <title>CCache GUI</title>
+                <sub>
+                    <overview>
+                        <title>Overview</title>
+                        <subtitle>About CCache GUI</subtitle>
+                    </overview>
+                </sub>
+            </ccache-gui>
+        </sub>
+    </apps>
+    <projects>
+        <title>Projects</title>
+        <sub>
+            <xeos>
+                <title>XEOS Operating System</title>
+                <sub>
+                    <overview>
+                        <title>Overview</title>
+                        <subtitle>x86/x86-64 Experimental Operating System</subtitle>
+                    </overview>
+                    <documentation>
+                        <title>Documentation</title>
+                        <subtitle>XEOS Documentation</subtitle>
+                    </documentation>
+                    <status>
+                        <title>Status</title>
+                        <subtitle>Project status</subtitle>
+                    </status>
+                    <roadmap>
+                        <title>Roadmap</title>
+                        <subtitle>Active sub-projects</subtitle>
+                    </roadmap>
+                    <download>
+                        <title>Download</title>
+                        <subtitle>Downloading XEOS</subtitle>
+                    </download>
+                </sub>
+            </xeos>
+            <xsfoundation>
+                <title>XSFoundation</title>
+                <sub>
+                    <overview>
+                        <title>Overview</title>
                         <subtitle>XEOS C Foundation Library</subtitle>
-	                </overview>
-	                <documentation>
-	                    <title>Documentation</title>
-	                </documentation>
-	                <download>
-	                    <title>Download</title>
-	                    <subtitle>Downloading XSFoundation</subtitle>
-	                </download>
-	            </sub>
-	        </xsfoundation>
-	        <xeos-software-license>
-	            <title>XEOS Software License</title>
-	            <sub>
-	                <overview>
-	                    <title>Overview</title>
-	                    <subtitle>About</subtitle>
-	                </overview>
-	                <terms>
-	                    <title>License Terms</title>
-	                    <subtitle>XEOS Software License - Version 1.0 - December 21, 2012</subtitle>
-	                </terms>
-	                <contribute>
-	                    <title>Contributing</title>
-	                    <subtitle>Contributing to the XEOS Software License</subtitle>
-	                </contribute>
-	            </sub>
-	        </xeos-software-license>
-	        <coding-style-guide>
-	            <title>Coding Style Guide</title>
-	            <sub>
-	                <overview>
-	                    <title>Overview</title>
-	                    <subtitle>About</subtitle>
-	                </overview>
-	            </sub>
-	        </coding-style-guide>
-	    </sub>
-	</projects>
-	<contact>
-		<title>Contact</title>
-	</contact>
-	<archives>
-		<title>Archives</title>
-		<sub>
-		    <software>
-		        <title>Discontinued software</title>
-		        <subtitle>About</subtitle>
-		    </software>
-		    <articles>
-		        <title>Old articles archives</title>
-		        <subtitle>About</subtitle>
-		        <sub>
-		            <c-reference-counting hidden="yes">
-		                <title>Reference counting in ANSI-C</title>
-		            </c-reference-counting>
-		            <gdb-tutorial hidden="yes">
-		                <title>GDB basic tutorial</title>
-		            </gdb-tutorial>
-		            <iokit-idle-time hidden="yes">
-		                <title>Detecting idle time and activity with I/O Kit</title>
-		            </iokit-idle-time>
-		            <xcode-static-libraries hidden="yes">
-		                <title>Using static libraries with XCode</title>
-		            </xcode-static-libraries>
-		            <c-bool hidden="yes">
-		                <title>Using boolean data-types with ANSI-C</title>
-		            </c-bool>
-		            <objc-blocks hidden="yes">
-		                <title>Closure and lambda in Objective-C</title>
-		            </objc-blocks>
-		            <cocoa-delegate-chain hidden="yes">
-		                <title>Cocoa: Delegate chain system</title>
-		            </cocoa-delegate-chain>
-		            <float hidden="yes">
-		                <title>Understanding floats</title>
-		            </float>
-		        </sub>
-		    </articles>
-		    <museum>
-		        <title>Computer Museum</title>
-		    </museum>
-		</sub>
-	</archives>
-	<blog>
-		<title>Blog</title>
-	</blog>
-	<xs-one>
-		<title>XS Computer One</title>
-	</xs-one>
-	<sitemap hidden="yes" sitemap="no">
-		<title>Sitemap</title>
-	</sitemap>
-	<legal hidden="yes">
-		<title>Legal</title>
-		<sub>
-			<privacy hidden="yes">
-				<title>Privacy Policy</title>
-			</privacy>
-			<credits hidden="yes">
-				<title>Credits &amp; Disclaimer</title>
-			</credits>
-		</sub>
-	</legal>
+                    </overview>
+                    <documentation>
+                        <title>Documentation</title>
+                    </documentation>
+                    <download>
+                        <title>Download</title>
+                        <subtitle>Downloading XSFoundation</subtitle>
+                    </download>
+                </sub>
+            </xsfoundation>
+            <xeos-software-license>
+                <title>XEOS Software License</title>
+                <sub>
+                    <overview>
+                        <title>Overview</title>
+                        <subtitle>About</subtitle>
+                    </overview>
+                    <terms>
+                        <title>License Terms</title>
+                        <subtitle>XEOS Software License - Version 1.0 - December 21, 2012</subtitle>
+                    </terms>
+                    <contribute>
+                        <title>Contributing</title>
+                        <subtitle>Contributing to the XEOS Software License</subtitle>
+                    </contribute>
+                </sub>
+            </xeos-software-license>
+            <coding-style-guide>
+                <title>Coding Style Guide</title>
+                <sub>
+                    <overview>
+                        <title>Overview</title>
+                        <subtitle>About</subtitle>
+                    </overview>
+                </sub>
+            </coding-style-guide>
+        </sub>
+    </projects>
+    <contact>
+        <title>Contact</title>
+    </contact>
+    <archives>
+        <title>Archives</title>
+        <sub>
+            <software>
+                <title>Discontinued software</title>
+                <subtitle>About</subtitle>
+            </software>
+            <articles>
+                <title>Old articles archives</title>
+                <subtitle>About</subtitle>
+                <sub>
+                    <c-reference-counting hidden="yes">
+                        <title>Reference counting in ANSI-C</title>
+                    </c-reference-counting>
+                    <gdb-tutorial hidden="yes">
+                        <title>GDB basic tutorial</title>
+                    </gdb-tutorial>
+                    <iokit-idle-time hidden="yes">
+                        <title>Detecting idle time and activity with I/O Kit</title>
+                    </iokit-idle-time>
+                    <xcode-static-libraries hidden="yes">
+                        <title>Using static libraries with XCode</title>
+                    </xcode-static-libraries>
+                    <c-bool hidden="yes">
+                        <title>Using boolean data-types with ANSI-C</title>
+                    </c-bool>
+                    <objc-blocks hidden="yes">
+                        <title>Closure and lambda in Objective-C</title>
+                    </objc-blocks>
+                    <cocoa-delegate-chain hidden="yes">
+                        <title>Cocoa: Delegate chain system</title>
+                    </cocoa-delegate-chain>
+                    <float hidden="yes">
+                        <title>Understanding floats</title>
+                    </float>
+                </sub>
+            </articles>
+            <museum>
+                <title>Computer Museum</title>
+            </museum>
+        </sub>
+    </archives>
+    <blog>
+        <title>Blog</title>
+    </blog>
+    <xs-one>
+        <title>XS Computer One</title>
+    </xs-one>
+    <sitemap hidden="yes" sitemap="no">
+        <title>Sitemap</title>
+    </sitemap>
+    <legal hidden="yes">
+        <title>Legal</title>
+        <sub>
+            <privacy hidden="yes">
+                <title>Privacy Policy</title>
+            </privacy>
+            <credits hidden="yes">
+                <title>Credits &amp; Disclaimer</title>
+            </credits>
+        </sub>
+    </legal>
     <licenses sitemap="no" hidden="yes">
         <title>OpenSource Licenses</title>
         <sub>
