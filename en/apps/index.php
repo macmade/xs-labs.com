@@ -11,7 +11,7 @@
             </div>
             <h3><?php print \XS\Menu::getInstance()->getPageLink( '/apps/xclean' ); ?></h3>
             <p>
-                Coming soon...
+                Xclean is a macOS menu bar app that provides a convenient way to clear Xcode's derived data or module cache.
             </p>
             <p>
                 <a class="btn btn-default" href="<?php print \XS\Menu::getInstance()->getPageUrl( '/apps/xclean' ); ?>">Learn more »</a>
@@ -23,7 +23,7 @@
             </div>
             <h3><?php print \XS\Menu::getInstance()->getPageLink( '/apps/hot' ); ?></h3>
             <p>
-                Coming soon...
+                Hot is macOS menu bar application that displays the CPU speed limit due to thermal issues.
             </p>
             <p>
                 <a class="btn btn-default" href="<?php print \XS\Menu::getInstance()->getPageUrl( '/apps/hot' ); ?>">Learn more »</a>
@@ -49,7 +49,7 @@
             </div>
             <h3><?php print \XS\Menu::getInstance()->getPageLink( '/apps/sensors' ); ?></h3>
             <p>
-                Coming soon...
+                Sensors is a macOS application displaying the thermal, voltage and current sensor values.
             </p>
             <p>
                 <a class="btn btn-default" href="<?php print \XS\Menu::getInstance()->getPageUrl( '/apps/sensors' ); ?>">Learn more »</a>
@@ -61,7 +61,7 @@
             </div>
             <h3><?php print \XS\Menu::getInstance()->getPageLink( '/apps/silicon' ); ?></h3>
             <p>
-                Coming soon...
+                Silicon is a macOS application to identify Intel-Only Apps with ease.
             </p>
             <p>
                 <a class="btn btn-default" href="<?php print \XS\Menu::getInstance()->getPageUrl( '/apps/silicon' ); ?>">Learn more »</a>
@@ -73,7 +73,7 @@
             </div>
             <h3><?php print \XS\Menu::getInstance()->getPageLink( '/apps/qemu-manager' ); ?></h3>
             <p>
-                Coming soon...
+                QEMU Manager is a macOS graphical frontend to QEMU, a generic and open source machine emulator and virtualizer.
             </p>
             <p>
                 <a class="btn btn-default" href="<?php print \XS\Menu::getInstance()->getPageUrl( '/apps/qemu-manager' ); ?>">Learn more »</a>
@@ -87,7 +87,7 @@
             </div>
             <h3><?php print \XS\Menu::getInstance()->getPageLink( '/apps/game-of-life' ); ?></h3>
             <p>
-                Coming soon...
+                Explore Game Of Life, a cellular automaton created by mathematician John Conway in 1970.
             </p>
             <p>
                 <a class="btn btn-default" href="<?php print \XS\Menu::getInstance()->getPageUrl( '/apps/game-of-life' ); ?>">Learn more »</a>
@@ -99,7 +99,7 @@
             </div>
             <h3><?php print \XS\Menu::getInstance()->getPageLink( '/apps/notarize' ); ?></h3>
             <p>
-                Coming soon...
+                A notarization status monitoring tool for macOS, supporting multiple developer accounts.
             </p>
             <p>
                 <a class="btn btn-default" href="<?php print \XS\Menu::getInstance()->getPageUrl( '/apps/notarize' ); ?>">Learn more »</a>
@@ -111,7 +111,7 @@
             </div>
             <h3><?php print \XS\Menu::getInstance()->getPageLink( '/apps/ccache-gui' ); ?></h3>
             <p>
-                Coming soon...
+                CCache GUI is macOS menu bar helper application for the ccache tool, a compiler cache.
             </p>
             <p>
                 <a class="btn btn-default" href="<?php print \XS\Menu::getInstance()->getPageUrl( '/apps/ccache-gui' ); ?>">Learn more »</a>
