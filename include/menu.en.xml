@@ -10,7 +10,7 @@
     <apps>
         <title>Apps</title>
         <sub>
-            <xclean keywords="XClean, Menu, Menubar, Cache, Clean, Clear, Clang, Derived Data, Module Cache">
+            <xclean keywords="XClean, Menu, Menubar, Cache, Clean, Clear, Clang, Derived Data, Module Cache" description="Xclean is a macOS menu bar app that provides a convenient way to clear Xcode's derived data or module cache.">
                 <title>Xclean</title>
                 <sub>
                     <overview sitemap="no">
@@ -19,7 +19,7 @@
                     </overview>
                 </sub>
             </xclean>
-            <hot keywords="Hot, Menu, Menubar, Status, CPU, Throttle, Throttling, Limit, Thermal, Intel, ARM, M1, Apple Silicon">
+            <hot keywords="Hot, Menu, Menubar, Status, CPU, Throttle, Throttling, Limit, Thermal, Intel, ARM, M1, Apple Silicon" description="Hot is macOS menu bar application that displays the CPU speed limit due to thermal issues.">
                 <title>Hot</title>
                 <sub>
                     <overview sitemap="no">
@@ -28,7 +28,7 @@
                     </overview>
                 </sub>
             </hot>
-            <iobrowser keywords="IOBrowser, IOKit, Registry, Browser, Explorer, IOReg, IORegistryExplorer, Hardware">
+            <iobrowser keywords="IOBrowser, IOKit, Registry, Browser, Explorer, IOReg, IORegistryExplorer, Hardware" description="IOBrowser is a macOS application for browsing the IOKit registry.">
                 <title>IOBrowser</title>
                 <sub>
                     <overview sitemap="no">
@@ -37,7 +37,7 @@
                     </overview>
                 </sub>
             </iobrowser>
-            <sensors keywords="Sensors, Sensor, CPU, Battery, Temperature, Voltage, Current, Power, PMU, ARM, M1, Apple Silicon">
+            <sensors keywords="Sensors, Sensor, CPU, Battery, Temperature, Voltage, Current, Power, PMU, ARM, M1, Apple Silicon" description="Sensors is a macOS application displaying the thermal, voltage and current sensor values.">
                 <title>Sensors</title>
                 <sub>
                     <overview sitemap="no">
@@ -46,7 +46,7 @@
                     </overview>
                 </sub>
             </sensors>
-            <silicon keywords="Silicon, M1, Apple Silicon, Intel, Compatibility, Universal, Binary, Binaries">
+            <silicon keywords="Silicon, M1, Apple Silicon, Intel, Compatibility, Universal, Binary, Binaries" description="Silicon is a macOS application to identify Intel-Only Apps with ease.">
                 <title>Silicon</title>
                 <sub>
                     <overview sitemap="no">
@@ -55,7 +55,7 @@
                     </overview>
                 </sub>
             </silicon>
-            <qemu-manager keywords="QEMU Manager, QEMU, Manager, Virtual Machine, Emulation, Virtualization, Frontend">
+            <qemu-manager keywords="QEMU Manager, QEMU, Manager, Virtual Machine, Emulation, Virtualization, Frontend" description="QEMU Manager is a macOS graphical frontend to QEMU, a generic and open source machine emulator and virtualizer.">
                 <title>QEMU Manager</title>
                 <sub>
                     <overview sitemap="no">
@@ -64,7 +64,7 @@
                     </overview>
                 </sub>
             </qemu-manager>
-            <game-of-life keywords="Game Of Life, Game, Life, Conway, Cell, Cellular, Automaton, Automata, Math, Grid">
+            <game-of-life keywords="Game Of Life, Game, Life, Conway, Cell, Cellular, Automaton, Automata, Math, Grid" description="Explore Game Of Life, a cellular automaton created by mathematician John Conway in 1970.">
                 <title>Game Of Life</title>
                 <sub>
                     <overview sitemap="no">
@@ -73,7 +73,7 @@
                     </overview>
                 </sub>
             </game-of-life>
-            <notarize keywords="Notarize, Notarization, Status, Monitoring, altool">
+            <notarize keywords="Notarize, Notarization, Status, Monitoring, altool" description="A notarization status monitoring tool for macOS, supporting multiple developer accounts.">
                 <title>Notarize</title>
                 <sub>
                     <overview sitemap="no">
@@ -82,7 +82,7 @@
                     </overview>
                 </sub>
             </notarize>
-            <ccache-gui keywords="CCache, GUI, Compiler, Cache, Speed, Optimization, Clang, LLVM">
+            <ccache-gui keywords="CCache, GUI, Compiler, Cache, Speed, Optimization, Clang, LLVM" description="CCache GUI is macOS menu bar helper application for the ccache tool, a compiler cache.">
                 <title>CCache GUI</title>
                 <sub>
                     <overview sitemap="no">
@@ -96,7 +96,7 @@
     <projects>
         <title>Projects</title>
         <sub>
-            <xeos keywords="XEOS, Experimental, C99, Library, POSIX, SUS2, Unix, Linux, Memory, Allocator, Boot, Bootloader, Scheduler, ACPI, BIOS">
+            <xeos keywords="XEOS, Experimental, C99, Library, POSIX, SUS2, Unix, Linux, Memory, Allocator, Boot, Bootloader, Scheduler, ACPI, BIOS" description="XEOS is an experimental 32/64 bits Operating System for x86 platforms, written from scratch in Assembly and C.">
                 <title>XEOS Operating System</title>
                 <sub>
                     <overview>
@@ -121,7 +121,7 @@
                     </download>
                 </sub>
             </xeos>
-            <xsfoundation keywords="XSFoundation, Library, Object Oriented, Allocation, Memory, Debug, Reference Counting, Reflection, Runtime, Polymorphism, Cross Platform">
+            <xsfoundation keywords="XSFoundation, Library, Object Oriented, Allocation, Memory, Debug, Reference Counting, Reflection, Runtime, Polymorphism, Cross Platform" description="The XSFoundation C Library provides the base for object-oriented C style coding, reference counting memory management with auto-release capabilities, reflection, runtime environment, polymorphism, exceptions, and basic objects.">
                 <title>XSFoundation</title>
                 <sub>
                     <overview>
@@ -137,7 +137,7 @@
                     </download>
                 </sub>
             </xsfoundation>
-            <xeos-software-license keywords="XEOS Software License, License, Free Software, FLOSS, MIT, BSD, GPL, GNU">
+            <xeos-software-license keywords="XEOS Software License, License, Free Software, FLOSS, MIT, BSD, GPL, GNU" description="The XEOS Software License is an attempt to create a new kind of permissive OpenSource license. Once finalized, it should be the OpenSource license used for all XS-Labs projects.">
                 <title>XEOS Software License</title>
                 <sub>
                     <overview>
@@ -154,7 +154,7 @@
                     </contribute>
                 </sub>
             </xeos-software-license>
-            <coding-style-guide keywords="Coding Style Guide, Style, Formatting, Convention, Syntax">
+            <coding-style-guide keywords="Coding Style Guide, Style, Formatting, Convention, Syntax" description="XS-Labs coding style guide for C, C++, Objective-C, Swift and Assembly.">
                 <title>Coding Style Guide</title>
                 <sub>
                     <overview sitemap="no">
@@ -179,11 +179,11 @@
                 <title>Past projects</title>
                 <subtitle>About</subtitle>
                 <sub>
-                    <codeine hidden="yes" keywords="Codeine, IDE, Clang, LLVM, Project, Workspace, Compiler, Compilation, Build, Diagnostic, Toolchain">
+                    <codeine hidden="yes" keywords="Codeine, IDE, Clang, LLVM, Project, Workspace, Compiler, Compilation, Build, Diagnostic, Toolchain" description="Codeine is a new code editor for Mac, allowing editing, building, running and debugging C, C++ and Objective-C code. While not an IDE (yet), Codeine aims to evolve to support complex application projects.">
                         <title>Codeine</title>
                         <subtitle>Codeine</subtitle>
                     </codeine>
-                    <filesystem hidden="yes" keywords="FileSystem, iPhone, iPad, File, Folder, Permissions, Unix, Disk">
+                    <filesystem hidden="yes" keywords="FileSystem, iPhone, iPad, File, Folder, Permissions, Unix, Disk" description="FileSystem is an application that allows you to browse the content of your iPhone disk, displaying file and folders, files contents, and detailed informations about file and folder permissions.">
                         <title>FileSystem</title>
                         <subtitle>FileSystem</subtitle>
                     </filesystem>
