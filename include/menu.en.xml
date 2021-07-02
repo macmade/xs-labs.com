@@ -2,15 +2,15 @@
 <menu
     lang="en"
     root="XS-Labs"
-    keywords="XS-Labs, XEOS, XSFoundation, XEOS Software Licence, OpenSource, Operating System, Development, Cocoa, iOS, Objective-C, Assembly, x86, C++, Code, Software, Mac, IDE, Macmade, Jean-David, Gadina, Switzerland"
-    description="XS-Labs is the home of the XEOS Operating System and related projects."
+    keywords="XS-Labs, XEOS, OpenSource, Code, Software, Development, Apple, Xcode, Mac, Apps, Operating System, Reverse Engineering, Electronics, Cocoa, AppKit, macOS, iOS, Swift, Objective-C, C, C++, Assembly, x86, ARM, Macmade, Jean-David, Gadina, Switzerland"
+    description=""
     image="/uploads/image/highlights/default.jpg"
     banner="default"
 >
     <apps>
         <title>Apps</title>
         <sub>
-            <xclean>
+            <xclean keywords="XClean, Menu, Menubar, Cache, Clean, Clear, Clang, Derived Data, Module Cache">
                 <title>Xclean</title>
                 <sub>
                     <overview sitemap="no">
@@ -19,7 +19,7 @@
                     </overview>
                 </sub>
             </xclean>
-            <hot>
+            <hot keywords="Hot, Menu, Menubar, Status, CPU, Throttle, Throttling, Limit, Thermal, Intel, ARM, M1, Apple Silicon">
                 <title>Hot</title>
                 <sub>
                     <overview sitemap="no">
@@ -28,7 +28,7 @@
                     </overview>
                 </sub>
             </hot>
-            <iobrowser>
+            <iobrowser keywords="IOBrowser, IOKit, Registry, Browser, Explorer, IOReg, IORegistryExplorer, Hardware">
                 <title>IOBrowser</title>
                 <sub>
                     <overview sitemap="no">
@@ -37,7 +37,7 @@
                     </overview>
                 </sub>
             </iobrowser>
-            <sensors>
+            <sensors keywords="Sensors, Sensor, CPU, Battery, Temperature, Voltage, Current, Power, PMU, ARM, M1, Apple Silicon">
                 <title>Sensors</title>
                 <sub>
                     <overview sitemap="no">
@@ -46,7 +46,7 @@
                     </overview>
                 </sub>
             </sensors>
-            <silicon>
+            <silicon keywords="Silicon, M1, Apple Silicon, Intel, Compatibility, Universal, Binary, Binaries">
                 <title>Silicon</title>
                 <sub>
                     <overview sitemap="no">
@@ -55,7 +55,7 @@
                     </overview>
                 </sub>
             </silicon>
-            <qemu-manager>
+            <qemu-manager keywords="QEMU Manager, QEMU, Manager, Virtual Machine, Emulation, Virtualization, Frontend">
                 <title>QEMU Manager</title>
                 <sub>
                     <overview sitemap="no">
@@ -64,7 +64,7 @@
                     </overview>
                 </sub>
             </qemu-manager>
-            <game-of-life>
+            <game-of-life keywords="Game Of Life, Game, Life, Conway, Cell, Cellular, Automaton, Automata, Math, Grid">
                 <title>Game Of Life</title>
                 <sub>
                     <overview sitemap="no">
@@ -73,7 +73,7 @@
                     </overview>
                 </sub>
             </game-of-life>
-            <notarize>
+            <notarize keywords="Notarize, Notarization, Status, Monitoring, altool">
                 <title>Notarize</title>
                 <sub>
                     <overview sitemap="no">
@@ -82,7 +82,7 @@
                     </overview>
                 </sub>
             </notarize>
-            <ccache-gui>
+            <ccache-gui keywords="CCache, GUI, Compiler, Cache, Speed, Optimization, Clang, LLVM">
                 <title>CCache GUI</title>
                 <sub>
                     <overview sitemap="no">
@@ -96,7 +96,7 @@
     <projects>
         <title>Projects</title>
         <sub>
-            <xeos>
+            <xeos keywords="XEOS, Experimental, C99, Library, POSIX, SUS2, Unix, Linux, Memory, Allocator, Boot, Bootloader, Scheduler, ACPI, BIOS">
                 <title>XEOS Operating System</title>
                 <sub>
                     <overview>
@@ -121,7 +121,7 @@
                     </download>
                 </sub>
             </xeos>
-            <xsfoundation>
+            <xsfoundation keywords="XSFoundation, Library, Object Oriented, Allocation, Memory, Debug, Reference Counting, Reflection, Runtime, Polymorphism, Cross Platform">
                 <title>XSFoundation</title>
                 <sub>
                     <overview>
@@ -137,7 +137,7 @@
                     </download>
                 </sub>
             </xsfoundation>
-            <xeos-software-license>
+            <xeos-software-license keywords="XEOS Software License, License, Free Software, FLOSS, MIT, BSD, GPL, GNU">
                 <title>XEOS Software License</title>
                 <sub>
                     <overview>
@@ -154,7 +154,7 @@
                     </contribute>
                 </sub>
             </xeos-software-license>
-            <coding-style-guide>
+            <coding-style-guide keywords="Coding Style Guide, Style, Formatting, Convention, Syntax">
                 <title>Coding Style Guide</title>
                 <sub>
                     <overview sitemap="no">
@@ -179,47 +179,47 @@
                 <title>Past projects</title>
                 <subtitle>About</subtitle>
                 <sub>
-                    <codeine hidden="yes">
+                    <codeine hidden="yes" keywords="Codeine, IDE, Clang, LLVM, Project, Workspace, Compiler, Compilation, Build, Diagnostic, Toolchain">
                         <title>Codeine</title>
                         <subtitle>Codeine</subtitle>
                     </codeine>
-                    <filesystem hidden="yes">
+                    <filesystem hidden="yes" keywords="FileSystem, iPhone, iPad, File, Folder, Permissions, Unix, Disk">
                         <title>FileSystem</title>
                         <subtitle>FileSystem</subtitle>
                     </filesystem>
                 </sub>
             </projects>
-            <articles>
+            <articles keywords="Article, Tutorial">
                 <title>Old articles archives</title>
                 <subtitle>About</subtitle>
                 <sub>
-                    <c-reference-counting hidden="yes">
+                    <c-reference-counting hidden="yes" keywords="Article, Reference Counting, Memory, Management, Allocator, Allocation">
                         <title>Reference counting in ANSI-C</title>
                     </c-reference-counting>
-                    <gdb-tutorial hidden="yes">
+                    <gdb-tutorial hidden="yes" keywords="GDB, Debug, Debugger, Crash, Memory, Fault, Segmentation Fault, Bus Error">
                         <title>GDB basic tutorial</title>
                     </gdb-tutorial>
-                    <iokit-idle-time hidden="yes">
+                    <iokit-idle-time hidden="yes" keywords="Time, Idle, Detection, IOKit, Keyboard, Mouse, Input">
                         <title>Detecting idle time and activity with I/O Kit</title>
                     </iokit-idle-time>
-                    <xcode-static-libraries hidden="yes">
+                    <xcode-static-libraries hidden="yes" keywords="Library, Static, Dynamic, Linker, Link, Loader, Runtime, Symbol, External, Definition">
                         <title>Using static libraries with XCode</title>
                     </xcode-static-libraries>
-                    <c-bool hidden="yes">
+                    <c-bool hidden="yes" keywords="Bool, Boolean, Type, Data, Syntax, Keyword, ANSI">
                         <title>Using boolean data-types with ANSI-C</title>
                     </c-bool>
-                    <objc-blocks hidden="yes">
+                    <objc-blocks hidden="yes" keywords="Closure, Lambda, Block, Callback, Delegate, Function, Functor, Keyword, Syntax">
                         <title>Closure and lambda in Objective-C</title>
                     </objc-blocks>
-                    <cocoa-delegate-chain hidden="yes">
+                    <cocoa-delegate-chain hidden="yes" keyowrds="Delegate, Delegation, Pattern, Chaining">
                         <title>Cocoa: Delegate chain system</title>
                     </cocoa-delegate-chain>
-                    <float hidden="yes">
+                    <float hidden="yes" keywords="Float, Double, Real, Floating Point, Precision, IEEE 754, Arithmetic, Standard, Math, Sign, Exponent, Mantissa, Binary">
                         <title>Understanding floats</title>
                     </float>
                 </sub>
             </articles>
-            <museum>
+            <museum keywords="Computer Museum, Computer, Museum, Old, Legacy, Performa, Classic, Intel, Cray, Motorola, G3, G4, G5, iMac, iBook, PowerBook">
                 <title>Computer Museum</title>
             </museum>
         </sub>
