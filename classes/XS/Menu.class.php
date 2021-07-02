@@ -43,6 +43,7 @@ final class Menu
     private $_pageTitle         = '';
     private $_rootlineExtraName = '';
     private $_rootlineExtraUrl  = '';
+    private $_description       = '';
     
     private function __construct()
     {
@@ -722,8 +723,18 @@ final class Menu
         return $this->getPageUrl( $this->_currentPath, $params );
     }
     
+    public function setDescription( $description )
+    {
+        $this->_description = ( string )$description;
+    }
+    
     public function getDescription()
     {
+        if( !empty( $this->_description ) )
+        {
+            return $this->_description;
+        }
+        
         $description = '';
         $menu        = $this->_menu;
         

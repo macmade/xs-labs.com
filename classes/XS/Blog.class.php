@@ -76,11 +76,18 @@ final class Blog
             return '';
         }
         
-        $post = $this->_getPostContent();
+        $post = $this->_getCurrentPost();
         
-        if( !empty( $post ) )
+        if( $post != NULL )
         {
-            return $post;
+            \XS\Menu::getInstance()->setDescription( $this->_getPostAbstract( $post ) );
+        }
+        
+        $content = $this->_getPostContent();
+        
+        if( !empty( $content ) )
+        {
+            return $content;
         }
         else
         {
@@ -173,6 +180,63 @@ final class Blog
         $url  = \XS\Menu::getInstance()->getPageURL( 'blog' );
         
         return $url . strftime( '%Y/%m/%d', $time ) . '/' . $post->name . '/';
+    }
+    
+    protected function _getCurrentPost()
+    {
+        $pathInfo = explode( '/', $_SERVER[ 'REQUEST_URI' ] );
+    
+        if( count( $pathInfo ) < 7 )
+        {
+            return NULL;
+        }
+    
+        $year   = $pathInfo[ 3 ];
+        $month  = $pathInfo[ 4 ];
+        $day    = $pathInfo[ 5 ];
+        $name   = $pathInfo[ 6 ];
+    
+        $path = __ROOTDIR__
+              . DIRECTORY_SEPARATOR
+              . 'blog'
+              . DIRECTORY_SEPARATOR
+              .$year
+              . DIRECTORY_SEPARATOR
+              .$month
+              . DIRECTORY_SEPARATOR
+              .$day
+              . DIRECTORY_SEPARATOR 
+              . $name
+              . DIRECTORY_SEPARATOR;
+        
+        if( !file_exists( $path ) || !is_dir( $path ) || !file_exists( $path . 'index.html' ) )
+        {
+            return NULL;
+        }
+        
+        $date = strtotime( $month . '/' . $day . '/' . $year );
+    
+        if( $date === 0 )
+        {
+            return NULL;
+        }
+    
+        foreach( $this->_posts->post as $post )
+        {
+            if( $post->name != $name )
+            {
+                continue;
+            }
+            
+            if( $date != strtotime( $post->date ) )
+            {
+                continue;
+            }
+            
+            return $post;
+        }
+        
+        return NULL;
     }
     
     protected function _getPostAbstract( \SimpleXMLElement $post )
