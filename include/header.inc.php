@@ -47,12 +47,17 @@ if( isset( $_SERVER[ 'HTTP_USER_AGENT' ] ) && ( strpos( $_SERVER[ 'HTTP_USER_AGE
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><?php print \XS\Menu::getInstance()->getRootLine(); ?></title>
     <link rel="stylesheet" href="/css/styles.php" type="text/css" media="all" />
-    <meta name="author" content="XS-Labs" />
+    <meta name="author" content="<?php print \XS\Menu::getInstance()->getAuthor(); ?>" />
+    <meta name="copyright" content="<?php print \XS\Menu::getInstance()->getCopyright(); ?>" />
     <meta name="description" content="<?php print \XS\Menu::getInstance()->getDescription(); ?>" />
     <meta name="keywords" content="<?php print \XS\Menu::getInstance()->getKeywords(); ?>" />
-    <meta name="rating" content="General" />
-    <meta name="robots" content="all" />
-    <meta name="generator" content="BBEdit 10.5" />
+    <meta name="rating" content="<?php print \XS\Menu::getInstance()->getRating(); ?>" />
+    <meta name="robots" content="<?php print \XS\Menu::getInstance()->getRobots(); ?>" />
+    <meta property="og:type" content="<?php print \XS\Menu::getInstance()->getType(); ?>" />
+    <meta property="og:title" content="<?php print \XS\Menu::getInstance()->getRootLine(); ?>" />
+    <meta property="og:description" content="<?php print \XS\Menu::getInstance()->getDescription(); ?>" />
+    <meta property="og:url" content="<?php print $_SERVER[ 'SCRIPT_URI' ]; ?>" />
+    <meta property="og:locale" content="<?php print \XS\Menu::getInstance()->getLocale(); ?>" />
     <!--[if IE]><link rel="shortcut icon" href="/favicon.ico"><![endif]-->
     <link rel="icon" href="/favicon.png">
     <link rel="apple-touch-icon-precomposed" href="/favicon-apple-touch.png">

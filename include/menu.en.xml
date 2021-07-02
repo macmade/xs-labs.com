@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
     lang="en"
+    locale="en_US"
+    type="website"
+    rating="General"
+    robots="all"
     root="XS-Labs"
+    author="Jean-David Gadina - XS-Labs"
+    copyright="Copyright (c) {YEAR} Jean-David Gadina - www.xs-labs.com"
     keywords="XS-Labs, XEOS, OpenSource, Code, Software, Development, Apple, Xcode, Mac, Apps, Operating System, Reverse Engineering, Electronics, Cocoa, AppKit, macOS, iOS, Swift, Objective-C, C, C++, Assembly, x86, ARM, Macmade, Jean-David, Gadina, Switzerland"
     description="XS-Labs is the home of the XEOS Operating System and related OpenSource projects."
     image="/uploads/image/highlights/default.jpg"

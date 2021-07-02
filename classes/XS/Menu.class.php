@@ -728,15 +728,10 @@ final class Menu
         $this->_description = ( string )$description;
     }
     
-    public function getDescription()
+    public function getAttribute( $name )
     {
-        if( !empty( $this->_description ) )
-        {
-            return $this->_description;
-        }
-        
-        $description = '';
-        $menu        = $this->_menu;
+        $value = '';
+        $menu  = $this->_menu;
         
         for( $i = 0; $i < count( $this->_pathInfos ); $i++ )
         {
@@ -751,13 +746,53 @@ final class Menu
                 $menu = $menu->sub->$page;
             }
             
-            if( isset( $menu[ 'description' ] ) && !isset( $menu[ 'preview' ] ) )
+            if( isset( $menu[ ( string )$name ] ) && !isset( $menu[ 'preview' ] ) )
             {
-                $description = ( string )$menu[ 'description' ];
+                $value = ( string )$menu[ ( string )$name ];
             }
         }
         
-        return $description;
+        return $value;
+    }
+    
+    public function getDescription()
+    {
+        if( !empty( $this->_description ) )
+        {
+            return $this->_description;
+        }
+        
+        return $this->getAttribute( 'description' );
+    }
+    
+    public function getAuthor()
+    {
+        return $this->getAttribute( 'author' );
+    }
+    
+    public function getCopyright()
+    {
+        return str_replace( '{YEAR}', date( 'Y', time() ), $this->getAttribute( 'copyright' ) );
+    }
+    
+    public function getLocale()
+    {
+        return $this->getAttribute( 'locale' );
+    }
+    
+    public function getType()
+    {
+        return $this->getAttribute( 'type' );
+    }
+    
+    public function getRating()
+    {
+        return $this->getAttribute( 'rating' );
+    }
+    
+    public function getRobots()
+    {
+        return $this->getAttribute( 'robots' );
     }
     
     public function getKeywords()
