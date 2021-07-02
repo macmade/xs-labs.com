@@ -175,6 +175,20 @@
                 <title>Discontinued software</title>
                 <subtitle>About</subtitle>
             </software>
+            <projects>
+                <title>Past projects</title>
+                <subtitle>About</subtitle>
+                <sub>
+                    <codeine hidden="yes">
+                        <title>Codeine</title>
+                        <subtitle>Codeine</subtitle>
+                    </codeine>
+                    <filesystem hidden="yes">
+                        <title>FileSystem</title>
+                        <subtitle>FileSystem</subtitle>
+                    </filesystem>
+                </sub>
+            </projects>
             <articles>
                 <title>Old articles archives</title>
                 <subtitle>About</subtitle>
