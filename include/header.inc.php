@@ -147,6 +147,9 @@ if( isset( $_SERVER[ 'HTTP_USER_AGENT' ] ) && ( strpos( $_SERVER[ 'HTTP_USER_AGE
                     ?>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <iframe src="https://github.com/sponsors/macmade/button" title="Sponsor macmade" height="35" width="130" style="margin-top: 10px; margin-left: 5px; vertical-align: middle; border: 0px;"></iframe>
+                        </li>
                         <li><a href="https://twitter.com/macmade"><img src="/css/image/xs-menu-bar-item-twitter.png" alt="Twitter" width="30" height="30" /></a></li>
                         <li><a href="https://github.com/macmade"><img src="/css/image/xs-menu-bar-item-github.png" alt="GitHub" width="30" height="30" /></a></li>
                         <li><a href="http://stackoverflow.com/users/182676/macmade"><img src="/css/image/xs-menu-bar-item-stackoverflow.png" alt="StackOverflow" width="30" height="30" /></a></li>
